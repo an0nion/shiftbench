@@ -1,0 +1,17 @@
+dataset,domain,neff_bin,n_pairs,n_disagree,n_active,disagree_rate,disagree_pct
+adult,tabular,5-25,150,0,0,0.0,0.0
+adult,tabular,25-100,300,0,0,0.0,0.0
+adult,tabular,100-300,300,0,0,0.0,0.0
+bace,molecular,25-100,345,0,0,0.0,0.0
+bace,molecular,100-300,405,0,0,0.0,0.0
+bbbp,molecular,100-300,640,30,233,0.046875,4.6875
+bbbp,molecular,300+,110,2,43,0.01818181818181818,1.8181818181818181
+compas,tabular,5-25,150,0,0,0.0,0.0
+compas,tabular,100-300,450,0,0,0.0,0.0
+compas,tabular,300+,150,0,0,0.0,0.0
+imdb,text,5-25,150,0,0,0.0,0.0
+imdb,text,100-300,580,0,167,0.0,0.0
+imdb,text,300+,20,0,8,0.0,0.0
+yelp,text,25-100,150,0,0,0.0,0.0
+yelp,text,100-300,300,0,0,0.0,0.0
+yelp,text,300+,150,0,0,0.0,0.0

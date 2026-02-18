@@ -1,0 +1,2 @@
+dataset,method,n_samples_total,n_calibration,n_test,n_features,n_cohorts,n_decisions,n_certify,n_abstain,n_no_guarantee,weight_elapsed_sec,bound_elapsed_sec,total_elapsed_sec,alpha,use_oracle,diag_method,diag_sigma,diag_n_basis,diag_alpha_min,diag_alpha_max,diag_alpha_std
+adult,ulsif,48842,9768,9769,113,49,294,49,245,0,0.2146146297454834,0.09237003326416016,0.4539041519165039,0.05,True,ulsif,4.277922163700078,100,0.0,0.060137993576667916,0.012574297313711786

@@ -1,0 +1,7 @@
+domain,method,elapsed_sec
+molecular,kliep,0.142
+molecular,ulsif,0.02
+tabular,kliep,11.9
+tabular,ulsif,9.05
+text,kliep,6.117
+text,ulsif,4.604

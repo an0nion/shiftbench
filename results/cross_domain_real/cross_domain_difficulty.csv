@@ -1,0 +1,4 @@
+domain,cert_rate,std,n_decisions
+molecular,0.005,0.0706,5988
+tabular,0.0318,0.1756,1476
+text,0.7675,0.4229,456

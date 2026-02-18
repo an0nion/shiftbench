@@ -1,0 +1,26 @@
+======================================================================
+NON-DEGENERATE REGIME SEARCH RESULTS
+======================================================================
+
+Total regimes tested: 8
+Target certification rate: >= 20%
+
+FWER VIOLATIONS: 2 regimes had >= 1 false certification
+  n_cal=2000.0, n_coh=10.0, shift=1.0, pos=0.5: observed FWER=0.100
+  n_cal=2000.0, n_coh=10.0, shift=0.5, pos=0.5: observed FWER=0.100
+
+USABLE REGIMES (cert >= 20%): Found 3
+
+   n_cal n_coh shift   pos  cert%  n_eff  FWER
+  --------------------------------------------------
+    2000     5   1.0   0.5 40.8%  188.7 0.000
+    2000     5   0.5   0.5 36.4%  184.9 0.000
+    2000    10   1.0   0.5 25.4%  111.9 0.100
+
+  BEST REGIME: n_cal=2000, n_cohorts=5, shift=1.0, pos=0.5 => cert_rate=40.8%
+
+PRACTITIONER GUIDANCE:
+  n_cal=  500: mean cert=2.3%, max cert=4.4%
+  n_cal= 2000: mean cert=29.6%, max cert=40.8%
+
+======================================================================

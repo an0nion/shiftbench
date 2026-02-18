@@ -1,0 +1,92 @@
+{
+  "bace": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "models\\predictions\\bace\\rf_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\bace\\rf_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\bace\\rf_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\bace\\rf_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\bace\\rf_test_preds_proba.npy"
+  },
+  "bbbp": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "models\\predictions\\bbbp\\rf_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\bbbp\\rf_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\bbbp\\rf_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\bbbp\\rf_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\bbbp\\rf_test_preds_proba.npy"
+  },
+  "clintox": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "models\\predictions\\clintox\\rf_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\clintox\\rf_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\clintox\\rf_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\clintox\\rf_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\clintox\\rf_test_preds_proba.npy"
+  },
+  "esol": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "models\\predictions\\esol\\rf_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\esol\\rf_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\esol\\rf_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\esol\\rf_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\esol\\rf_test_preds_proba.npy"
+  },
+  "adult": {
+    "model": "lr",
+    "domain": "tabular",
+    "path": "models\\predictions\\adult\\lr_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\adult\\lr_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\adult\\lr_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\adult\\lr_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\adult\\lr_test_preds_proba.npy"
+  },
+  "compas": {
+    "model": "lr",
+    "domain": "tabular",
+    "path": "models\\predictions\\compas\\lr_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\compas\\lr_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\compas\\lr_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\compas\\lr_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\compas\\lr_test_preds_proba.npy"
+  },
+  "bank": {
+    "model": "lr",
+    "domain": "tabular",
+    "path": "models\\predictions\\bank\\lr_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\bank\\lr_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\bank\\lr_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\bank\\lr_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\bank\\lr_test_preds_proba.npy"
+  },
+  "german_credit": {
+    "model": "lr",
+    "domain": "tabular",
+    "path": "models\\predictions\\german_credit\\lr_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\german_credit\\lr_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\german_credit\\lr_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\german_credit\\lr_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\german_credit\\lr_test_preds_proba.npy"
+  },
+  "imdb": {
+    "model": "lr",
+    "domain": "text",
+    "path": "models\\predictions\\imdb\\lr_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\imdb\\lr_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\imdb\\lr_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\imdb\\lr_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\imdb\\lr_test_preds_proba.npy"
+  },
+  "yelp": {
+    "model": "lr",
+    "domain": "text",
+    "path": "models\\predictions\\yelp\\lr_cal_preds_binary.npy",
+    "cal_binary": "models\\predictions\\yelp\\lr_cal_preds_binary.npy",
+    "cal_proba": "models\\predictions\\yelp\\lr_cal_preds_proba.npy",
+    "test_binary": "models\\predictions\\yelp\\lr_test_preds_binary.npy",
+    "test_proba": "models\\predictions\\yelp\\lr_test_preds_proba.npy"
+  }
+}

@@ -1,0 +1,35 @@
+# Data (too large for git - 7GB+)
+data/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+
+# Models (binary files)
+models/*.npy
+models/*.pkl
+models/*.joblib
+
+# Results (CSV outputs - regenerable)
+# Keep summary CSVs but ignore large raw result files
+results/**/*raw*.csv
+results/**/*stress*.csv
+results/**/*weights*.png
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+nul
+*.tmp

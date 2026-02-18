@@ -1,0 +1,11 @@
+domain,method,ABSTAIN,CERTIFY,All
+molecular,kliep,5179,26,5205
+molecular,ravel,4777,13,4790
+molecular,ulsif,5178,27,5205
+tabular,kliep,592,23,615
+tabular,ravel,601,14,615
+tabular,ulsif,593,22,615
+text,kliep,39,151,190
+text,ravel,40,150,190
+text,ulsif,39,151,190
+All,,17038,577,17615

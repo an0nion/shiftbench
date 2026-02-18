@@ -1,0 +1,84 @@
+[2026-02-18 12:45:52,990] INFO: ================================================================================
+[2026-02-18 12:45:52,991] INFO: Cross-Domain Benchmark Configuration
+[2026-02-18 12:45:52,992] INFO: ================================================================================
+[2026-02-18 12:45:52,992] INFO: Methods: ['ulsif', 'kliep']
+[2026-02-18 12:45:52,993] INFO: Domains: ['molecular']
+[2026-02-18 12:45:52,993] INFO: Datasets: 9 (bace, bbbp, clintox, esol, freesolv, lipophilicity, sider, tox21, toxcast)
+[2026-02-18 12:45:52,993] INFO: Tau grid: [0.5, 0.6, 0.7, 0.8, 0.85, 0.9]
+[2026-02-18 12:45:52,994] INFO: Alpha: 0.05
+[2026-02-18 12:45:52,994] INFO: Output directory: results\cross_domain_test
+[2026-02-18 12:45:52,995] INFO: ================================================================================
+[2026-02-18 12:45:53,003] INFO: Evaluating ulsif on bace...
+[2026-02-18 12:45:53,070] INFO:   Using real predictions for bace
+[2026-02-18 12:45:53,102] INFO:   Results: 2 CERTIFY, 760 ABSTAIN, 0 NO-GUARANTEE (total: 762)
+[2026-02-18 12:45:53,105] INFO: Evaluating ulsif on bbbp...
+[2026-02-18 12:45:53,168] INFO:   Using real predictions for bbbp
+[2026-02-18 12:45:53,196] INFO:   Results: 4 CERTIFY, 758 ABSTAIN, 0 NO-GUARANTEE (total: 762)
+[2026-02-18 12:45:53,200] INFO: Evaluating ulsif on clintox...
+[2026-02-18 12:45:53,344] INFO:   Using real predictions for clintox
+[2026-02-18 12:45:53,370] INFO:   Results: 5 CERTIFY, 655 ABSTAIN, 0 NO-GUARANTEE (total: 660)
+[2026-02-18 12:45:53,373] INFO: Evaluating ulsif on esol...
+[2026-02-18 12:45:53,537] INFO:   Using real predictions for esol
+[2026-02-18 12:45:53,537] ERROR: Bound estimation failed for ulsif on esol: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:53,538] INFO: Evaluating ulsif on freesolv...
+[2026-02-18 12:45:53,614] INFO:   Using oracle predictions for freesolv
+[2026-02-18 12:45:53,615] ERROR: Bound estimation failed for ulsif on freesolv: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:53,615] INFO: Evaluating ulsif on lipophilicity...
+[2026-02-18 12:45:53,857] INFO:   Using oracle predictions for lipophilicity
+[2026-02-18 12:45:53,858] ERROR: Bound estimation failed for ulsif on lipophilicity: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:53,860] INFO: Evaluating ulsif on sider...
+[2026-02-18 12:45:54,001] INFO:   Using oracle predictions for sider
+[2026-02-18 12:45:54,036] INFO:   Results: 4 CERTIFY, 806 ABSTAIN, 0 NO-GUARANTEE (total: 810)
+[2026-02-18 12:45:54,039] INFO: Evaluating ulsif on tox21...
+[2026-02-18 12:45:54,447] INFO:   Using oracle predictions for tox21
+[2026-02-18 12:45:54,448] ERROR: Bound estimation failed for ulsif on tox21: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:54,451] INFO: Evaluating ulsif on toxcast...
+[2026-02-18 12:45:54,824] INFO:   Using oracle predictions for toxcast
+[2026-02-18 12:45:54,825] ERROR: Bound estimation failed for ulsif on toxcast: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:54,831] INFO: Evaluating kliep on bace...
+[2026-02-18 12:45:54,996] INFO:   Using real predictions for bace
+[2026-02-18 12:45:55,025] INFO:   Results: 2 CERTIFY, 760 ABSTAIN, 0 NO-GUARANTEE (total: 762)
+[2026-02-18 12:45:55,029] INFO: Evaluating kliep on bbbp...
+[2026-02-18 12:45:55,192] INFO:   Using real predictions for bbbp
+[2026-02-18 12:45:55,222] INFO:   Results: 4 CERTIFY, 758 ABSTAIN, 0 NO-GUARANTEE (total: 762)
+[2026-02-18 12:45:55,225] INFO: Evaluating kliep on clintox...
+[2026-02-18 12:45:55,455] INFO:   Using real predictions for clintox
+[2026-02-18 12:45:55,478] INFO:   Results: 5 CERTIFY, 655 ABSTAIN, 0 NO-GUARANTEE (total: 660)
+[2026-02-18 12:45:55,481] INFO: Evaluating kliep on esol...
+[2026-02-18 12:45:55,598] INFO:   Using real predictions for esol
+[2026-02-18 12:45:55,599] ERROR: Bound estimation failed for kliep on esol: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:55,600] INFO: Evaluating kliep on freesolv...
+[2026-02-18 12:45:55,768] INFO:   Using oracle predictions for freesolv
+[2026-02-18 12:45:55,769] ERROR: Bound estimation failed for kliep on freesolv: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:55,770] INFO: Evaluating kliep on lipophilicity...
+[2026-02-18 12:45:56,096] INFO:   Using oracle predictions for lipophilicity
+[2026-02-18 12:45:56,097] ERROR: Bound estimation failed for kliep on lipophilicity: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:56,099] INFO: Evaluating kliep on sider...
+[2026-02-18 12:45:56,259] INFO:   Using oracle predictions for sider
+[2026-02-18 12:45:56,289] INFO:   Results: 4 CERTIFY, 806 ABSTAIN, 0 NO-GUARANTEE (total: 810)
+[2026-02-18 12:45:56,291] INFO: Evaluating kliep on tox21...
+[2026-02-18 12:45:56,546] INFO:   Using oracle predictions for tox21
+[2026-02-18 12:45:56,547] ERROR: Bound estimation failed for kliep on tox21: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:56,552] INFO: Evaluating kliep on toxcast...
+[2026-02-18 12:45:56,880] INFO:   Using oracle predictions for toxcast
+[2026-02-18 12:45:56,880] ERROR: Bound estimation failed for kliep on toxcast: y_cal must be binary (0 or 1)
+[2026-02-18 12:45:56,955] INFO: Saved raw results to results\cross_domain_test\cross_domain_raw_results.csv
+[2026-02-18 12:45:56,955] INFO: Generating summary tables...
+[2026-02-18 12:45:56,996] INFO:   Saved domain summary to results\cross_domain_test\cross_domain_summary.csv
+[2026-02-18 12:45:57,028] INFO:   Saved dataset breakdown to results\cross_domain_test\cross_domain_by_dataset.csv
+[2026-02-18 12:45:57,054] INFO:   Saved method breakdown to results\cross_domain_test\cross_domain_by_method.csv
+[2026-02-18 12:45:57,161] INFO:   Saved decision distribution to results\cross_domain_test\cross_domain_decision_distribution.csv
+[2026-02-18 12:45:57,161] INFO: Running statistical analysis...
+[2026-02-18 12:45:57,164] INFO:   Testing: Do certification rates differ by domain?
+[2026-02-18 12:45:57,171] INFO:   Testing: Does method ranking change by domain?
+[2026-02-18 12:45:57,190] INFO:   Computing: Domain difficulty ranking
+[2026-02-18 12:45:57,198] INFO:   Computing: Effective sample size by domain
+[2026-02-18 12:45:57,206] INFO:   Computing: Runtime by domain
+[2026-02-18 12:45:57,231] INFO:   Saved statistical analysis to results\cross_domain_test\cross_domain_statistical_analysis.csv
+[2026-02-18 12:45:57,242] INFO:   Saved domain difficulty to results\cross_domain_test\cross_domain_difficulty.csv
+[2026-02-18 12:45:57,256] INFO:   Saved ESS summary to results\cross_domain_test\cross_domain_ess_summary.csv
+[2026-02-18 12:45:57,275] INFO:   Saved runtime summary to results\cross_domain_test\cross_domain_runtime.csv
+[2026-02-18 12:45:57,276] INFO: ================================================================================
+[2026-02-18 12:45:57,277] INFO: Cross-Domain Benchmark Complete!
+[2026-02-18 12:45:57,283] INFO: Results saved to: results\cross_domain_test
+[2026-02-18 12:45:57,285] INFO: ================================================================================

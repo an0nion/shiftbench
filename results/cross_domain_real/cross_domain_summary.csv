@@ -1,0 +1,7 @@
+domain,method,cert_rate_%,mean_mu_hat,mean_lower_bound,mean_n_eff,mean_runtime_sec,n_datasets,n_cohorts
+molecular,kliep,0.5,0.84,0.23,1.01,0.14,4,421
+molecular,ulsif,0.5,0.84,0.23,1.03,0.02,4,421
+tabular,kliep,3.25,0.81,0.23,25.44,11.9,6,117
+tabular,ulsif,3.12,0.81,0.22,24.74,9.05,6,117
+text,kliep,76.75,0.85,0.82,474.1,6.12,5,28
+text,ulsif,76.75,0.85,0.82,474.11,4.6,5,28

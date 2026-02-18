@@ -1,0 +1,6 @@
+model,r2,coefficients,n_features
+cert_rate ~ log(n_eff),0.7364985313356448,"log_neff=0.1491, intercept=-0.2092",1
+cert_rate ~ log(n_eff) + shift,0.7686756949612912,"log_neff=0.1813, shift=0.4284, intercept=-0.4136",2
+cert_rate ~ log(n_eff) + shift + domain,0.9341567693821438,"log_neff=-0.0295, shift=-1.1184, is_text=0.3773, is_tabular=-0.5037, intercept=0.7116",4
+cert_rate ~ domain (ablation),0.9007202868579867,"is_text=0.8182, is_tabular=0.0110, intercept=0.0051",2
+cert_rate ~ shift (ablation),0.24205657975653094,"shift=-0.8170, intercept=0.4695",1

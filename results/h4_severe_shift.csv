@@ -1,0 +1,3 @@
+trial_id,n_cal,n_test,n_cohorts,shift_severity,positive_rate,false_certify_fwer,false_certify_count,n_certified,n_abstain,n_no_guarantee,coverage,mean_n_eff,mean_ppv_estimate,mean_true_ppv,runtime_seconds
+0,500,5000,5,2.0,0.5,0,0,6,19,0,1.0,62.165065306393736,0.8900385130721048,0.8436698397917394,0.018093347549438477
+1,500,5000,5,2.0,0.5,0,0,4,21,0,1.0,51.066462158499796,0.886595354988228,0.8735257553693027,0.009620189666748047

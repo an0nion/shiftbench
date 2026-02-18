@@ -1,0 +1,2 @@
+dataset,method,n_samples_total,n_calibration,n_test,n_features,n_cohorts,n_decisions,n_certify,n_abstain,n_no_guarantee,weight_elapsed_sec,bound_elapsed_sec,total_elapsed_sec,alpha,use_oracle,diag_method,diag_sigma,diag_n_basis,diag_alpha_min,diag_alpha_max,diag_alpha_std
+student_performance,ulsif,1044,208,210,65,11,66,10,56,0,0.004660367965698242,0.0052337646484375,0.023597002029418945,0.05,True,ulsif,6.569162847687098,100,0.0,0.12571194605019897,0.03128382493086335

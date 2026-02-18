@@ -1,0 +1,11 @@
+======================================================================
+EXPERIMENT B: BOUND-FAMILY SWEEP
+======================================================================
+Design: 50 trials, n_cal=2000, n_cohorts=5, alpha=0.05
+Synthetic data with known ground-truth PPV.
+
+bootstrap: FWER=28.0%, cert=62.8%, runtime=1.153s [FAIL]
+eb: FWER=4.0%, cert=41.3%, runtime=0.002s [PASS]
+hoeffding: FWER=6.0%, cert=51.8%, runtime=0.001s [FAIL]
+
+======================================================================

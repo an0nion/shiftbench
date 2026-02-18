@@ -1,0 +1,42 @@
+======================================================================
+POWER ANALYSIS SUMMARY
+======================================================================
+
+Total experiments: 550
+Alpha: 0.05
+Trials per experiment: 500
+
+FALSE-CERTIFY VALIDATION (true_ppv < tau):
+  Max false-certify rate: 0.0000
+  Mean false-certify rate: 0.0000
+  STATUS: PASSED (max <= alpha)
+
+POWER BY TAU (averaged over n_eff, true_ppv > tau):
+  tau=0.5: mean power=0.411, max power=1.000
+  tau=0.6: mean power=0.389, max power=1.000
+  tau=0.7: mean power=0.335, max power=1.000
+  tau=0.8: mean power=0.301, max power=1.000
+  tau=0.9: mean power=0.239, max power=1.000
+
+POWER BY N_EFF (tau=0.8, true_ppv=0.9):
+  n_eff=     5: power=0.000
+  n_eff=    10: power=0.000
+  n_eff=    15: power=0.000
+  n_eff=    25: power=0.000
+  n_eff=    50: power=0.000
+  n_eff=    75: power=0.010
+  n_eff=   100: power=0.058
+  n_eff=   150: power=0.258
+  n_eff=   200: power=0.496
+  n_eff=   500: power=0.998
+
+NON-DEGENERATE REGIME CHECK (power >= 0.20):
+  Found 122 experiments with power >= 20%
+  Best: tau=0.5, true_ppv=1.00, n_eff=25, power=1.000
+  tau=0.5: min n_eff for 20% power = 25
+  tau=0.6: min n_eff for 20% power = 25
+  tau=0.7: min n_eff for 20% power = 50
+  tau=0.8: min n_eff for 20% power = 50
+  tau=0.9: min n_eff for 20% power = 100
+
+======================================================================

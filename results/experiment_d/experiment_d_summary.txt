@@ -1,0 +1,50 @@
+======================================================================
+EXPERIMENT D: GATING ABLATION (SYNTHETIC PATHOLOGICAL WEIGHTS)
+======================================================================
+Design: 100 trials per config, alpha=0.05
+Weights injected with controlled pathology levels.
+Variants: ungated, clipped_99, clipped_95, ess_gated_15, ess_gated_25
+
+--- small_n_adversarial (weights: adversarial) ---
+  naive_clipped_99: FWER=0.0%, cert=0.5%, gated=0.0, cov=0.857 [PASS]
+  naive_ess_gated: FWER=0.0%, cert=0.1%, gated=4.0, cov=1.000 [PASS]
+  naive_ungated: FWER=0.0%, cert=0.5%, gated=0.0, cov=0.857 [PASS]
+  neff_ess_gated: FWER=0.0%, cert=0.1%, gated=4.0, cov=1.000 [PASS]
+  neff_ungated: FWER=0.0%, cert=0.1%, gated=0.0, cov=1.000 [PASS]
+
+--- small_n_heavy_tails (weights: heavy_tails) ---
+  naive_clipped_99: FWER=0.0%, cert=0.2%, gated=0.0, cov=0.900 [PASS]
+  naive_ess_gated: FWER=0.0%, cert=0.2%, gated=0.5, cov=0.889 [PASS]
+  naive_ungated: FWER=0.0%, cert=0.3%, gated=0.0, cov=0.909 [PASS]
+  neff_ess_gated: FWER=0.0%, cert=0.0%, gated=0.5, cov=N/A [PASS]
+  neff_ungated: FWER=0.0%, cert=0.0%, gated=0.0, cov=N/A [PASS]
+
+--- usable_adversarial (weights: adversarial) ---
+  naive_clipped_99: FWER=64.0%, cert=50.7%, gated=0.0, cov=0.372 [FAIL]
+  naive_ess_gated: FWER=0.0%, cert=0.3%, gated=4.9, cov=1.000 [PASS]
+  naive_ungated: FWER=74.0%, cert=55.1%, gated=0.0, cov=0.260 [FAIL]
+  neff_ess_gated: FWER=0.0%, cert=0.3%, gated=4.9, cov=1.000 [PASS]
+  neff_ungated: FWER=0.0%, cert=0.3%, gated=0.0, cov=1.000 [PASS]
+
+--- usable_good_weights (weights: well_behaved) ---
+  naive_clipped_99: FWER=6.0%, cert=42.9%, gated=0.0, cov=0.876 [FAIL]
+  naive_ess_gated: FWER=6.0%, cert=42.7%, gated=0.0, cov=0.876 [FAIL]
+  naive_ungated: FWER=6.0%, cert=42.7%, gated=0.0, cov=0.876 [FAIL]
+  neff_ess_gated: FWER=5.0%, cert=40.6%, gated=0.0, cov=0.896 [PASS]
+  neff_ungated: FWER=5.0%, cert=40.6%, gated=0.0, cov=0.896 [PASS]
+
+--- usable_heavy_tails (weights: heavy_tails) ---
+  naive_clipped_99: FWER=7.0%, cert=43.6%, gated=0.0, cov=0.859 [FAIL]
+  naive_ess_gated: FWER=6.0%, cert=34.8%, gated=1.0, cov=0.829 [FAIL]
+  naive_ungated: FWER=7.0%, cert=44.7%, gated=0.0, cov=0.832 [FAIL]
+  neff_ess_gated: FWER=0.0%, cert=9.2%, gated=1.0, cov=0.986 [PASS]
+  neff_ungated: FWER=0.0%, cert=9.2%, gated=0.0, cov=0.986 [PASS]
+
+--- usable_moderate_tails (weights: moderate_tails) ---
+  naive_clipped_99: FWER=7.0%, cert=43.8%, gated=0.0, cov=0.850 [FAIL]
+  naive_ess_gated: FWER=7.0%, cert=43.6%, gated=0.0, cov=0.838 [FAIL]
+  naive_ungated: FWER=7.0%, cert=43.8%, gated=0.0, cov=0.839 [FAIL]
+  neff_ess_gated: FWER=0.0%, cert=15.8%, gated=0.0, cov=0.968 [PASS]
+  neff_ungated: FWER=0.0%, cert=15.8%, gated=0.0, cov=0.968 [PASS]
+
+======================================================================

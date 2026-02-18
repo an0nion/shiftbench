@@ -1,0 +1,2 @@
+dataset,method,n_samples_total,n_calibration,n_test,n_features,n_cohorts,n_decisions,n_certify,n_abstain,n_no_guarantee,weight_elapsed_sec,bound_elapsed_sec,total_elapsed_sec,alpha,use_oracle,diag_method,diag_sigma,diag_n_basis,diag_alpha_min,diag_alpha_max,diag_alpha_std
+civil_comments,ulsif,30000,5997,6005,15,5,30,30,0,0,0.036516666412353516,0.01067972183227539,0.10866427421569824,0.05,True,ulsif,1.4142135623730951,100,0.012496694407626649,0.015488326374357679,0.0012670140005102003

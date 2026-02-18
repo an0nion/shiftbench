@@ -1,0 +1,2 @@
+dataset,method,n_samples_total,n_calibration,n_test,n_features,n_cohorts,n_decisions,n_certify,n_abstain,n_no_guarantee,weight_elapsed_sec,bound_elapsed_sec,total_elapsed_sec,alpha,use_oracle,diag_method,diag_sigma,diag_n_basis,diag_alpha_min,diag_alpha_max,diag_alpha_std
+sider,ulsif,1427,286,220,217,135,810,4,806,0,0.009933233261108398,0.006014585494995117,0.030473947525024414,0.05,True,ulsif,12.009972924273258,100,0.0,0.28707543610115005,0.06475860266451007

@@ -1,0 +1,21 @@
+======================================================================
+EXPERIMENT A: SEMI-SYNTHETIC REAL-DATA CALIBRATION
+======================================================================
+
+Design: 50 independent trials per dataset, n_cal=2000, alpha=0.05
+Real features, labels, predictions, natural covariate shift.
+Ground truth from held-out test set.
+
+Dataset         Domain     FWER            Cert%    n_eff    Coverage  
+------------------------------------------------------------------
+bace            molecular  0/50 (0.0%)     0.0%     109.9    N/A       
+bbbp            molecular  0/50 (0.0%)     37.9%    261.0    0.995     
+adult           tabular    0/50 (0.0%)     0.0%     16.5     N/A       
+compas          tabular    0/50 (0.0%)     0.0%     28.8     N/A       
+imdb            text       0/50 (0.0%)     24.0%    91.2     1.000     
+yelp            text       0/50 (0.0%)     0.0%     69.9     N/A       
+
+Overall FWER: 0/300 (0.0%)
+[PASS] Protocol maintains FWER <= alpha on all real datasets.
+
+======================================================================

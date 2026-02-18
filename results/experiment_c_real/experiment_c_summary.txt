@@ -1,0 +1,19 @@
+======================================================================
+EXPERIMENT C: CROSS-DOMAIN H1 (KLIEP vs uLSIF AGREEMENT)
+======================================================================
+
+Design: 30 trials per dataset, n_cal=2000, n_cohorts=5, alpha=0.05
+Both methods run on identical subsampled data per trial.
+Agreement = same certify/abstain decision on each (cohort, tau) pair.
+
+bace (molecular): agree=100.0%, kappa=1.000, uLSIF=0 certs, KLIEP=0 certs
+bbbp (molecular): agree=95.7%, kappa=0.906, uLSIF=276 certs, KLIEP=244 certs
+adult (tabular): agree=100.0%, kappa=1.000, uLSIF=0 certs, KLIEP=0 certs
+compas (tabular): agree=100.0%, kappa=1.000, uLSIF=0 certs, KLIEP=0 certs
+imdb (text): agree=100.0%, kappa=1.000, uLSIF=175 certs, KLIEP=175 certs
+yelp (text): agree=100.0%, kappa=1.000, uLSIF=0 certs, KLIEP=0 certs
+
+Overall agreement: 99.3%
+Mean kappa: 0.984
+
+======================================================================
