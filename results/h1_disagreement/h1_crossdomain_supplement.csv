@@ -1,0 +1,10 @@
+dataset,domain,n_cohorts,kliep_cert_rate,ulsif_cert_rate,kliep_neff,ulsif_neff,n_total,kliep_certs,ulsif_certs,n_active,n_disagree_lb,n_disagree_ub,n_disagree_est,agree_pct,mean_neff,neff_bin
+adult,tabular,49,2.38,2.04,38.48,37.32,294,7,6,7,1,7,1,85.71428571428572,37.9,25-100
+bace,molecular,127,0.26,0.26,0.61,0.61,762,2,2,2,0,2,0,100.0,0.61,1-5
+bank,tabular,10,0.0,0.0,55.99,53.51,60,0,0,0,0,0,0,100.0,54.75,25-100
+bbbp,molecular,127,0.52,0.52,1.71,1.79,762,4,4,4,0,4,0,100.0,1.75,1-5
+clintox,molecular,110,0.76,0.76,1.4,1.4,660,5,5,5,0,5,0,100.0,1.4,1-5
+compas,tabular,38,7.46,7.46,15.28,15.17,228,17,17,17,0,17,0,100.0,15.225,5-25
+german_credit,tabular,14,0.0,0.0,2.3,2.32,84,0,0,0,0,0,0,100.0,2.3099999999999996,1-5
+imdb,text,10,60.0,60.0,538.46,538.44,60,36,36,36,0,36,0,100.0,538.45,300+
+yelp,text,10,51.67,51.67,424.73,424.79,60,31,31,31,0,31,0,100.0,424.76,300+
