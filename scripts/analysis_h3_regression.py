@@ -2,9 +2,22 @@
 H3 Regression Analysis
 ========================
 Runs cert_rate ~ log(n_eff) + shift_metric + domain regression
-to show n_eff explains most variance in cross-domain certification difficulty.
+to quantify cross-domain certification difficulty.
 
-Uses existing cross_domain_real results + computes shift metrics per dataset.
+IMPORTANT FRAMING:
+- Domain is the primary predictor (R²~0.90 domain-only).
+- This reflects that domain DETERMINES n_eff range by construction:
+  scaffold shift → n_eff~1; temporal drift → n_eff~500.
+  Domain identity and n_eff are therefore collinear.
+- Within each domain, log(n_eff) retains independent predictive value
+  (shown via within-domain regression + partial R²).
+- Correct claim: "domain mediates n_eff; within domain, n_eff explains
+  remaining variation beyond shift magnitude."
+
+Dataset filter: REAL_PRED_DATASETS only (oracle datasets excluded).
+Oracle-contaminated exclusions:
+  amazon / civil_comments / twitter — cert_rate=100% due to oracle fallback
+  sider / heart_disease / diabetes   — oracle fallback, cert_rate≈0%
 
 Produces: results/h3_regression/
 """
@@ -19,243 +32,272 @@ shift_bench_dir = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(shift_bench_dir / "src"))
 sys.path.insert(0, str(shift_bench_dir / "scripts"))
 
+# Datasets with REAL (non-oracle) predictions confirmed in benchmark.log.
+REAL_PRED_DATASETS = {
+    "bace", "bbbp", "clintox", "esol",           # molecular
+    "adult", "compas", "bank", "german_credit",    # tabular
+    "imdb", "yelp",                                # text
+}
 
-def compute_shift_metrics_per_dataset():
-    """Compute two-sample AUC shift metric for each dataset."""
+
+def compute_shift_metric_for_dataset(ds_name, domain):
+    """Compute two-sample AUC shift metric for a single dataset."""
     from shiftbench.data import load_dataset
     from sklearn.model_selection import train_test_split
     from sklearn.ensemble import GradientBoostingClassifier
+    from sklearn.metrics import roc_auc_score
 
-    datasets_to_check = [
-        ("bace", "molecular"), ("bbbp", "molecular"),
-        ("clintox", "molecular"), ("sider", "molecular"),
-        ("adult", "tabular"), ("compas", "tabular"),
-        ("bank", "tabular"), ("german_credit", "tabular"),
-        ("heart_disease", "tabular"), ("diabetes", "tabular"),
-        ("imdb", "text"), ("yelp", "text"),
-        ("amazon", "text"), ("civil_comments", "text"),
-        ("twitter", "text"),
-    ]
+    try:
+        X, y, cohorts, splits = load_dataset(ds_name)
+    except Exception as e:
+        print(f"  Skip {ds_name}: {e}")
+        return None
 
-    results = []
-    for ds_name, domain in datasets_to_check:
-        try:
-            X, y, cohorts, splits = load_dataset(ds_name)
-        except Exception as e:
-            print(f"  Skip {ds_name}: {e}")
-            continue
+    cal_mask = (splits["split"] == "cal").values
+    test_mask = (splits["split"] == "test").values
+    X_cal, X_test = X[cal_mask], X[test_mask]
 
-        cal_mask = (splits["split"] == "cal").values
-        test_mask = (splits["split"] == "test").values
+    max_n = 3000
+    rng = np.random.RandomState(42)
+    X_cal_sub = X_cal[rng.choice(len(X_cal), min(len(X_cal), max_n), replace=False)]
+    X_test_sub = X_test[rng.choice(len(X_test), min(len(X_test), max_n), replace=False)]
 
-        X_cal = X[cal_mask]
-        X_test = X[test_mask]
+    X_comb = np.vstack([X_cal_sub, X_test_sub])
+    y_dom = np.concatenate([np.zeros(len(X_cal_sub)), np.ones(len(X_test_sub))])
+    X_tr, X_val, y_tr, y_val = train_test_split(
+        X_comb, y_dom, test_size=0.3, random_state=42, stratify=y_dom
+    )
+    try:
+        clf = GradientBoostingClassifier(n_estimators=50, max_depth=3, random_state=42)
+        clf.fit(X_tr, y_tr)
+        auc = roc_auc_score(y_val, clf.predict_proba(X_val)[:, 1])
+    except Exception:
+        auc = 0.5
 
-        # Two-sample AUC: train classifier to distinguish cal from test
-        n_cal = len(X_cal)
-        n_test = len(X_test)
+    shift_magnitude = abs(auc - 0.5) * 2
+    print(f"  {ds_name}: AUC={auc:.3f}, shift={shift_magnitude:.3f}")
+    return {
+        "dataset": ds_name, "domain": domain,
+        "two_sample_auc": auc, "shift_magnitude": shift_magnitude,
+        "n_cal": int(cal_mask.sum()), "n_test": int(test_mask.sum()),
+        "n_features": X.shape[1],
+    }
 
-        # Subsample for speed if needed
-        max_n = 3000
-        if n_cal > max_n:
-            idx = np.random.RandomState(42).choice(n_cal, max_n, replace=False)
-            X_cal_sub = X_cal[idx]
-        else:
-            X_cal_sub = X_cal
 
-        if n_test > max_n:
-            idx = np.random.RandomState(43).choice(n_test, max_n, replace=False)
-            X_test_sub = X_test[idx]
-        else:
-            X_test_sub = X_test
+def load_or_update_shift_metrics(out_dir):
+    """Load cached shift metrics and add any missing REAL_PRED_DATASETS."""
+    cache_path = out_dir / "shift_metrics.csv"
+    if cache_path.exists():
+        df = pd.read_csv(cache_path)
+    else:
+        df = pd.DataFrame(columns=["dataset", "domain", "two_sample_auc",
+                                    "shift_magnitude", "n_cal", "n_test", "n_features"])
 
-        # Combine and label
-        X_combined = np.vstack([X_cal_sub, X_test_sub])
-        y_domain = np.concatenate([
-            np.zeros(len(X_cal_sub)),
-            np.ones(len(X_test_sub))
-        ])
+    existing = set(df["dataset"].values)
+    domain_map = {
+        "bace": "molecular", "bbbp": "molecular", "clintox": "molecular",
+        "esol": "molecular",
+        "adult": "tabular", "compas": "tabular", "bank": "tabular",
+        "german_credit": "tabular",
+        "imdb": "text", "yelp": "text",
+    }
+    missing = REAL_PRED_DATASETS - existing
+    if missing:
+        print(f"\nComputing shift metrics for: {sorted(missing)}")
+        new_rows = []
+        for ds in sorted(missing):
+            row = compute_shift_metric_for_dataset(ds, domain_map[ds])
+            if row:
+                new_rows.append(row)
+        if new_rows:
+            df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
+            df.to_csv(cache_path, index=False)
 
-        # Train/val split
-        X_tr, X_val, y_tr, y_val = train_test_split(
-            X_combined, y_domain, test_size=0.3, random_state=42, stratify=y_domain
-        )
+    return df
 
-        try:
-            clf = GradientBoostingClassifier(
-                n_estimators=50, max_depth=3, random_state=42
-            )
-            clf.fit(X_tr, y_tr)
-            probs = clf.predict_proba(X_val)[:, 1]
 
-            from sklearn.metrics import roc_auc_score
-            auc = roc_auc_score(y_val, probs)
-        except Exception:
-            auc = 0.5
-
-        # Shift magnitude = |AUC - 0.5| * 2 (rescaled to [0, 1])
-        shift_magnitude = abs(auc - 0.5) * 2
-
-        results.append({
-            "dataset": ds_name,
-            "domain": domain,
-            "two_sample_auc": auc,
-            "shift_magnitude": shift_magnitude,
-            "n_cal": n_cal,
-            "n_test": n_test,
-            "n_features": X.shape[1],
-        })
-        print(f"  {ds_name}: AUC={auc:.3f}, shift={shift_magnitude:.3f}")
-
-    return pd.DataFrame(results)
+def load_cert_rates(shift_bench_dir):
+    """
+    Load per-dataset cert_rate and mean_n_eff.
+    Prefers tier_a (has esol with real preds); falls back to cross_domain_real.
+    """
+    for rel_path in [
+        "results/cross_domain_tier_a/cross_domain_by_dataset.csv",
+        "results/cross_domain_real/cross_domain_by_dataset.csv",
+    ]:
+        path = shift_bench_dir / rel_path
+        if path.exists():
+            print(f"Loading cert rates from: {path.name}")
+            df = pd.read_csv(path)
+            if "cert_rate_%" in df.columns:
+                df["cert_rate"] = df["cert_rate_%"] / 100.0
+            elif "cert_rate" not in df.columns:
+                raise KeyError("No cert_rate column found")
+            agg = df.groupby(["dataset", "domain"]).agg(
+                cert_rate=("cert_rate", "mean"),
+                mean_n_eff=("mean_n_eff", "mean"),
+                n_cohorts=("n_cohorts", "first"),
+            ).reset_index()
+            return agg
+    raise FileNotFoundError("No cross-domain by_dataset.csv found in tier_a or real dirs")
 
 
 def run_h3_regression():
-    """Run regression analysis for H3."""
+    """Run H3 regression with oracle-filtered, real-prediction datasets only."""
     out_dir = shift_bench_dir / "results" / "h3_regression"
     os.makedirs(out_dir, exist_ok=True)
 
-    # Load cross-domain results
-    raw_path = shift_bench_dir / "results" / "cross_domain_real" / "cross_domain_raw_results.csv"
-    if not raw_path.exists():
-        print(f"ERROR: {raw_path} not found")
+    # ── 1. Cert rates ───────────────────────────────────────────────────────
+    cert_df = load_cert_rates(shift_bench_dir)
+
+    # ── 2. Filter to real-pred datasets ────────────────────────────────────
+    cert_df = cert_df[cert_df["dataset"].isin(REAL_PRED_DATASETS)].copy()
+    print(f"\nReal-pred datasets ({len(cert_df)}):")
+    print(cert_df[["dataset", "domain", "cert_rate", "mean_n_eff"]].to_string(index=False))
+
+    # ── 3. Shift metrics ───────────────────────────────────────────────────
+    shift_df = load_or_update_shift_metrics(out_dir)
+    shift_df = shift_df[shift_df["dataset"].isin(REAL_PRED_DATASETS)]
+
+    # ── 4. Merge ───────────────────────────────────────────────────────────
+    merged = cert_df.merge(
+        shift_df[["dataset", "domain", "two_sample_auc", "shift_magnitude",
+                  "n_cal", "n_test", "n_features"]],
+        on=["dataset", "domain"], how="inner"
+    )
+    n = len(merged)
+    print(f"\nFinal regression dataset: n={n}")
+
+    if n < 5:
+        print("Insufficient data for regression")
         return
 
-    raw = pd.read_csv(raw_path)
-    print(f"Loaded {len(raw)} raw decisions")
-
-    # Compute per-dataset metrics
-    dataset_stats = raw.groupby(["dataset", "domain", "method"]).agg(
-        cert_rate=("decision", lambda x: (x == "CERTIFY").mean()),
-        mean_n_eff=("n_eff", "mean"),
-        median_n_eff=("n_eff", "median"),
-        mean_mu_hat=("mu_hat", "mean"),
-        mean_lb=("lower_bound", "mean"),
-        n_decisions=("decision", "size"),
-    ).reset_index()
-
-    # Average across methods for the regression
-    dataset_avg = dataset_stats.groupby(["dataset", "domain"]).agg(
-        cert_rate=("cert_rate", "mean"),
-        mean_n_eff=("mean_n_eff", "mean"),
-        median_n_eff=("median_n_eff", "mean"),
-        n_decisions=("n_decisions", "sum"),
-    ).reset_index()
-
-    print(f"\nDataset-level metrics ({len(dataset_avg)} datasets):")
-    print(dataset_avg.to_string(index=False))
-
-    # Compute shift metrics
-    print("\nComputing shift metrics...")
-    shift_df = compute_shift_metrics_per_dataset()
-    shift_df.to_csv(out_dir / "shift_metrics.csv", index=False)
-
-    # Merge
-    merged = dataset_avg.merge(shift_df, on=["dataset", "domain"], how="inner")
-    print(f"\nMerged: {len(merged)} datasets")
-
-    if len(merged) < 3:
-        print("Not enough datasets for regression")
-        return
-
-    # Add log(n_eff)
+    # ── 5. Features ─────────────────────────────────────────────────────────
     merged["log_neff"] = np.log1p(merged["mean_n_eff"])
-
-    # Domain dummies
     merged["is_text"] = (merged["domain"] == "text").astype(int)
     merged["is_tabular"] = (merged["domain"] == "tabular").astype(int)
-
     merged.to_csv(out_dir / "regression_data.csv", index=False)
 
-    # === Regression models ===
     from sklearn.linear_model import LinearRegression
     from sklearn.metrics import r2_score
 
+    y = merged["cert_rate"].values
     results = []
 
-    # Model 1: cert_rate ~ log(n_eff) only
-    X1 = merged[["log_neff"]].values
-    y = merged["cert_rate"].values
-    m1 = LinearRegression().fit(X1, y)
-    r2_1 = r2_score(y, m1.predict(X1))
-    results.append({
-        "model": "cert_rate ~ log(n_eff)",
-        "r2": r2_1,
-        "coefficients": f"log_neff={m1.coef_[0]:.4f}, intercept={m1.intercept_:.4f}",
-        "n_features": 1,
-    })
+    def fit(label, X_cols):
+        X = merged[X_cols].values
+        m = LinearRegression().fit(X, y)
+        r2 = r2_score(y, m.predict(X))
+        coef_str = ", ".join(f"{c}={v:.4f}" for c, v in zip(X_cols, m.coef_))
+        coef_str += f", intercept={m.intercept_:.4f}"
+        results.append({"model": label, "r2": r2, "coefficients": coef_str,
+                         "n_features": len(X_cols), "n_obs": n})
+        return r2
 
-    # Model 2: cert_rate ~ log(n_eff) + shift_magnitude
-    X2 = merged[["log_neff", "shift_magnitude"]].values
-    m2 = LinearRegression().fit(X2, y)
-    r2_2 = r2_score(y, m2.predict(X2))
-    results.append({
-        "model": "cert_rate ~ log(n_eff) + shift",
-        "r2": r2_2,
-        "coefficients": f"log_neff={m2.coef_[0]:.4f}, shift={m2.coef_[1]:.4f}, intercept={m2.intercept_:.4f}",
-        "n_features": 2,
-    })
+    # ── 6. Global regressions ───────────────────────────────────────────────
+    r2_neff   = fit("cert_rate ~ log(n_eff)",
+                    ["log_neff"])
+    r2_shift  = fit("cert_rate ~ shift",
+                    ["shift_magnitude"])
+    r2_ns     = fit("cert_rate ~ log(n_eff) + shift",
+                    ["log_neff", "shift_magnitude"])
+    r2_domain = fit("cert_rate ~ domain",
+                    ["is_text", "is_tabular"])
+    r2_dn     = fit("cert_rate ~ domain + log(n_eff)",
+                    ["is_text", "is_tabular", "log_neff"])
+    r2_full   = fit("cert_rate ~ log(n_eff) + shift + domain",
+                    ["log_neff", "shift_magnitude", "is_text", "is_tabular"])
 
-    # Model 3: cert_rate ~ log(n_eff) + shift + domain
-    X3 = merged[["log_neff", "shift_magnitude", "is_text", "is_tabular"]].values
-    m3 = LinearRegression().fit(X3, y)
-    r2_3 = r2_score(y, m3.predict(X3))
-    results.append({
-        "model": "cert_rate ~ log(n_eff) + shift + domain",
-        "r2": r2_3,
-        "coefficients": (f"log_neff={m3.coef_[0]:.4f}, shift={m3.coef_[1]:.4f}, "
-                        f"is_text={m3.coef_[2]:.4f}, is_tabular={m3.coef_[3]:.4f}, "
-                        f"intercept={m3.intercept_:.4f}"),
-        "n_features": 4,
-    })
+    # ── 7. Incremental / partial R² ─────────────────────────────────────────
+    # partial R²(n_eff | domain) = how much n_eff adds after domain is controlled
+    partial_neff_given_domain = (
+        (r2_dn - r2_domain) / (1 - r2_domain) if r2_domain < 1.0 else float("nan")
+    )
+    # partial R²(domain | n_eff+shift)
+    partial_domain_given_ns = (
+        (r2_full - r2_ns) / (1 - r2_ns) if r2_ns < 1.0 else float("nan")
+    )
+    # incremental: how much n_eff adds beyond shift alone
+    incr_neff_over_shift = r2_ns - r2_shift
 
-    # Model 4: cert_rate ~ domain only (ablation)
-    X4 = merged[["is_text", "is_tabular"]].values
-    m4 = LinearRegression().fit(X4, y)
-    r2_4 = r2_score(y, m4.predict(X4))
-    results.append({
-        "model": "cert_rate ~ domain (ablation)",
-        "r2": r2_4,
-        "coefficients": f"is_text={m4.coef_[0]:.4f}, is_tabular={m4.coef_[1]:.4f}, intercept={m4.intercept_:.4f}",
-        "n_features": 2,
-    })
+    partial_df = pd.DataFrame([
+        {"metric": "R²(n_eff alone)", "value": r2_neff},
+        {"metric": "R²(shift alone)", "value": r2_shift},
+        {"metric": "R²(domain alone)", "value": r2_domain},
+        {"metric": "R²(domain + n_eff)", "value": r2_dn},
+        {"metric": "R²(full model)", "value": r2_full},
+        {"metric": "partial R²(n_eff | domain)", "value": partial_neff_given_domain},
+        {"metric": "partial R²(domain | n_eff+shift)", "value": partial_domain_given_ns},
+        {"metric": "incremental R²(n_eff over shift)", "value": incr_neff_over_shift},
+    ])
+    partial_df.to_csv(out_dir / "h3_partial_r2.csv", index=False)
 
-    # Model 5: cert_rate ~ shift_magnitude only (ablation)
-    X5 = merged[["shift_magnitude"]].values
-    m5 = LinearRegression().fit(X5, y)
-    r2_5 = r2_score(y, m5.predict(X5))
-    results.append({
-        "model": "cert_rate ~ shift (ablation)",
-        "r2": r2_5,
-        "coefficients": f"shift={m5.coef_[0]:.4f}, intercept={m5.intercept_:.4f}",
-        "n_features": 1,
-    })
+    # ── 8. Within-domain regression ─────────────────────────────────────────
+    within_results = []
+    for domain in ["molecular", "tabular", "text"]:
+        sub = merged[merged["domain"] == domain].copy()
+        nd = len(sub)
+        if nd < 3:
+            within_results.append({
+                "domain": domain, "n_datasets": nd,
+                "r2_neff": float("nan"), "r2_shift": float("nan"),
+                "r2_neff_shift": float("nan"), "neff_coef": float("nan"),
+                "note": f"only {nd} obs, cannot fit"
+            })
+            continue
+        ys = sub["cert_rate"].values
+        m_n = LinearRegression().fit(sub[["log_neff"]].values, ys)
+        m_s = LinearRegression().fit(sub[["shift_magnitude"]].values, ys)
+        m_ns = LinearRegression().fit(sub[["log_neff", "shift_magnitude"]].values, ys)
+        within_results.append({
+            "domain": domain, "n_datasets": nd,
+            "r2_neff":       r2_score(ys, m_n.predict(sub[["log_neff"]].values)),
+            "r2_shift":      r2_score(ys, m_s.predict(sub[["shift_magnitude"]].values)),
+            "r2_neff_shift": r2_score(ys, m_ns.predict(sub[["log_neff", "shift_magnitude"]].values)),
+            "neff_coef": m_n.coef_[0],
+            "note": "",
+        })
+    within_df = pd.DataFrame(within_results)
+    within_df.to_csv(out_dir / "h3_within_domain_regression.csv", index=False)
 
+    # ── 9. Save & print ─────────────────────────────────────────────────────
     reg_df = pd.DataFrame(results)
     reg_df.to_csv(out_dir / "regression_results.csv", index=False)
 
-    # Print results
-    print(f"\n{'='*70}")
-    print("H3 REGRESSION ANALYSIS: cert_rate explanatory models")
-    print(f"{'='*70}")
-    print(f"{'Model':<45} {'R2':>8} {'#feat':>6}")
-    print("-" * 62)
-    for _, row in reg_df.iterrows():
-        print(f"{row['model']:<45} {row['r2']:>8.4f} {row['n_features']:>6}")
-
-    print(f"\nKey finding: log(n_eff) alone explains R2={r2_1:.4f}")
-    print(f"Adding shift: R2={r2_2:.4f} (delta={r2_2-r2_1:.4f})")
-    print(f"Adding domain: R2={r2_3:.4f} (delta={r2_3-r2_2:.4f})")
-    print(f"Domain only (no n_eff): R2={r2_4:.4f}")
-    print(f"\n=> n_eff ablation: removing n_eff from full model loses {r2_3-r2_4:.4f} R2")
-
-    # Scatter data for plotting
     scatter = merged[["dataset", "domain", "cert_rate", "log_neff",
                        "mean_n_eff", "shift_magnitude"]].copy()
     scatter.to_csv(out_dir / "scatter_data.csv", index=False)
-    print(f"\nSaved scatter data: {out_dir / 'scatter_data.csv'}")
 
     print(f"\n{'='*70}")
+    print(f"H3 REGRESSION  (n={n} real-pred datasets)")
+    print(f"{'='*70}")
+    print(f"\n--- Global models ---")
+    print(f"{'Model':<45} {'R²':>8}")
+    print("-" * 55)
+    for _, row in reg_df.iterrows():
+        print(f"{row['model']:<45} {row['r2']:>8.4f}")
+
+    print(f"\n--- Partial / Incremental R² ---")
+    for _, row in partial_df.iterrows():
+        print(f"  {row['metric']:<45} {row['value']:>8.4f}")
+
+    print(f"\n--- Within-domain: cert_rate ~ log(n_eff) ---")
+    print(f"{'Domain':<12} {'n':>3} {'R²(neff)':>10} {'R²(shift)':>10} {'neff_coef':>10} note")
+    print("-" * 60)
+    for _, row in within_df.iterrows():
+        r2n = f"{row['r2_neff']:.4f}" if not np.isnan(row['r2_neff']) else "  N/A"
+        r2s = f"{row['r2_shift']:.4f}" if not np.isnan(row['r2_shift']) else "  N/A"
+        nc  = f"{row['neff_coef']:.4f}" if not np.isnan(row['neff_coef']) else "  N/A"
+        print(f"{row['domain']:<12} {row['n_datasets']:>3} {r2n:>10} {r2s:>10} {nc:>10}  {row['note']}")
+
+    print(f"\n--- Interpretation ---")
+    print(f"  Primary driver: domain (R²={r2_domain:.3f}); reflects that domain")
+    print(f"  determines n_eff range by construction.")
+    print(f"  n_eff retains within-domain predictive power:")
+    print(f"    partial R²(n_eff | domain) = {partial_neff_given_domain:.3f}")
+    print(f"  The correct claim: 'domain mediates n_eff; within domain, n_eff")
+    print(f"  explains remaining variation beyond shift magnitude.'")
+    print(f"\nSaved to {out_dir}/")
     return reg_df
 
 

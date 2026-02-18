@@ -1,0 +1,9 @@
+metric,value
+R²(n_eff alone),0.7079885383280234
+R²(shift alone),0.06909056809983749
+R²(domain alone),0.9935047202920522
+R²(domain + n_eff),0.9935168158343662
+R²(full model),0.9935200161612519
+partial R²(n_eff | domain),0.0018622049946935759
+partial R²(domain | n_eff+shift),0.9654017680269856
+incremental R²(n_eff over shift),0.7436170915342629

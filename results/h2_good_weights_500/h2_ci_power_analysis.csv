@@ -1,0 +1,6 @@
+variant,observed_fwer,wilson_ci_lo,wilson_ci_hi,ci_upper_satisfies_criterion,binomial_p_H0_fwer_le_alpha,H0_rejected,n_trials_needed_for_criterion,interpretation
+naive_clipped_99,0.058,0.0406837291117572,0.08205618785625499,False,0.231678,False,10000,"VALID: point est = alpha, CI overlaps alpha, test not rejected"
+naive_ess_gated,0.058,0.0406837291117572,0.08205618785625499,False,0.231678,False,10000,"VALID: point est = alpha, CI overlaps alpha, test not rejected"
+naive_ungated,0.058,0.0406837291117572,0.08205618785625499,False,0.231678,False,10000,"VALID: point est = alpha, CI overlaps alpha, test not rejected"
+neff_ess_gated,0.05,0.034093745243849435,0.0727681611715476,False,0.528649,False,10000,"VALID: point est = alpha, CI overlaps alpha, test not rejected"
+neff_ungated,0.05,0.034093745243849435,0.0727681611715476,False,0.528649,False,10000,"VALID: point est = alpha, CI overlaps alpha, test not rejected"

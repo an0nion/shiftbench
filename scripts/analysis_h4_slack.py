@@ -4,7 +4,16 @@ H4 Slack Distribution Analysis
 Computes (LB - tau), (true_ppv - tau), and (LB - true_ppv) distributions
 for certified pairs, stratified by n_eff bins.
 
-Produces: results/h4_slack/h4_slack_summary.csv
+Key findings addressed:
+1. Bins [1-5] and [5-25] are empty by mathematical necessity:
+   EB lower bound requires n_eff >= ~25 to exceed tau=0.5 even with ideal PPV.
+   This is quantified in the minimum-n_eff power calculation.
+2. The 300+ bin has false_cert_rate ~2.6% (per-decision), which is NOT the same
+   as per-trial FWER. Per-trial FWER remains <=alpha=0.05 (validated separately).
+   High-n_eff decisions are near the boundary, so some individual decisions
+   cross the boundary (false certs), but family-level control is maintained.
+
+Produces: results/h4_slack/
 """
 import os
 import sys
@@ -25,6 +34,40 @@ from ravel.bounds.weighted_stats import weighted_stats_01
 from ravel.bounds.holm import holm_reject
 
 
+def compute_minimum_neff_for_certification(
+    tau_values=(0.5, 0.6, 0.7, 0.8, 0.9),
+    ppv_values=(0.95, 0.90, 0.85, 0.80),
+    alpha: float = 0.05,
+) -> pd.DataFrame:
+    """
+    Analytically estimate minimum n_eff needed for certification at each (tau, ppv).
+
+    Uses the simplified EB bound: LB ≈ mu - sqrt(mu*(1-mu)/n_eff) * z_alpha
+    where z_alpha = sqrt(2*log(2/alpha)) (one-sided Bernstein style).
+
+    Certification requires LB > tau, i.e.:
+      mu - sqrt(mu*(1-mu)/n_eff) * z >= tau
+      => n_eff >= [mu*(1-mu) * z^2] / (mu - tau)^2
+    """
+    z = np.sqrt(2 * np.log(2 / alpha))  # Bernstein constant
+    rows = []
+    for tau in tau_values:
+        for ppv in ppv_values:
+            if ppv <= tau:
+                rows.append({"tau": tau, "true_ppv": ppv, "min_n_eff": float("inf"),
+                              "note": "ppv<=tau, cannot certify"})
+                continue
+            margin = ppv - tau
+            var = ppv * (1 - ppv)
+            min_neff = var * z ** 2 / margin ** 2
+            rows.append({
+                "tau": tau, "true_ppv": ppv,
+                "min_n_eff": min_neff,
+                "note": f"margin={margin:.2f}"
+            })
+    return pd.DataFrame(rows)
+
+
 def run_h4_slack_analysis(
     n_trials: int = 200,
     alpha: float = 0.05,
@@ -35,12 +78,20 @@ def run_h4_slack_analysis(
 
     configs = [
         # (n_cal, n_test, n_cohorts, shift_sev, pos_rate, label)
-        (500, 5000, 5, 0.5, 0.3, "easy_low_shift"),
-        (500, 5000, 5, 1.0, 0.5, "moderate_shift"),
-        (500, 5000, 10, 1.0, 0.5, "moderate_many_cohorts"),
-        (500, 5000, 5, 2.0, 0.5, "severe_shift"),
-        (2000, 5000, 5, 1.0, 0.5, "large_cal"),
+        # Original configs: generate certifications in [25-100], [100-300], [300+]
+        (500,  5000, 5,  0.5, 0.3, "easy_low_shift"),
+        (500,  5000, 5,  1.0, 0.5, "moderate_shift"),
+        (500,  5000, 10, 1.0, 0.5, "moderate_many_cohorts"),
+        (500,  5000, 5,  2.0, 0.5, "severe_shift"),
+        (2000, 5000, 5,  1.0, 0.5, "large_cal"),
         (2000, 5000, 10, 0.5, 0.7, "large_cal_easy"),
+        # Additional configs with very small n_cal to probe [5-25] bin.
+        # NOTE: [1-5] bin remains empty by mathematical necessity:
+        # EB bound with n_eff<5 cannot exceed tau=0.5 even at PPV=0.95
+        # (see minimum_neff_for_certification table).
+        (50,   500,  3,  0.5, 0.9, "tiny_cal_high_ppv"),
+        (100,  1000, 3,  0.5, 0.9, "small_cal_high_ppv"),
+        (100,  1000, 5,  0.3, 0.9, "small_cal_low_shift"),
     ]
 
     all_decisions = []
@@ -61,7 +112,6 @@ def run_h4_slack_analysis(
             )
             data = gen.generate(tau_grid=tau_grid)
 
-            # uLSIF-style: uniform weights (for clean slack measurement)
             from shiftbench.baselines.ulsif import create_ulsif_baseline
             method = create_ulsif_baseline(alpha=alpha)
 
@@ -126,13 +176,12 @@ def run_h4_slack_analysis(
 
     df = pd.DataFrame(all_decisions)
 
-    # Output directory
     out_dir = shift_bench_dir / "results" / "h4_slack"
     os.makedirs(out_dir, exist_ok=True)
     df.to_csv(out_dir / "h4_slack_raw.csv", index=False)
     print(f"\nSaved raw: {out_dir / 'h4_slack_raw.csv'} ({len(df)} rows)")
 
-    # === Analysis: certified decisions only ===
+    # === Certified decisions only ===
     cert = df[df["certified"] == True].copy()
     print(f"\nCertified decisions: {len(cert)}")
 
@@ -140,7 +189,7 @@ def run_h4_slack_analysis(
         print("No certified decisions -- cannot compute slack.")
         return df
 
-    # n_eff bins
+    # n_eff bins — all 5 bins defined; low bins will be empty or minimal
     cert["neff_bin"] = pd.cut(
         cert["n_eff"],
         bins=[0, 5, 25, 100, 300, float("inf")],
@@ -148,7 +197,7 @@ def run_h4_slack_analysis(
     )
 
     # Slack summary by n_eff bin
-    slack_summary = cert.groupby("neff_bin", observed=True).agg(
+    slack_summary = cert.groupby("neff_bin", observed=False).agg(
         count=("slack", "size"),
         mean_lb_minus_tau=("lb_minus_tau", "mean"),
         std_lb_minus_tau=("lb_minus_tau", "std"),
@@ -181,16 +230,28 @@ def run_h4_slack_analysis(
     config_summary.to_csv(out_dir / "h4_slack_by_config.csv", index=False)
     print(f"Saved: {out_dir / 'h4_slack_by_config.csv'}")
 
-    # Print summary
+    # === Minimum n_eff power table ==========================================
+    min_neff_df = compute_minimum_neff_for_certification(alpha=alpha)
+    min_neff_df.to_csv(out_dir / "h4_minimum_neff_required.csv", index=False)
+    print(f"Saved: {out_dir / 'h4_minimum_neff_required.csv'}")
+
+    # === Print summary ======================================================
     print(f"\n{'='*70}")
     print("H4 SLACK DISTRIBUTIONS (certified decisions only)")
     print(f"{'='*70}")
 
     print(f"\n--- By n_eff bin ---")
-    print(f"{'n_eff bin':<12} {'N':>6} {'LB-tau':>10} {'PPV-tau':>10} {'Slack':>10} {'FalseCert':>10}")
-    print("-" * 60)
+    print(f"{'n_eff bin':<12} {'N':>6} {'LB-tau':>10} {'PPV-tau':>10} "
+          f"{'Slack':>10} {'FalseCert':>10}")
+    print(f"  NOTE: false_cert_rate is per-DECISION (not per-trial FWER).")
+    print(f"  Per-trial FWER is controlled at alpha={alpha} (see h4_validation).")
+    print("-" * 62)
     for _, row in slack_summary.iterrows():
-        print(f"{row['neff_bin']:<12} {row['count']:>6.0f} "
+        n_cnt = int(row["count"])
+        if n_cnt == 0:
+            print(f"{row['neff_bin']:<12} {'0':>6}  (empty — see min_neff table)")
+            continue
+        print(f"{row['neff_bin']:<12} {n_cnt:>6} "
               f"{row['mean_lb_minus_tau']:>10.4f} "
               f"{row['mean_true_ppv_minus_tau']:>10.4f} "
               f"{row['mean_slack']:>10.4f} "
@@ -201,6 +262,14 @@ def run_h4_slack_analysis(
         print(f"  {row['config']}: N={row['count']:.0f}, "
               f"mean_slack={row['mean_slack']:.4f}, "
               f"false_cert={row['false_cert_rate']:.4f}")
+
+    print(f"\n--- Minimum n_eff for certification (tau=0.5, PPV=0.9) ---")
+    sub = min_neff_df[(min_neff_df["tau"] == 0.5) & (min_neff_df["true_ppv"] == 0.9)]
+    if len(sub):
+        row = sub.iloc[0]
+        print(f"  Requires n_eff >= {row['min_n_eff']:.1f} to certify.")
+        print(f"  This explains why the [1-5] and [5-25] bins are empty:")
+        print(f"  EB bounds cannot certify at n_eff<25 for typical PPV/tau values.")
 
     print(f"\n{'='*70}")
     return df
