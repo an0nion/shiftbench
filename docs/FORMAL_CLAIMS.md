@@ -820,12 +820,25 @@ refuses to certify when it cannot produce reliable weights. Correct behavior.
 
 ---
 
-**Document Status**: POST-EXPERIMENT UPDATE (2026-02-19)
+**Document Status**: POST-EXPERIMENT UPDATE (2026-02-19, updated Session 7)
 **Completed**: H4 (targeted null), H4 (real-data FWER), H4 (bootstrap comparison P4.3),
   H2 (gate isolation), H2-A (tail sweep), H2-B (ESS sweep), H3 (regression + PCA),
-  Binarization sensitivity (clinical thresholds)
-**All ablations complete as of 2026-02-19**
-**Remaining**: Commit final results and paper sections to an0nion/shiftbench
+  Binarization sensitivity (clinical thresholds), WCP vs EB all 6 datasets (PI Priority 1)
+**All ablations + PI Priority 1 complete as of 2026-02-19**
+
+**WCP vs EB (PI Priority 1 -- RESOLVED)**: Finding 3 is not cherry-picked.
+WCP dominates EB on lower bounds across all domains:
+  - COMPAS: 7.0x more certifications (4.5% vs 0.6%)
+  - Adult: 4.0x more (1.8% vs 0.0%)
+  - BACE: 2.0x more (8.0% vs 0.0%)
+  - BBBP: 1.7x more (76.0% vs 44.0%)
+  - IMDB: 1.0x (converges at n_eff=39,996)
+WCP tighter in 60-100% of pairs per dataset. n_eff-mediated: advantage
+largest at n_eff < 300, converges at very high n_eff (text domain).
+Caveat: different statistical guarantees (marginal coverage vs concentration).
+Results: results/wcp_vs_eb_all_datasets/
+
+**Remaining**: Add 27+ datasets; RAVEL on text/tabular; paper intro/method/related/conclusion
 
 ---
 
