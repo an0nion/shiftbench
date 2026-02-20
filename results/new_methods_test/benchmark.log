@@ -1,0 +1,348 @@
+[2026-02-20 14:31:07,634] INFO: ================================================================================
+[2026-02-20 14:31:07,634] INFO: Cross-Domain Benchmark Configuration
+[2026-02-20 14:31:07,634] INFO: ================================================================================
+[2026-02-20 14:31:07,634] INFO: Methods: ['split_conformal', 'cvplus', 'group_dro', 'bbse']
+[2026-02-20 14:31:07,634] INFO: Domains: ['tabular', 'text']
+[2026-02-20 14:31:07,634] INFO: Datasets: 12 (adult, compas, bank, german_credit, heart_disease, diabetes, student_performance, imdb, yelp, amazon, civil_comments, twitter)
+[2026-02-20 14:31:07,635] INFO: Tau grid: [0.5, 0.7]
+[2026-02-20 14:31:07,635] INFO: Alpha: 0.05
+[2026-02-20 14:31:07,635] INFO: Output directory: results\new_methods_test
+[2026-02-20 14:31:07,635] INFO: ================================================================================
+[2026-02-20 14:31:07,637] INFO: Evaluating split_conformal on adult...
+[2026-02-20 14:31:07,717] INFO:   Using real predictions for adult
+[2026-02-20 14:31:07,757] INFO:   Results: 13 CERTIFY, 85 ABSTAIN, 0 NO-GUARANTEE (total: 98)
+[2026-02-20 14:31:07,763] INFO: Evaluating split_conformal on compas...
+[2026-02-20 14:31:11,851] INFO:   Using real predictions for compas
+[2026-02-20 14:31:11,861] INFO:   Results: 36 CERTIFY, 40 ABSTAIN, 0 NO-GUARANTEE (total: 76)
+[2026-02-20 14:31:12,076] INFO: Evaluating split_conformal on bank...
+[2026-02-20 14:31:12,193] INFO:   Using real predictions for bank
+[2026-02-20 14:31:12,211] INFO:   Results: 6 CERTIFY, 14 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:31:12,214] INFO: Evaluating split_conformal on german_credit...
+[2026-02-20 14:31:12,225] INFO:   Using real predictions for german_credit
+[2026-02-20 14:31:12,231] INFO:   Results: 0 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 28)
+[2026-02-20 14:31:12,232] INFO: Evaluating split_conformal on heart_disease...
+[2026-02-20 14:31:12,241] INFO:   Using real predictions for heart_disease
+[2026-02-20 14:31:12,243] INFO:   Results: 2 CERTIFY, 14 ABSTAIN, 0 NO-GUARANTEE (total: 16)
+[2026-02-20 14:31:12,244] INFO: Evaluating split_conformal on diabetes...
+[2026-02-20 14:31:12,252] INFO:   Using real predictions for diabetes
+[2026-02-20 14:31:12,257] INFO:   Results: 1 CERTIFY, 7 ABSTAIN, 0 NO-GUARANTEE (total: 8)
+[2026-02-20 14:31:12,258] INFO: Evaluating split_conformal on student_performance...
+[2026-02-20 14:31:12,271] INFO:   Using real predictions for student_performance
+[2026-02-20 14:31:12,277] INFO:   Results: 13 CERTIFY, 9 ABSTAIN, 0 NO-GUARANTEE (total: 22)
+[2026-02-20 14:31:12,278] INFO: Evaluating split_conformal on imdb...
+[2026-02-20 14:31:13,831] INFO:   Using real predictions for imdb
+[2026-02-20 14:31:13,841] INFO:   Results: 12 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:31:14,009] INFO: Evaluating split_conformal on yelp...
+[2026-02-20 14:31:15,332] INFO:   Using real predictions for yelp
+[2026-02-20 14:31:15,342] INFO:   Results: 20 CERTIFY, 0 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:31:15,504] INFO: Evaluating split_conformal on amazon...
+[2026-02-20 14:31:15,536] INFO:   Using real predictions for amazon
+[2026-02-20 14:31:15,539] INFO:   Results: 0 CERTIFY, 6 ABSTAIN, 0 NO-GUARANTEE (total: 6)
+[2026-02-20 14:31:15,541] INFO: Evaluating split_conformal on civil_comments...
+[2026-02-20 14:31:15,571] INFO:   Using real predictions for civil_comments
+[2026-02-20 14:31:15,575] INFO:   Results: 0 CERTIFY, 10 ABSTAIN, 0 NO-GUARANTEE (total: 10)
+[2026-02-20 14:31:15,576] INFO: Evaluating split_conformal on twitter...
+[2026-02-20 14:31:15,608] INFO:   Using real predictions for twitter
+[2026-02-20 14:31:15,613] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:31:15,614] INFO: Evaluating cvplus on adult...
+[2026-02-20 14:31:16,544] INFO:   Using real predictions for adult
+[2026-02-20 14:31:16,568] INFO:   Results: 4 CERTIFY, 94 ABSTAIN, 0 NO-GUARANTEE (total: 98)
+[2026-02-20 14:31:16,572] INFO: Evaluating cvplus on compas...
+[2026-02-20 14:31:33,088] INFO:   Using real predictions for compas
+[2026-02-20 14:31:33,097] INFO:   Results: 5 CERTIFY, 71 ABSTAIN, 0 NO-GUARANTEE (total: 76)
+[2026-02-20 14:31:33,227] INFO: Evaluating cvplus on bank...
+[2026-02-20 14:31:33,631] INFO:   Using real predictions for bank
+[2026-02-20 14:31:33,637] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:31:33,640] INFO: Evaluating cvplus on german_credit...
+[2026-02-20 14:31:33,682] INFO:   Using real predictions for german_credit
+[2026-02-20 14:31:33,684] INFO:   Results: 0 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 28)
+[2026-02-20 14:31:33,685] INFO: Evaluating cvplus on heart_disease...
+[2026-02-20 14:31:33,706] INFO:   Using real predictions for heart_disease
+[2026-02-20 14:31:33,708] INFO:   Results: 0 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 16)
+[2026-02-20 14:31:33,709] INFO: Evaluating cvplus on diabetes...
+[2026-02-20 14:31:33,731] INFO:   Using real predictions for diabetes
+[2026-02-20 14:31:33,732] INFO:   Results: 0 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 8)
+[2026-02-20 14:31:33,733] INFO: Evaluating cvplus on student_performance...
+[2026-02-20 14:31:33,780] INFO:   Using real predictions for student_performance
+[2026-02-20 14:31:33,782] INFO:   Results: 2 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 22)
+[2026-02-20 14:31:33,783] INFO: Evaluating cvplus on imdb...
+[2026-02-20 14:31:43,009] INFO:   Using real predictions for imdb
+[2026-02-20 14:31:43,015] INFO:   Results: 12 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:31:43,106] INFO: Evaluating cvplus on yelp...
+[2026-02-20 14:31:54,499] INFO:   Using real predictions for yelp
+[2026-02-20 14:31:54,509] INFO:   Results: 20 CERTIFY, 0 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:31:54,640] INFO: Evaluating cvplus on amazon...
+[2026-02-20 14:31:54,689] INFO:   Using real predictions for amazon
+[2026-02-20 14:31:54,692] INFO:   Results: 0 CERTIFY, 6 ABSTAIN, 0 NO-GUARANTEE (total: 6)
+[2026-02-20 14:31:54,694] INFO: Evaluating cvplus on civil_comments...
+[2026-02-20 14:31:54,740] INFO:   Using real predictions for civil_comments
+[2026-02-20 14:31:54,744] INFO:   Results: 0 CERTIFY, 10 ABSTAIN, 0 NO-GUARANTEE (total: 10)
+[2026-02-20 14:31:54,746] INFO: Evaluating cvplus on twitter...
+[2026-02-20 14:31:54,791] INFO:   Using real predictions for twitter
+[2026-02-20 14:31:54,795] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:31:54,797] INFO: Evaluating group_dro on adult...
+[2026-02-20 14:31:54,871] INFO:   Using real predictions for adult
+[2026-02-20 14:31:56,189] INFO:   Results: 4 CERTIFY, 94 ABSTAIN, 0 NO-GUARANTEE (total: 98)
+[2026-02-20 14:31:56,194] INFO: Evaluating group_dro on compas...
+[2026-02-20 14:31:58,910] INFO:   Using real predictions for compas
+[2026-02-20 14:31:59,059] INFO:   Results: 9 CERTIFY, 67 ABSTAIN, 0 NO-GUARANTEE (total: 76)
+[2026-02-20 14:31:59,182] INFO: Evaluating group_dro on bank...
+[2026-02-20 14:31:59,241] INFO:   Using real predictions for bank
+[2026-02-20 14:31:59,426] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:31:59,429] INFO: Evaluating group_dro on german_credit...
+[2026-02-20 14:31:59,439] INFO:   Using real predictions for german_credit
+[2026-02-20 14:31:59,458] INFO:   Results: 0 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 28)
+[2026-02-20 14:31:59,459] INFO: Evaluating group_dro on heart_disease...
+[2026-02-20 14:31:59,467] INFO:   Using real predictions for heart_disease
+[2026-02-20 14:31:59,480] INFO:   Results: 0 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 16)
+[2026-02-20 14:31:59,481] INFO: Evaluating group_dro on diabetes...
+[2026-02-20 14:31:59,490] INFO:   Using real predictions for diabetes
+[2026-02-20 14:31:59,498] INFO:   Results: 0 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 8)
+[2026-02-20 14:31:59,499] INFO: Evaluating group_dro on student_performance...
+[2026-02-20 14:31:59,510] INFO:   Using real predictions for student_performance
+[2026-02-20 14:31:59,529] INFO:   Results: 6 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 22)
+[2026-02-20 14:31:59,529] INFO: Evaluating group_dro on imdb...
+[2026-02-20 14:32:00,601] INFO:   Using real predictions for imdb
+[2026-02-20 14:32:00,807] INFO:   Results: 12 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:00,905] INFO: Evaluating group_dro on yelp...
+[2026-02-20 14:32:01,960] INFO:   Using real predictions for yelp
+[2026-02-20 14:32:02,268] INFO:   Results: 20 CERTIFY, 0 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:02,393] INFO: Evaluating group_dro on amazon...
+[2026-02-20 14:32:02,432] INFO:   Using real predictions for amazon
+[2026-02-20 14:32:02,490] INFO:   Results: 0 CERTIFY, 6 ABSTAIN, 0 NO-GUARANTEE (total: 6)
+[2026-02-20 14:32:02,492] INFO: Evaluating group_dro on civil_comments...
+[2026-02-20 14:32:02,533] INFO:   Using real predictions for civil_comments
+[2026-02-20 14:32:02,679] INFO:   Results: 0 CERTIFY, 10 ABSTAIN, 0 NO-GUARANTEE (total: 10)
+[2026-02-20 14:32:02,681] INFO: Evaluating group_dro on twitter...
+[2026-02-20 14:32:02,711] INFO:   Using real predictions for twitter
+[2026-02-20 14:32:02,839] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:02,840] INFO: Evaluating bbse on adult...
+[2026-02-20 14:32:02,915] INFO:   Using real predictions for adult
+[2026-02-20 14:32:03,054] INFO:   Results: 4 CERTIFY, 94 ABSTAIN, 0 NO-GUARANTEE (total: 98)
+[2026-02-20 14:32:03,059] INFO: Evaluating bbse on compas...
+[2026-02-20 14:32:04,858] INFO:   Using real predictions for compas
+[2026-02-20 14:32:05,301] INFO:   Results: 9 CERTIFY, 67 ABSTAIN, 0 NO-GUARANTEE (total: 76)
+[2026-02-20 14:32:05,404] INFO: Evaluating bbse on bank...
+[2026-02-20 14:32:05,448] INFO:   Using real predictions for bank
+[2026-02-20 14:32:05,497] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:05,500] INFO: Evaluating bbse on german_credit...
+[2026-02-20 14:32:05,506] INFO:   Using real predictions for german_credit
+[2026-02-20 14:32:05,517] INFO:   Results: 0 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 28)
+[2026-02-20 14:32:05,518] INFO: Evaluating bbse on heart_disease...
+[2026-02-20 14:32:05,522] INFO:   Using real predictions for heart_disease
+[2026-02-20 14:32:05,528] INFO:   Results: 0 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 16)
+[2026-02-20 14:32:05,529] INFO: Evaluating bbse on diabetes...
+[2026-02-20 14:32:05,533] INFO:   Using real predictions for diabetes
+[2026-02-20 14:32:05,538] INFO:   Results: 0 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 8)
+[2026-02-20 14:32:05,539] INFO: Evaluating bbse on student_performance...
+[2026-02-20 14:32:05,544] INFO:   Using real predictions for student_performance
+[2026-02-20 14:32:05,551] INFO:   Results: 6 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 22)
+[2026-02-20 14:32:05,552] INFO: Evaluating bbse on imdb...
+[2026-02-20 14:32:06,450] INFO:   Using real predictions for imdb
+[2026-02-20 14:32:06,856] INFO:   Results: 12 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:06,943] INFO: Evaluating bbse on yelp...
+[2026-02-20 14:32:07,946] INFO:   Using real predictions for yelp
+[2026-02-20 14:32:08,288] INFO:   Results: 20 CERTIFY, 0 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:08,391] INFO: Evaluating bbse on amazon...
+[2026-02-20 14:32:08,416] INFO:   Using real predictions for amazon
+[2026-02-20 14:32:08,422] INFO:   Results: 0 CERTIFY, 6 ABSTAIN, 0 NO-GUARANTEE (total: 6)
+[2026-02-20 14:32:08,423] INFO: Evaluating bbse on civil_comments...
+[2026-02-20 14:32:08,447] INFO:   Using real predictions for civil_comments
+[2026-02-20 14:32:08,453] INFO:   Results: 0 CERTIFY, 10 ABSTAIN, 0 NO-GUARANTEE (total: 10)
+[2026-02-20 14:32:08,455] INFO: Evaluating bbse on twitter...
+[2026-02-20 14:32:08,477] INFO:   Using real predictions for twitter
+[2026-02-20 14:32:08,483] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:08,501] INFO: Saved raw results to results\new_methods_test\cross_domain_raw_results.csv
+[2026-02-20 14:32:08,501] INFO: Generating summary tables...
+[2026-02-20 14:32:08,540] INFO:   Saved domain summary to results\new_methods_test\cross_domain_summary.csv
+[2026-02-20 14:32:08,554] INFO:   Saved dataset breakdown to results\new_methods_test\cross_domain_by_dataset.csv
+[2026-02-20 14:32:08,560] INFO:   Saved method breakdown to results\new_methods_test\cross_domain_by_method.csv
+[2026-02-20 14:32:08,593] INFO:   Saved decision distribution to results\new_methods_test\cross_domain_decision_distribution.csv
+[2026-02-20 14:32:08,593] INFO: Running statistical analysis...
+[2026-02-20 14:32:08,594] INFO:   Testing: Do certification rates differ by domain?
+[2026-02-20 14:32:08,600] INFO:   Testing: Does method ranking change by domain?
+[2026-02-20 14:32:08,604] INFO:   Computing: Domain difficulty ranking
+[2026-02-20 14:32:08,606] INFO:   Computing: Effective sample size by domain
+[2026-02-20 14:32:08,607] INFO:   Computing: Runtime by domain
+[2026-02-20 14:32:08,611] INFO:   Saved statistical analysis to results\new_methods_test\cross_domain_statistical_analysis.csv
+[2026-02-20 14:32:08,613] INFO:   Saved domain difficulty to results\new_methods_test\cross_domain_difficulty.csv
+[2026-02-20 14:32:08,615] INFO:   Saved ESS summary to results\new_methods_test\cross_domain_ess_summary.csv
+[2026-02-20 14:32:08,619] INFO:   Saved runtime summary to results\new_methods_test\cross_domain_runtime.csv
+[2026-02-20 14:32:08,619] INFO: ================================================================================
+[2026-02-20 14:32:08,619] INFO: Cross-Domain Benchmark Complete!
+[2026-02-20 14:32:08,619] INFO: Results saved to: results\new_methods_test
+[2026-02-20 14:32:08,619] INFO: ================================================================================
+[2026-02-20 14:32:18,756] INFO: ================================================================================
+[2026-02-20 14:32:18,756] INFO: Cross-Domain Benchmark Configuration
+[2026-02-20 14:32:18,756] INFO: ================================================================================
+[2026-02-20 14:32:18,756] INFO: Methods: ['split_conformal', 'cvplus', 'group_dro', 'bbse']
+[2026-02-20 14:32:18,756] INFO: Domains: ['tabular', 'text']
+[2026-02-20 14:32:18,756] INFO: Datasets: 12 (adult, compas, bank, german_credit, heart_disease, diabetes, student_performance, imdb, yelp, amazon, civil_comments, twitter)
+[2026-02-20 14:32:18,756] INFO: Tau grid: [0.5, 0.7]
+[2026-02-20 14:32:18,756] INFO: Alpha: 0.05
+[2026-02-20 14:32:18,756] INFO: Output directory: results\new_methods_test
+[2026-02-20 14:32:18,756] INFO: ================================================================================
+[2026-02-20 14:32:18,757] INFO: Evaluating split_conformal on adult...
+[2026-02-20 14:32:18,822] INFO:   Using real predictions for adult
+[2026-02-20 14:32:18,845] INFO:   Results: 13 CERTIFY, 85 ABSTAIN, 0 NO-GUARANTEE (total: 98)
+[2026-02-20 14:32:18,851] INFO: Evaluating split_conformal on compas...
+[2026-02-20 14:32:20,569] INFO:   Using real predictions for compas
+[2026-02-20 14:32:20,581] INFO:   Results: 36 CERTIFY, 40 ABSTAIN, 0 NO-GUARANTEE (total: 76)
+[2026-02-20 14:32:20,691] INFO: Evaluating split_conformal on bank...
+[2026-02-20 14:32:20,731] INFO:   Using real predictions for bank
+[2026-02-20 14:32:20,738] INFO:   Results: 6 CERTIFY, 14 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:20,741] INFO: Evaluating split_conformal on german_credit...
+[2026-02-20 14:32:20,746] INFO:   Using real predictions for german_credit
+[2026-02-20 14:32:20,748] INFO:   Results: 0 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 28)
+[2026-02-20 14:32:20,748] INFO: Evaluating split_conformal on heart_disease...
+[2026-02-20 14:32:20,755] INFO:   Using real predictions for heart_disease
+[2026-02-20 14:32:20,756] INFO:   Results: 2 CERTIFY, 14 ABSTAIN, 0 NO-GUARANTEE (total: 16)
+[2026-02-20 14:32:20,757] INFO: Evaluating split_conformal on diabetes...
+[2026-02-20 14:32:20,762] INFO:   Using real predictions for diabetes
+[2026-02-20 14:32:20,765] INFO:   Results: 1 CERTIFY, 7 ABSTAIN, 0 NO-GUARANTEE (total: 8)
+[2026-02-20 14:32:20,766] INFO: Evaluating split_conformal on student_performance...
+[2026-02-20 14:32:20,775] INFO:   Using real predictions for student_performance
+[2026-02-20 14:32:20,777] INFO:   Results: 13 CERTIFY, 9 ABSTAIN, 0 NO-GUARANTEE (total: 22)
+[2026-02-20 14:32:20,778] INFO: Evaluating split_conformal on imdb...
+[2026-02-20 14:32:21,767] INFO:   Using real predictions for imdb
+[2026-02-20 14:32:21,774] INFO:   Results: 12 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:21,865] INFO: Evaluating split_conformal on yelp...
+[2026-02-20 14:32:22,888] INFO:   Using real predictions for yelp
+[2026-02-20 14:32:22,901] INFO:   Results: 20 CERTIFY, 0 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:23,025] INFO: Evaluating split_conformal on amazon...
+[2026-02-20 14:32:23,055] INFO:   Using real predictions for amazon
+[2026-02-20 14:32:23,058] INFO:   Results: 0 CERTIFY, 6 ABSTAIN, 0 NO-GUARANTEE (total: 6)
+[2026-02-20 14:32:23,060] INFO: Evaluating split_conformal on civil_comments...
+[2026-02-20 14:32:23,091] INFO:   Using real predictions for civil_comments
+[2026-02-20 14:32:23,096] INFO:   Results: 0 CERTIFY, 10 ABSTAIN, 0 NO-GUARANTEE (total: 10)
+[2026-02-20 14:32:23,098] INFO: Evaluating split_conformal on twitter...
+[2026-02-20 14:32:23,128] INFO:   Using real predictions for twitter
+[2026-02-20 14:32:23,135] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:23,136] INFO: Evaluating cvplus on adult...
+[2026-02-20 14:32:24,041] INFO:   Using real predictions for adult
+[2026-02-20 14:32:24,059] INFO:   Results: 4 CERTIFY, 94 ABSTAIN, 0 NO-GUARANTEE (total: 98)
+[2026-02-20 14:32:24,064] INFO: Evaluating cvplus on compas...
+[2026-02-20 14:32:39,766] INFO:   Using real predictions for compas
+[2026-02-20 14:32:39,771] INFO:   Results: 5 CERTIFY, 71 ABSTAIN, 0 NO-GUARANTEE (total: 76)
+[2026-02-20 14:32:39,893] INFO: Evaluating cvplus on bank...
+[2026-02-20 14:32:40,299] INFO:   Using real predictions for bank
+[2026-02-20 14:32:40,305] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:40,307] INFO: Evaluating cvplus on german_credit...
+[2026-02-20 14:32:40,345] INFO:   Using real predictions for german_credit
+[2026-02-20 14:32:40,347] INFO:   Results: 0 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 28)
+[2026-02-20 14:32:40,348] INFO: Evaluating cvplus on heart_disease...
+[2026-02-20 14:32:40,379] INFO:   Using real predictions for heart_disease
+[2026-02-20 14:32:40,382] INFO:   Results: 0 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 16)
+[2026-02-20 14:32:40,382] INFO: Evaluating cvplus on diabetes...
+[2026-02-20 14:32:40,413] INFO:   Using real predictions for diabetes
+[2026-02-20 14:32:40,416] INFO:   Results: 0 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 8)
+[2026-02-20 14:32:40,417] INFO: Evaluating cvplus on student_performance...
+[2026-02-20 14:32:40,460] INFO:   Using real predictions for student_performance
+[2026-02-20 14:32:40,462] INFO:   Results: 2 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 22)
+[2026-02-20 14:32:40,462] INFO: Evaluating cvplus on imdb...
+[2026-02-20 14:32:49,289] INFO:   Using real predictions for imdb
+[2026-02-20 14:32:49,294] INFO:   Results: 12 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:32:49,376] INFO: Evaluating cvplus on yelp...
+[2026-02-20 14:32:59,998] INFO:   Using real predictions for yelp
+[2026-02-20 14:33:00,008] INFO:   Results: 20 CERTIFY, 0 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:00,145] INFO: Evaluating cvplus on amazon...
+[2026-02-20 14:33:00,210] INFO:   Using real predictions for amazon
+[2026-02-20 14:33:00,214] INFO:   Results: 0 CERTIFY, 6 ABSTAIN, 0 NO-GUARANTEE (total: 6)
+[2026-02-20 14:33:00,217] INFO: Evaluating cvplus on civil_comments...
+[2026-02-20 14:33:00,272] INFO:   Using real predictions for civil_comments
+[2026-02-20 14:33:00,276] INFO:   Results: 0 CERTIFY, 10 ABSTAIN, 0 NO-GUARANTEE (total: 10)
+[2026-02-20 14:33:00,278] INFO: Evaluating cvplus on twitter...
+[2026-02-20 14:33:00,342] INFO:   Using real predictions for twitter
+[2026-02-20 14:33:00,346] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:00,348] INFO: Evaluating group_dro on adult...
+[2026-02-20 14:33:00,425] INFO:   Using real predictions for adult
+[2026-02-20 14:33:02,095] INFO:   Results: 4 CERTIFY, 94 ABSTAIN, 0 NO-GUARANTEE (total: 98)
+[2026-02-20 14:33:02,101] INFO: Evaluating group_dro on compas...
+[2026-02-20 14:33:04,787] INFO:   Using real predictions for compas
+[2026-02-20 14:33:04,954] INFO:   Results: 9 CERTIFY, 67 ABSTAIN, 0 NO-GUARANTEE (total: 76)
+[2026-02-20 14:33:05,085] INFO: Evaluating group_dro on bank...
+[2026-02-20 14:33:05,134] INFO:   Using real predictions for bank
+[2026-02-20 14:33:05,296] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:05,297] INFO: Evaluating group_dro on german_credit...
+[2026-02-20 14:33:05,306] INFO:   Using real predictions for german_credit
+[2026-02-20 14:33:05,325] INFO:   Results: 0 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 28)
+[2026-02-20 14:33:05,325] INFO: Evaluating group_dro on heart_disease...
+[2026-02-20 14:33:05,333] INFO:   Using real predictions for heart_disease
+[2026-02-20 14:33:05,342] INFO:   Results: 0 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 16)
+[2026-02-20 14:33:05,343] INFO: Evaluating group_dro on diabetes...
+[2026-02-20 14:33:05,351] INFO:   Using real predictions for diabetes
+[2026-02-20 14:33:05,359] INFO:   Results: 0 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 8)
+[2026-02-20 14:33:05,360] INFO: Evaluating group_dro on student_performance...
+[2026-02-20 14:33:05,369] INFO:   Using real predictions for student_performance
+[2026-02-20 14:33:05,388] INFO:   Results: 6 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 22)
+[2026-02-20 14:33:05,388] INFO: Evaluating group_dro on imdb...
+[2026-02-20 14:33:06,314] INFO:   Using real predictions for imdb
+[2026-02-20 14:33:06,519] INFO:   Results: 12 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:06,613] INFO: Evaluating group_dro on yelp...
+[2026-02-20 14:33:07,611] INFO:   Using real predictions for yelp
+[2026-02-20 14:33:07,943] INFO:   Results: 20 CERTIFY, 0 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:08,054] INFO: Evaluating group_dro on amazon...
+[2026-02-20 14:33:08,086] INFO:   Using real predictions for amazon
+[2026-02-20 14:33:08,137] INFO:   Results: 0 CERTIFY, 6 ABSTAIN, 0 NO-GUARANTEE (total: 6)
+[2026-02-20 14:33:08,139] INFO: Evaluating group_dro on civil_comments...
+[2026-02-20 14:33:08,171] INFO:   Using real predictions for civil_comments
+[2026-02-20 14:33:08,294] INFO:   Results: 0 CERTIFY, 10 ABSTAIN, 0 NO-GUARANTEE (total: 10)
+[2026-02-20 14:33:08,295] INFO: Evaluating group_dro on twitter...
+[2026-02-20 14:33:08,322] INFO:   Using real predictions for twitter
+[2026-02-20 14:33:08,448] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:08,449] INFO: Evaluating bbse on adult...
+[2026-02-20 14:33:08,517] INFO:   Using real predictions for adult
+[2026-02-20 14:33:08,637] INFO:   Results: 4 CERTIFY, 94 ABSTAIN, 0 NO-GUARANTEE (total: 98)
+[2026-02-20 14:33:08,642] INFO: Evaluating bbse on compas...
+[2026-02-20 14:33:10,432] INFO:   Using real predictions for compas
+[2026-02-20 14:33:10,902] INFO:   Results: 9 CERTIFY, 67 ABSTAIN, 0 NO-GUARANTEE (total: 76)
+[2026-02-20 14:33:11,031] INFO: Evaluating bbse on bank...
+[2026-02-20 14:33:11,081] INFO:   Using real predictions for bank
+[2026-02-20 14:33:11,128] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:11,130] INFO: Evaluating bbse on german_credit...
+[2026-02-20 14:33:11,139] INFO:   Using real predictions for german_credit
+[2026-02-20 14:33:11,147] INFO:   Results: 0 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 28)
+[2026-02-20 14:33:11,147] INFO: Evaluating bbse on heart_disease...
+[2026-02-20 14:33:11,154] INFO:   Using real predictions for heart_disease
+[2026-02-20 14:33:11,158] INFO:   Results: 0 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 16)
+[2026-02-20 14:33:11,159] INFO: Evaluating bbse on diabetes...
+[2026-02-20 14:33:11,165] INFO:   Using real predictions for diabetes
+[2026-02-20 14:33:11,170] INFO:   Results: 0 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 8)
+[2026-02-20 14:33:11,170] INFO: Evaluating bbse on student_performance...
+[2026-02-20 14:33:11,177] INFO:   Using real predictions for student_performance
+[2026-02-20 14:33:11,185] INFO:   Results: 6 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 22)
+[2026-02-20 14:33:11,186] INFO: Evaluating bbse on imdb...
+[2026-02-20 14:33:12,086] INFO:   Using real predictions for imdb
+[2026-02-20 14:33:12,502] INFO:   Results: 12 CERTIFY, 8 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:12,595] INFO: Evaluating bbse on yelp...
+[2026-02-20 14:33:13,626] INFO:   Using real predictions for yelp
+[2026-02-20 14:33:13,992] INFO:   Results: 20 CERTIFY, 0 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:14,112] INFO: Evaluating bbse on amazon...
+[2026-02-20 14:33:14,145] INFO:   Using real predictions for amazon
+[2026-02-20 14:33:14,154] INFO:   Results: 0 CERTIFY, 6 ABSTAIN, 0 NO-GUARANTEE (total: 6)
+[2026-02-20 14:33:14,156] INFO: Evaluating bbse on civil_comments...
+[2026-02-20 14:33:14,194] INFO:   Using real predictions for civil_comments
+[2026-02-20 14:33:14,203] INFO:   Results: 0 CERTIFY, 10 ABSTAIN, 0 NO-GUARANTEE (total: 10)
+[2026-02-20 14:33:14,204] INFO: Evaluating bbse on twitter...
+[2026-02-20 14:33:14,235] INFO:   Using real predictions for twitter
+[2026-02-20 14:33:14,242] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:33:14,262] INFO: Saved raw results to results\new_methods_test\cross_domain_raw_results.csv
+[2026-02-20 14:33:14,262] INFO: Generating summary tables...
+[2026-02-20 14:33:14,287] INFO:   Saved domain summary to results\new_methods_test\cross_domain_summary.csv
+[2026-02-20 14:33:14,300] INFO:   Saved dataset breakdown to results\new_methods_test\cross_domain_by_dataset.csv
+[2026-02-20 14:33:14,307] INFO:   Saved method breakdown to results\new_methods_test\cross_domain_by_method.csv
+[2026-02-20 14:33:14,340] INFO:   Saved decision distribution to results\new_methods_test\cross_domain_decision_distribution.csv
+[2026-02-20 14:33:14,340] INFO: Running statistical analysis...
+[2026-02-20 14:33:14,341] INFO:   Testing: Do certification rates differ by domain?
+[2026-02-20 14:33:14,348] INFO:   Testing: Does method ranking change by domain?
+[2026-02-20 14:33:14,352] INFO:   Computing: Domain difficulty ranking
+[2026-02-20 14:33:14,354] INFO:   Computing: Effective sample size by domain
+[2026-02-20 14:33:14,354] INFO:   Computing: Runtime by domain
+[2026-02-20 14:33:14,359] INFO:   Saved statistical analysis to results\new_methods_test\cross_domain_statistical_analysis.csv
+[2026-02-20 14:33:14,361] INFO:   Saved domain difficulty to results\new_methods_test\cross_domain_difficulty.csv
+[2026-02-20 14:33:14,363] INFO:   Saved ESS summary to results\new_methods_test\cross_domain_ess_summary.csv
+[2026-02-20 14:33:14,366] INFO:   Saved runtime summary to results\new_methods_test\cross_domain_runtime.csv
+[2026-02-20 14:33:14,366] INFO: ================================================================================
+[2026-02-20 14:33:14,366] INFO: Cross-Domain Benchmark Complete!
+[2026-02-20 14:33:14,366] INFO: Results saved to: results\new_methods_test
+[2026-02-20 14:33:14,366] INFO: ================================================================================

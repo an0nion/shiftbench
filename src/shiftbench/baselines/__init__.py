@@ -21,6 +21,18 @@ from shiftbench.baselines.split_conformal import (
     SplitConformalBaseline,
     create_split_conformal_baseline,
 )
+from shiftbench.baselines.cvplus import (
+    CVPlusBaseline,
+    create_cvplus_baseline,
+)
+from shiftbench.baselines.group_dro import (
+    GroupDROBaseline,
+    create_group_dro_baseline,
+)
+from shiftbench.baselines.bbse import (
+    BBSEBaseline,
+    create_bbse_baseline,
+)
 
 try:
     from shiftbench.baselines.ravel import RAVELBaseline, create_ravel_baseline
@@ -44,6 +56,12 @@ __all__ = [
     "create_weighted_conformal_baseline",
     "SplitConformalBaseline",
     "create_split_conformal_baseline",
+    "CVPlusBaseline",
+    "create_cvplus_baseline",
+    "GroupDROBaseline",
+    "create_group_dro_baseline",
+    "BBSEBaseline",
+    "create_bbse_baseline",
 ]
 
 if RAVEL_AVAILABLE:

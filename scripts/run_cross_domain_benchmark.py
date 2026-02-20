@@ -31,6 +31,10 @@ from shiftbench.baselines import (
     create_kmm_baseline,
     create_rulsif_baseline,
     create_weighted_conformal_baseline,
+    create_split_conformal_baseline,
+    create_cvplus_baseline,
+    create_group_dro_baseline,
+    create_bbse_baseline,
 )
 
 # Try importing RAVEL if available
@@ -78,6 +82,10 @@ def get_available_methods() -> Dict[str, callable]:
         "kmm": create_kmm_baseline,
         "rulsif": create_rulsif_baseline,
         "weighted_conformal": create_weighted_conformal_baseline,
+        "split_conformal": create_split_conformal_baseline,
+        "cvplus": create_cvplus_baseline,
+        "group_dro": create_group_dro_baseline,
+        "bbse": create_bbse_baseline,
     }
 
     if RAVEL_AVAILABLE:

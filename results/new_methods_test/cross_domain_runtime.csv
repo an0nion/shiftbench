@@ -1,0 +1,9 @@
+domain,method,elapsed_sec
+tabular,bbse,0.18
+tabular,cvplus,4.334
+tabular,group_dro,0.673
+tabular,split_conformal,0.011
+text,bbse,0.208
+text,cvplus,4.437
+text,group_dro,0.193
+text,split_conformal,0.006

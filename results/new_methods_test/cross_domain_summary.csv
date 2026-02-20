@@ -1,0 +1,9 @@
+domain,method,cert_rate_%,mean_mu_hat,mean_lower_bound,mean_n_eff,mean_runtime_sec,n_datasets,n_cohorts
+tabular,bbse,7.09,0.81,0.24,24.71,0.18,7,128
+tabular,cvplus,4.1,0.8,0.18,22.0,4.33,7,128
+tabular,group_dro,7.09,0.81,0.24,24.72,0.67,7,128
+tabular,split_conformal,26.49,0.81,0.58,24.72,0.01,7,128
+text,bbse,42.11,0.62,0.55,411.31,0.21,5,28
+text,cvplus,42.11,0.62,0.54,328.5,4.44,5,28
+text,group_dro,42.11,0.62,0.55,411.32,0.19,5,28
+text,split_conformal,42.11,0.62,0.59,411.32,0.01,5,28

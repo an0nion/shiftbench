@@ -1,0 +1,10 @@
+domain,method,ABSTAIN,CERTIFY,All
+tabular,bbse,249,19,268
+tabular,cvplus,257,11,268
+tabular,group_dro,249,19,268
+tabular,split_conformal,197,71,268
+text,bbse,44,32,76
+text,cvplus,44,32,76
+text,group_dro,44,32,76
+text,split_conformal,44,32,76
+All,,1128,248,1376
