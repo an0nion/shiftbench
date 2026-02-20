@@ -88,5 +88,140 @@
     "cal_proba": "models\\predictions\\yelp\\lr_cal_preds_proba.npy",
     "test_binary": "models\\predictions\\yelp\\lr_test_preds_binary.npy",
     "test_proba": "models\\predictions\\yelp\\lr_test_preds_proba.npy"
+  },
+  "freesolv": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\freesolv\\rf_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\freesolv\\rf_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\freesolv\\rf_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\freesolv\\rf_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\freesolv\\rf_test_preds_proba.npy"
+  },
+  "lipophilicity": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\lipophilicity\\rf_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\lipophilicity\\rf_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\lipophilicity\\rf_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\lipophilicity\\rf_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\lipophilicity\\rf_test_preds_proba.npy"
+  },
+  "sider": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\sider\\rf_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\sider\\rf_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\sider\\rf_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\sider\\rf_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\sider\\rf_test_preds_proba.npy"
+  },
+  "tox21": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\tox21\\rf_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\tox21\\rf_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\tox21\\rf_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\tox21\\rf_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\tox21\\rf_test_preds_proba.npy"
+  },
+  "toxcast": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\toxcast\\rf_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\toxcast\\rf_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\toxcast\\rf_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\toxcast\\rf_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\toxcast\\rf_test_preds_proba.npy"
+  },
+  "muv": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\muv\\rf_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\muv\\rf_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\muv\\rf_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\muv\\rf_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\muv\\rf_test_preds_proba.npy"
+  },
+  "molhiv": {
+    "model": "rf",
+    "domain": "molecular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\molhiv\\rf_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\molhiv\\rf_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\molhiv\\rf_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\molhiv\\rf_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\molhiv\\rf_test_preds_proba.npy"
+  },
+  "diabetes": {
+    "model": "lr",
+    "domain": "tabular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\diabetes\\lr_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\diabetes\\lr_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\diabetes\\lr_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\diabetes\\lr_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\diabetes\\lr_test_preds_proba.npy"
+  },
+  "heart_disease": {
+    "model": "lr",
+    "domain": "tabular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\heart_disease\\lr_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\heart_disease\\lr_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\heart_disease\\lr_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\heart_disease\\lr_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\heart_disease\\lr_test_preds_proba.npy"
+  },
+  "student_performance": {
+    "model": "lr",
+    "domain": "tabular",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\student_performance\\lr_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\student_performance\\lr_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\student_performance\\lr_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\student_performance\\lr_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\student_performance\\lr_test_preds_proba.npy"
+  },
+  "amazon": {
+    "model": "lr",
+    "domain": "text",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\amazon\\lr_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\amazon\\lr_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\amazon\\lr_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\amazon\\lr_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\amazon\\lr_test_preds_proba.npy"
+  },
+  "civil_comments": {
+    "model": "lr",
+    "domain": "text",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\civil_comments\\lr_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\civil_comments\\lr_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\civil_comments\\lr_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\civil_comments\\lr_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\civil_comments\\lr_test_preds_proba.npy"
+  },
+  "twitter": {
+    "model": "lr",
+    "domain": "text",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\twitter\\lr_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\twitter\\lr_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\twitter\\lr_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\twitter\\lr_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\twitter\\lr_test_preds_proba.npy"
+  },
+  "camelyon17": {
+    "model": "lr",
+    "domain": "vision",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\camelyon17\\lr_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\camelyon17\\lr_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\camelyon17\\lr_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\camelyon17\\lr_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\camelyon17\\lr_test_preds_proba.npy"
+  },
+  "waterbirds": {
+    "model": "lr",
+    "domain": "vision",
+    "path": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\waterbirds\\lr_cal_preds_binary.npy",
+    "cal_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\waterbirds\\lr_cal_preds_binary.npy",
+    "cal_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\waterbirds\\lr_cal_preds_proba.npy",
+    "test_binary": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\waterbirds\\lr_test_preds_binary.npy",
+    "test_proba": "C:\\Users\\ananya.salian\\Downloads\\shift-bench\\models\\predictions\\waterbirds\\lr_test_preds_proba.npy"
   }
 }

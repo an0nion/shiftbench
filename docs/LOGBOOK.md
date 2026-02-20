@@ -2,6 +2,73 @@
 
 ---
 
+## Session 8 — 2026-02-20
+
+### Work Completed This Session
+
+**PI Priority 3 -- Dataset Expansion (PARTIAL PROGRESS):**
+Expanded benchmark from 10 datasets with model predictions to 25 datasets.
+Scripts: scripts/train_new_datasets.py, scripts/run_extended_benchmark.py.
+Results: results/cross_domain_extended/
+
+Approach:
+- All 26 datasets in data/processed/ were already fully preprocessed (features.npy,
+  labels.npy, cohorts.npy, splits.csv). The gap was missing trained model predictions.
+- Trained RF models (molecular, 217-dim RDKit features) and LR models (tabular/text)
+  for 13 datasets: freesolv, lipophilicity, sider, tox21, toxcast, muv, molhiv,
+  diabetes, heart_disease, student_performance, amazon, civil_comments, twitter.
+- Added camelyon17, waterbirds to prediction_mapping.json (predictions already existed).
+- prediction_mapping.json expanded from 10 to 25 datasets.
+
+Model training results (test AUC):
+
+| Dataset           | Domain    | AUC   | Notes                            |
+|-------------------|-----------|-------|----------------------------------|
+| freesolv          | molecular | 0.939 | median-split binarization        |
+| lipophilicity     | molecular | 0.849 | median-split binarization        |
+| sider             | molecular | 0.692 |                                  |
+| tox21             | molecular | ~0.5  | NaN->0; very low pred_pos        |
+| toxcast           | molecular | ~0.5  | NaN->0; very low pred_pos        |
+| muv               | molecular | ~0.5  | NaN->0; very low pred_pos        |
+| molhiv            | molecular | 0.775 | very imbalanced                  |
+| diabetes          | tabular   | ~0.75 |                                  |
+| heart_disease     | tabular   | ~0.80 |                                  |
+| student_performance | tabular | ~0.85 |                                  |
+| amazon            | text      | ~0.5  | only 21 TF-IDF features (sparse) |
+| civil_comments    | text      | ~0.5  | only 15 TF-IDF features (sparse) |
+| twitter           | text      | ~0.5  | only 21 TF-IDF features (sparse) |
+
+Extended benchmark (23 datasets, uLSIF, results/cross_domain_extended/):
+
+| Dataset             | Domain    | cert_%  | n_eff   |
+|---------------------|-----------|---------|---------|
+| yelp                | text      | 62.00   | 424.8   |
+| imdb                | text      | 60.00   | 538.4   |
+| student_performance | tabular   | 18.18   | 15.2    |
+| freesolv            | molecular | 26.67   | 15.1    |
+| compas              | tabular   | 8.42    | 15.2    |
+| esol                | molecular | 6.67    | 24.4    |
+| toxcast             | molecular | 3.81    | 4.1     |
+| adult               | tabular   | 2.45    | 37.3    |
+| tox21               | molecular | 0.75    | 0.4     |
+| clintox             | molecular | 0.73    | 1.4     |
+| bbbp                | molecular | 0.63    | 1.8     |
+| bace                | molecular | 0.31    | 0.6     |
+| molhiv/muv/amazon/  | --        | 0.00    | ~0      |
+| civil_comments/twitter/... | -- | 0.00   | --      |
+
+KNOWN ISSUES:
+1. tox21/toxcast/muv: prediction length mismatch (NaN->0 in training vs drop-NaN
+   in benchmark). Falls back to oracle predictions (y > 0.5). cert_rate is oracle-based.
+2. amazon/civil_comments/twitter: sparse TF-IDF (15-21 features) gives AUC ~0.5.
+   Models are near-random; 0% cert rate reflects model quality, not dataset behaviour.
+3. Still need 15+ more datasets to reach PI's 40-dataset target. All 26 preprocessed
+   datasets are now exhausted; new raw data must be downloaded for further expansion.
+
+STATUS: 25/40 datasets registered. Priority 3 remains PARTIAL.
+
+---
+
 ## Session 7 — 2026-02-19 (continuation)
 
 ### Work Completed This Session
