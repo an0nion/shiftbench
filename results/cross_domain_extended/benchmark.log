@@ -106,3 +106,436 @@
 [2026-02-20 12:14:17,102] INFO: Cross-Domain Benchmark Complete!
 [2026-02-20 12:14:17,102] INFO: Results saved to: results\cross_domain_extended
 [2026-02-20 12:14:17,102] INFO: ================================================================================
+[2026-02-20 14:29:47,239] INFO: ================================================================================
+[2026-02-20 14:29:47,239] INFO: Cross-Domain Benchmark Configuration
+[2026-02-20 14:29:47,239] INFO: ================================================================================
+[2026-02-20 14:29:47,239] INFO: Methods: ['ulsif']
+[2026-02-20 14:29:47,239] INFO: Domains: ['molecular', 'tabular', 'text']
+[2026-02-20 14:29:47,239] INFO: Datasets: 23 (bace, bbbp, clintox, esol, freesolv, lipophilicity, sider, tox21, toxcast, molhiv, muv, adult, compas, bank, german_credit, heart_disease, diabetes, student_performance, imdb, yelp, amazon, civil_comments, twitter)
+[2026-02-20 14:29:47,239] INFO: Tau grid: [0.5, 0.6, 0.7, 0.8, 0.9]
+[2026-02-20 14:29:47,239] INFO: Alpha: 0.05
+[2026-02-20 14:29:47,239] INFO: Output directory: results\cross_domain_extended
+[2026-02-20 14:29:47,239] INFO: ================================================================================
+[2026-02-20 14:29:47,241] INFO: Evaluating ulsif on bace...
+[2026-02-20 14:29:47,277] INFO:   Using real predictions for bace
+[2026-02-20 14:29:47,285] INFO:   Results: 2 CERTIFY, 633 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 14:29:47,286] INFO: Evaluating ulsif on bbbp...
+[2026-02-20 14:29:47,336] INFO:   Using real predictions for bbbp
+[2026-02-20 14:29:47,346] INFO:   Results: 4 CERTIFY, 631 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 14:29:47,347] INFO: Evaluating ulsif on clintox...
+[2026-02-20 14:29:47,373] INFO:   Using real predictions for clintox
+[2026-02-20 14:29:47,380] INFO:   Results: 4 CERTIFY, 546 ABSTAIN, 0 NO-GUARANTEE (total: 550)
+[2026-02-20 14:29:47,381] INFO: Evaluating ulsif on esol...
+[2026-02-20 14:29:47,422] INFO:   esol: binarized via median-split (threshold=-2.680, pos_rate=0.466)
+[2026-02-20 14:29:47,433] INFO:   Using real predictions for esol
+[2026-02-20 14:29:47,436] INFO:   Results: 2 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 30)
+[2026-02-20 14:29:47,436] INFO: Evaluating ulsif on freesolv...
+[2026-02-20 14:29:47,444] INFO:   freesolv: binarized via median-split (threshold=-2.920, pos_rate=0.427)
+[2026-02-20 14:29:47,450] INFO:   Using real predictions for freesolv
+[2026-02-20 14:29:47,452] INFO:   Results: 4 CERTIFY, 11 ABSTAIN, 0 NO-GUARANTEE (total: 15)
+[2026-02-20 14:29:47,452] INFO: Evaluating ulsif on lipophilicity...
+[2026-02-20 14:29:47,472] INFO:   lipophilicity: binarized via median-split (threshold=2.430, pos_rate=0.472)
+[2026-02-20 14:29:47,539] INFO:   Using real predictions for lipophilicity
+[2026-02-20 14:29:47,574] INFO:   Results: 0 CERTIFY, 2295 ABSTAIN, 0 NO-GUARANTEE (total: 2295)
+[2026-02-20 14:29:47,576] INFO: Evaluating ulsif on sider...
+[2026-02-20 14:29:47,601] INFO:   Using real predictions for sider
+[2026-02-20 14:29:47,608] INFO:   Results: 0 CERTIFY, 675 ABSTAIN, 0 NO-GUARANTEE (total: 675)
+[2026-02-20 14:29:47,609] INFO: Evaluating ulsif on tox21...
+[2026-02-20 14:29:47,636] INFO:   tox21: dropped 566/7831 NaN labels
+[2026-02-20 14:29:47,737] WARNING:   Prediction length mismatch for tox21: 1567 vs 1469, falling back to oracle
+[2026-02-20 14:29:47,737] INFO:   Using oracle predictions for tox21
+[2026-02-20 14:29:47,743] INFO:   Results: 2 CERTIFY, 263 ABSTAIN, 0 NO-GUARANTEE (total: 265)
+[2026-02-20 14:29:47,746] INFO: Evaluating ulsif on toxcast...
+[2026-02-20 14:29:47,773] INFO:   toxcast: dropped 6845/8576 NaN labels
+[2026-02-20 14:29:47,793] WARNING:   Prediction length mismatch for toxcast: 1715 vs 396, falling back to oracle
+[2026-02-20 14:29:47,793] INFO:   Using oracle predictions for toxcast
+[2026-02-20 14:29:47,796] INFO:   Results: 4 CERTIFY, 101 ABSTAIN, 0 NO-GUARANTEE (total: 105)
+[2026-02-20 14:29:47,797] INFO: Evaluating ulsif on molhiv...
+[2026-02-20 14:29:48,110] INFO:   Using real predictions for molhiv
+[2026-02-20 14:29:49,211] INFO:   Results: 0 CERTIFY, 11615 ABSTAIN, 0 NO-GUARANTEE (total: 11615)
+[2026-02-20 14:29:49,226] INFO: Evaluating ulsif on muv...
+[2026-02-20 14:29:49,517] INFO:   muv: dropped 78246/93087 NaN labels
+[2026-02-20 14:29:49,704] WARNING:   Prediction length mismatch for muv: 18617 vs 2794, falling back to oracle
+[2026-02-20 14:29:49,704] INFO:   Using oracle predictions for muv
+[2026-02-20 14:29:50,400] INFO:   Results: 0 CERTIFY, 8440 ABSTAIN, 0 NO-GUARANTEE (total: 8440)
+[2026-02-20 14:29:50,407] INFO: Evaluating ulsif on adult...
+[2026-02-20 14:29:50,629] INFO:   Using real predictions for adult
+[2026-02-20 14:29:50,666] INFO:   Results: 6 CERTIFY, 239 ABSTAIN, 0 NO-GUARANTEE (total: 245)
+[2026-02-20 14:29:50,671] INFO: Evaluating ulsif on compas...
+[2026-02-20 14:30:16,893] INFO:   Using real predictions for compas
+[2026-02-20 14:30:16,906] INFO:   Results: 16 CERTIFY, 174 ABSTAIN, 0 NO-GUARANTEE (total: 190)
+[2026-02-20 14:30:17,201] INFO: Evaluating ulsif on bank...
+[2026-02-20 14:30:17,320] INFO:   Using real predictions for bank
+[2026-02-20 14:30:17,333] INFO:   Results: 0 CERTIFY, 50 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 14:30:17,336] INFO: Evaluating ulsif on german_credit...
+[2026-02-20 14:30:17,352] INFO:   Using real predictions for german_credit
+[2026-02-20 14:30:17,357] INFO:   Results: 0 CERTIFY, 70 ABSTAIN, 0 NO-GUARANTEE (total: 70)
+[2026-02-20 14:30:17,357] INFO: Evaluating ulsif on heart_disease...
+[2026-02-20 14:30:17,367] INFO:   Using real predictions for heart_disease
+[2026-02-20 14:30:17,371] INFO:   Results: 0 CERTIFY, 40 ABSTAIN, 0 NO-GUARANTEE (total: 40)
+[2026-02-20 14:30:17,372] INFO: Evaluating ulsif on diabetes...
+[2026-02-20 14:30:17,383] INFO:   Using real predictions for diabetes
+[2026-02-20 14:30:17,387] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 14:30:17,388] INFO: Evaluating ulsif on student_performance...
+[2026-02-20 14:30:17,402] INFO:   Using real predictions for student_performance
+[2026-02-20 14:30:17,410] INFO:   Results: 10 CERTIFY, 45 ABSTAIN, 0 NO-GUARANTEE (total: 55)
+[2026-02-20 14:30:17,411] INFO: Evaluating ulsif on imdb...
+[2026-02-20 14:30:23,732] INFO:   Using real predictions for imdb
+[2026-02-20 14:30:23,748] INFO:   Results: 30 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 14:30:23,937] INFO: Evaluating ulsif on yelp...
+[2026-02-20 14:30:31,928] INFO:   Using real predictions for yelp
+[2026-02-20 14:30:31,955] INFO:   Results: 31 CERTIFY, 19 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 14:30:32,205] INFO: Evaluating ulsif on amazon...
+[2026-02-20 14:30:32,290] INFO:   Using real predictions for amazon
+[2026-02-20 14:30:32,298] INFO:   Results: 0 CERTIFY, 15 ABSTAIN, 0 NO-GUARANTEE (total: 15)
+[2026-02-20 14:30:32,301] INFO: Evaluating ulsif on civil_comments...
+[2026-02-20 14:30:32,373] INFO:   Using real predictions for civil_comments
+[2026-02-20 14:30:32,385] INFO:   Results: 0 CERTIFY, 25 ABSTAIN, 0 NO-GUARANTEE (total: 25)
+[2026-02-20 14:30:32,386] INFO: Evaluating ulsif on twitter...
+[2026-02-20 14:30:32,460] INFO:   Using real predictions for twitter
+[2026-02-20 14:30:32,469] INFO:   Results: 0 CERTIFY, 50 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 14:30:32,633] INFO: Saved raw results to results\cross_domain_extended\cross_domain_raw_results.csv
+[2026-02-20 14:30:32,633] INFO: Generating summary tables...
+[2026-02-20 14:30:32,680] INFO:   Saved domain summary to results\cross_domain_extended\cross_domain_summary.csv
+[2026-02-20 14:30:32,707] INFO:   Saved dataset breakdown to results\cross_domain_extended\cross_domain_by_dataset.csv
+[2026-02-20 14:30:32,720] INFO:   Saved method breakdown to results\cross_domain_extended\cross_domain_by_method.csv
+[2026-02-20 14:30:32,766] INFO:   Saved decision distribution to results\cross_domain_extended\cross_domain_decision_distribution.csv
+[2026-02-20 14:30:32,767] INFO: Running statistical analysis...
+[2026-02-20 14:30:32,767] INFO:   Testing: Do certification rates differ by domain?
+[2026-02-20 14:30:32,774] INFO:   Testing: Does method ranking change by domain?
+[2026-02-20 14:30:32,782] INFO:   Computing: Domain difficulty ranking
+[2026-02-20 14:30:32,786] INFO:   Computing: Effective sample size by domain
+[2026-02-20 14:30:32,788] INFO:   Computing: Runtime by domain
+[2026-02-20 14:30:32,795] INFO:   Saved statistical analysis to results\cross_domain_extended\cross_domain_statistical_analysis.csv
+[2026-02-20 14:30:32,797] INFO:   Saved domain difficulty to results\cross_domain_extended\cross_domain_difficulty.csv
+[2026-02-20 14:30:32,801] INFO:   Saved ESS summary to results\cross_domain_extended\cross_domain_ess_summary.csv
+[2026-02-20 14:30:32,804] INFO:   Saved runtime summary to results\cross_domain_extended\cross_domain_runtime.csv
+[2026-02-20 14:30:32,805] INFO: ================================================================================
+[2026-02-20 14:30:32,805] INFO: Cross-Domain Benchmark Complete!
+[2026-02-20 14:30:32,805] INFO: Results saved to: results\cross_domain_extended
+[2026-02-20 14:30:32,805] INFO: ================================================================================
+[2026-02-20 14:52:53,090] INFO: ================================================================================
+[2026-02-20 14:52:53,090] INFO: Cross-Domain Benchmark Configuration
+[2026-02-20 14:52:53,090] INFO: ================================================================================
+[2026-02-20 14:52:53,091] INFO: Methods: ['ulsif', 'kliep', 'kmm', 'rulsif', 'weighted_conformal', 'split_conformal', 'cvplus', 'group_dro', 'bbse']
+[2026-02-20 14:52:53,091] INFO: Domains: ['molecular', 'tabular', 'text']
+[2026-02-20 14:52:53,091] INFO: Datasets: 23 (bace, bbbp, clintox, esol, freesolv, lipophilicity, sider, tox21, toxcast, molhiv, muv, adult, compas, bank, german_credit, heart_disease, diabetes, student_performance, imdb, yelp, amazon, civil_comments, twitter)
+[2026-02-20 14:52:53,091] INFO: Tau grid: [0.5, 0.6, 0.7, 0.8, 0.9]
+[2026-02-20 14:52:53,091] INFO: Alpha: 0.05
+[2026-02-20 14:52:53,091] INFO: Output directory: results\cross_domain_extended
+[2026-02-20 14:52:53,091] INFO: ================================================================================
+[2026-02-20 14:52:53,093] INFO: Evaluating ulsif on bace...
+[2026-02-20 14:52:53,128] INFO:   Using real predictions for bace
+[2026-02-20 14:52:53,136] INFO:   Results: 2 CERTIFY, 633 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 14:52:53,181] INFO: Evaluating ulsif on bbbp...
+[2026-02-20 14:52:53,210] INFO:   Using real predictions for bbbp
+[2026-02-20 14:52:53,217] INFO:   Results: 4 CERTIFY, 631 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 14:52:53,218] INFO: Evaluating ulsif on clintox...
+[2026-02-20 14:52:53,245] INFO:   Using real predictions for clintox
+[2026-02-20 14:52:53,251] INFO:   Results: 4 CERTIFY, 546 ABSTAIN, 0 NO-GUARANTEE (total: 550)
+[2026-02-20 14:52:53,252] INFO: Evaluating ulsif on esol...
+[2026-02-20 14:52:53,260] INFO:   esol: binarized via median-split (threshold=-2.680, pos_rate=0.466)
+[2026-02-20 14:52:53,271] INFO:   Using real predictions for esol
+[2026-02-20 14:52:53,273] INFO:   Results: 2 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 30)
+[2026-02-20 14:52:53,274] INFO: Evaluating ulsif on freesolv...
+[2026-02-20 14:52:53,280] INFO:   freesolv: binarized via median-split (threshold=-2.920, pos_rate=0.427)
+[2026-02-20 14:52:53,286] INFO:   Using real predictions for freesolv
+[2026-02-20 14:52:53,287] INFO:   Results: 4 CERTIFY, 11 ABSTAIN, 0 NO-GUARANTEE (total: 15)
+[2026-02-20 14:52:53,288] INFO: Evaluating ulsif on lipophilicity...
+[2026-02-20 14:52:53,303] INFO:   lipophilicity: binarized via median-split (threshold=2.430, pos_rate=0.472)
+[2026-02-20 14:52:53,361] INFO:   Using real predictions for lipophilicity
+[2026-02-20 14:52:53,397] INFO:   Results: 0 CERTIFY, 2295 ABSTAIN, 0 NO-GUARANTEE (total: 2295)
+[2026-02-20 14:52:53,400] INFO: Evaluating ulsif on sider...
+[2026-02-20 14:52:53,427] INFO:   Using real predictions for sider
+[2026-02-20 14:52:53,435] INFO:   Results: 0 CERTIFY, 675 ABSTAIN, 0 NO-GUARANTEE (total: 675)
+[2026-02-20 14:52:53,436] INFO: Evaluating ulsif on tox21...
+[2026-02-20 14:52:53,463] INFO:   tox21: dropped 566/7831 NaN labels
+[2026-02-20 14:52:53,570] WARNING:   Prediction length mismatch for tox21: 1567 vs 1469, falling back to oracle
+[2026-02-20 14:52:53,570] INFO:   Using oracle predictions for tox21
+[2026-02-20 14:52:53,577] INFO:   Results: 2 CERTIFY, 263 ABSTAIN, 0 NO-GUARANTEE (total: 265)
+[2026-02-20 14:52:53,580] INFO: Evaluating ulsif on toxcast...
+[2026-02-20 14:52:53,606] INFO:   toxcast: dropped 6845/8576 NaN labels
+[2026-02-20 14:52:53,628] WARNING:   Prediction length mismatch for toxcast: 1715 vs 396, falling back to oracle
+[2026-02-20 14:52:53,628] INFO:   Using oracle predictions for toxcast
+[2026-02-20 14:52:53,631] INFO:   Results: 4 CERTIFY, 101 ABSTAIN, 0 NO-GUARANTEE (total: 105)
+[2026-02-20 14:52:53,631] INFO: Evaluating ulsif on molhiv...
+[2026-02-20 14:52:53,899] INFO:   Using real predictions for molhiv
+[2026-02-20 14:52:55,210] INFO:   Results: 0 CERTIFY, 11615 ABSTAIN, 0 NO-GUARANTEE (total: 11615)
+[2026-02-20 14:52:55,223] INFO: Evaluating ulsif on muv...
+[2026-02-20 14:52:55,438] INFO:   muv: dropped 78246/93087 NaN labels
+[2026-02-20 14:52:55,603] WARNING:   Prediction length mismatch for muv: 18617 vs 2794, falling back to oracle
+[2026-02-20 14:52:55,604] INFO:   Using oracle predictions for muv
+[2026-02-20 14:52:56,048] INFO:   Results: 0 CERTIFY, 8440 ABSTAIN, 0 NO-GUARANTEE (total: 8440)
+[2026-02-20 15:01:24,115] INFO: ================================================================================
+[2026-02-20 15:01:24,115] INFO: Cross-Domain Benchmark Configuration
+[2026-02-20 15:01:24,115] INFO: ================================================================================
+[2026-02-20 15:01:24,115] INFO: Methods: ['ulsif', 'kliep', 'kmm', 'rulsif', 'weighted_conformal', 'split_conformal', 'cvplus', 'group_dro', 'bbse']
+[2026-02-20 15:01:24,115] INFO: Domains: ['molecular', 'tabular', 'text']
+[2026-02-20 15:01:24,115] INFO: Datasets: 35 (bace, bbbp, clintox, esol, freesolv, lipophilicity, sider, tox21, toxcast, molhiv, muv, hiv, qm7, delaney, sampl, adult, compas, bank, german_credit, heart_disease, diabetes, student_performance, wine_quality, online_shoppers, communities_crime, mushroom, imdb, yelp, amazon, civil_comments, twitter, ag_news, dbpedia, imdb_genre, sst2)
+[2026-02-20 15:01:24,115] INFO: Tau grid: [0.5, 0.6, 0.7, 0.8, 0.9]
+[2026-02-20 15:01:24,115] INFO: Alpha: 0.05
+[2026-02-20 15:01:24,115] INFO: Output directory: results\cross_domain_extended
+[2026-02-20 15:01:24,115] INFO: ================================================================================
+[2026-02-20 15:01:24,118] INFO: Evaluating ulsif on bace...
+[2026-02-20 15:01:24,302] INFO:   Using real predictions for bace
+[2026-02-20 15:01:24,313] INFO:   Results: 2 CERTIFY, 633 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 15:01:24,314] INFO: Evaluating ulsif on bbbp...
+[2026-02-20 15:01:24,493] INFO:   Using real predictions for bbbp
+[2026-02-20 15:01:24,504] INFO:   Results: 4 CERTIFY, 631 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 15:01:24,505] INFO: Evaluating ulsif on clintox...
+[2026-02-20 15:01:24,781] INFO:   Using real predictions for clintox
+[2026-02-20 15:01:24,788] INFO:   Results: 4 CERTIFY, 546 ABSTAIN, 0 NO-GUARANTEE (total: 550)
+[2026-02-20 15:01:24,789] INFO: Evaluating ulsif on esol...
+[2026-02-20 15:01:24,871] INFO:   esol: binarized via median-split (threshold=-2.680, pos_rate=0.466)
+[2026-02-20 15:01:24,897] INFO:   Using real predictions for esol
+[2026-02-20 15:01:24,899] INFO:   Results: 2 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 30)
+[2026-02-20 15:01:24,900] INFO: Evaluating ulsif on freesolv...
+[2026-02-20 15:01:24,975] INFO:   freesolv: binarized via median-split (threshold=-2.920, pos_rate=0.427)
+[2026-02-20 15:01:25,001] INFO:   Using real predictions for freesolv
+[2026-02-20 15:01:25,004] INFO:   Results: 4 CERTIFY, 11 ABSTAIN, 0 NO-GUARANTEE (total: 15)
+[2026-02-20 15:01:25,005] INFO: Evaluating ulsif on lipophilicity...
+[2026-02-20 15:01:25,091] INFO:   lipophilicity: binarized via median-split (threshold=2.430, pos_rate=0.472)
+[2026-02-20 15:01:25,175] INFO:   Using real predictions for lipophilicity
+[2026-02-20 15:01:25,216] INFO:   Results: 0 CERTIFY, 2295 ABSTAIN, 0 NO-GUARANTEE (total: 2295)
+[2026-02-20 15:01:25,217] INFO: Evaluating ulsif on sider...
+[2026-02-20 15:01:25,323] INFO:   Using real predictions for sider
+[2026-02-20 15:01:25,332] INFO:   Results: 0 CERTIFY, 675 ABSTAIN, 0 NO-GUARANTEE (total: 675)
+[2026-02-20 15:01:25,332] INFO: Evaluating ulsif on tox21...
+[2026-02-20 15:01:25,433] INFO:   tox21: dropped 566/7831 NaN labels
+[2026-02-20 15:01:25,543] WARNING:   Prediction length mismatch for tox21: 1567 vs 1469, falling back to oracle
+[2026-02-20 15:01:25,543] INFO:   Using oracle predictions for tox21
+[2026-02-20 15:01:25,550] INFO:   Results: 2 CERTIFY, 263 ABSTAIN, 0 NO-GUARANTEE (total: 265)
+[2026-02-20 15:01:25,553] INFO: Evaluating ulsif on toxcast...
+[2026-02-20 15:01:25,656] INFO:   toxcast: dropped 6845/8576 NaN labels
+[2026-02-20 15:01:25,694] WARNING:   Prediction length mismatch for toxcast: 1715 vs 396, falling back to oracle
+[2026-02-20 15:01:25,695] INFO:   Using oracle predictions for toxcast
+[2026-02-20 15:01:25,698] INFO:   Results: 4 CERTIFY, 101 ABSTAIN, 0 NO-GUARANTEE (total: 105)
+[2026-02-20 15:01:25,699] INFO: Evaluating ulsif on molhiv...
+[2026-02-20 15:01:26,095] INFO:   Using real predictions for molhiv
+[2026-02-20 15:01:27,155] INFO:   Results: 0 CERTIFY, 11615 ABSTAIN, 0 NO-GUARANTEE (total: 11615)
+[2026-02-20 15:01:27,164] INFO: Evaluating ulsif on muv...
+[2026-02-20 15:01:27,513] INFO:   muv: dropped 78246/93087 NaN labels
+[2026-02-20 15:01:27,679] WARNING:   Prediction length mismatch for muv: 18617 vs 2794, falling back to oracle
+[2026-02-20 15:01:27,679] INFO:   Using oracle predictions for muv
+[2026-02-20 15:01:28,012] INFO:   Results: 0 CERTIFY, 8440 ABSTAIN, 0 NO-GUARANTEE (total: 8440)
+[2026-02-20 15:01:28,018] INFO: Evaluating ulsif on hiv...
+[2026-02-20 15:01:28,434] INFO:   Using real predictions for hiv
+[2026-02-20 15:01:28,504] INFO:   Results: 0 CERTIFY, 100 ABSTAIN, 0 NO-GUARANTEE (total: 100)
+[2026-02-20 15:01:28,514] INFO: Evaluating ulsif on qm7...
+[2026-02-20 15:01:28,700] INFO:   Using real predictions for qm7
+[2026-02-20 15:01:28,711] INFO:   Results: 9 CERTIFY, 91 ABSTAIN, 0 NO-GUARANTEE (total: 100)
+[2026-02-20 15:01:28,713] INFO: Evaluating ulsif on delaney...
+[2026-02-20 15:01:28,796] INFO:   Using real predictions for delaney
+[2026-02-20 15:01:28,802] INFO:   Results: 4 CERTIFY, 96 ABSTAIN, 0 NO-GUARANTEE (total: 100)
+[2026-02-20 15:01:28,803] INFO: Evaluating ulsif on sampl...
+[2026-02-20 15:01:28,887] INFO:   Using real predictions for sampl
+[2026-02-20 15:01:28,892] INFO:   Results: 3 CERTIFY, 97 ABSTAIN, 0 NO-GUARANTEE (total: 100)
+[2026-02-20 15:01:28,893] INFO: Evaluating ulsif on adult...
+[2026-02-20 15:01:29,180] INFO:   Using real predictions for adult
+[2026-02-20 15:01:29,240] INFO:   Results: 6 CERTIFY, 239 ABSTAIN, 0 NO-GUARANTEE (total: 245)
+[2026-02-20 15:01:29,245] INFO: Evaluating ulsif on compas...
+[2026-02-20 15:01:54,510] INFO:   Using real predictions for compas
+[2026-02-20 15:01:54,528] INFO:   Results: 16 CERTIFY, 174 ABSTAIN, 0 NO-GUARANTEE (total: 190)
+[2026-02-20 15:01:54,922] INFO: Evaluating ulsif on bank...
+[2026-02-20 15:01:55,152] INFO:   Using real predictions for bank
+[2026-02-20 15:01:55,173] INFO:   Results: 0 CERTIFY, 50 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:01:55,181] INFO: Evaluating ulsif on german_credit...
+[2026-02-20 15:01:55,264] INFO:   Using real predictions for german_credit
+[2026-02-20 15:01:55,267] INFO:   Results: 0 CERTIFY, 70 ABSTAIN, 0 NO-GUARANTEE (total: 70)
+[2026-02-20 15:01:55,269] INFO: Evaluating ulsif on heart_disease...
+[2026-02-20 15:01:55,360] INFO:   Using real predictions for heart_disease
+[2026-02-20 15:01:55,365] INFO:   Results: 0 CERTIFY, 40 ABSTAIN, 0 NO-GUARANTEE (total: 40)
+[2026-02-20 15:01:55,367] INFO: Evaluating ulsif on diabetes...
+[2026-02-20 15:01:55,436] INFO:   Using real predictions for diabetes
+[2026-02-20 15:01:55,442] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 15:01:55,443] INFO: Evaluating ulsif on student_performance...
+[2026-02-20 15:01:55,529] INFO:   Using real predictions for student_performance
+[2026-02-20 15:01:55,535] INFO:   Results: 10 CERTIFY, 45 ABSTAIN, 0 NO-GUARANTEE (total: 55)
+[2026-02-20 15:01:55,536] INFO: Evaluating ulsif on wine_quality...
+[2026-02-20 15:01:55,638] INFO:   Using real predictions for wine_quality
+[2026-02-20 15:01:55,642] INFO:   Results: 11 CERTIFY, 19 ABSTAIN, 0 NO-GUARANTEE (total: 30)
+[2026-02-20 15:01:55,643] INFO: Evaluating ulsif on online_shoppers...
+[2026-02-20 15:01:55,760] INFO:   Using real predictions for online_shoppers
+[2026-02-20 15:01:55,766] INFO:   Results: 1 CERTIFY, 49 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:01:55,767] INFO: Evaluating ulsif on communities_crime...
+[2026-02-20 15:01:55,853] INFO:   Using real predictions for communities_crime
+[2026-02-20 15:01:55,860] INFO:   Results: 3 CERTIFY, 42 ABSTAIN, 0 NO-GUARANTEE (total: 45)
+[2026-02-20 15:01:55,861] INFO: Evaluating ulsif on mushroom...
+[2026-02-20 15:01:55,970] INFO:   Using real predictions for mushroom
+[2026-02-20 15:01:55,974] INFO:   Results: 14 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 30)
+[2026-02-20 15:01:55,975] INFO: Evaluating ulsif on imdb...
+[2026-02-20 15:02:02,998] INFO:   Using real predictions for imdb
+[2026-02-20 15:02:03,017] INFO:   Results: 30 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:02:03,236] INFO: Evaluating ulsif on yelp...
+[2026-02-20 15:02:12,195] INFO:   Using real predictions for yelp
+[2026-02-20 15:02:12,224] INFO:   Results: 31 CERTIFY, 19 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:02:12,494] INFO: Evaluating ulsif on amazon...
+[2026-02-20 15:02:12,641] INFO:   Using real predictions for amazon
+[2026-02-20 15:02:12,647] INFO:   Results: 0 CERTIFY, 15 ABSTAIN, 0 NO-GUARANTEE (total: 15)
+[2026-02-20 15:02:12,650] INFO: Evaluating ulsif on civil_comments...
+[2026-02-20 15:02:12,798] INFO:   Using real predictions for civil_comments
+[2026-02-20 15:02:12,809] INFO:   Results: 0 CERTIFY, 25 ABSTAIN, 0 NO-GUARANTEE (total: 25)
+[2026-02-20 15:02:12,811] INFO: Evaluating ulsif on twitter...
+[2026-02-20 15:02:12,953] INFO:   Using real predictions for twitter
+[2026-02-20 15:02:12,965] INFO:   Results: 0 CERTIFY, 50 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:02:12,967] INFO: Evaluating ulsif on ag_news...
+[2026-02-20 15:02:25,896] INFO:   Using real predictions for ag_news
+[2026-02-20 15:02:25,919] INFO:   Results: 5 CERTIFY, 15 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 15:02:26,125] INFO: Evaluating ulsif on dbpedia...
+[2026-02-20 15:02:31,186] INFO:   Using real predictions for dbpedia
+[2026-02-20 15:02:31,204] INFO:   Results: 20 CERTIFY, 50 ABSTAIN, 0 NO-GUARANTEE (total: 70)
+[2026-02-20 15:02:31,241] INFO: Evaluating ulsif on imdb_genre...
+[2026-02-20 15:02:34,632] INFO:   Using real predictions for imdb_genre
+[2026-02-20 15:02:34,651] INFO:   Results: 26 CERTIFY, 14 ABSTAIN, 0 NO-GUARANTEE (total: 40)
+[2026-02-20 15:02:34,675] INFO: Evaluating ulsif on sst2...
+[2026-02-20 15:02:39,139] INFO:   Using real predictions for sst2
+[2026-02-20 15:02:39,155] INFO:   Results: 20 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 40)
+[2026-02-20 15:02:39,192] INFO: Evaluating kliep on bace...
+[2026-02-20 15:02:39,297] INFO:   Using real predictions for bace
+[2026-02-20 15:02:39,305] INFO:   Results: 2 CERTIFY, 633 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 15:02:39,306] INFO: Evaluating kliep on bbbp...
+[2026-02-20 15:02:39,394] INFO:   Using real predictions for bbbp
+[2026-02-20 15:02:39,402] INFO:   Results: 4 CERTIFY, 631 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 15:02:39,402] INFO: Evaluating kliep on clintox...
+[2026-02-20 15:02:39,534] INFO:   Using real predictions for clintox
+[2026-02-20 15:02:39,540] INFO:   Results: 4 CERTIFY, 546 ABSTAIN, 0 NO-GUARANTEE (total: 550)
+[2026-02-20 15:02:39,541] INFO: Evaluating kliep on esol...
+[2026-02-20 15:02:39,549] INFO:   esol: binarized via median-split (threshold=-2.680, pos_rate=0.466)
+[2026-02-20 15:02:39,606] INFO:   Using real predictions for esol
+[2026-02-20 15:02:39,608] INFO:   Results: 2 CERTIFY, 28 ABSTAIN, 0 NO-GUARANTEE (total: 30)
+[2026-02-20 15:02:39,608] INFO: Evaluating kliep on freesolv...
+[2026-02-20 15:02:39,615] INFO:   freesolv: binarized via median-split (threshold=-2.920, pos_rate=0.427)
+[2026-02-20 15:02:39,708] INFO:   Using real predictions for freesolv
+[2026-02-20 15:02:39,710] INFO:   Results: 4 CERTIFY, 11 ABSTAIN, 0 NO-GUARANTEE (total: 15)
+[2026-02-20 15:02:39,711] INFO: Evaluating kliep on lipophilicity...
+[2026-02-20 15:02:39,727] INFO:   lipophilicity: binarized via median-split (threshold=2.430, pos_rate=0.472)
+[2026-02-20 15:02:39,872] INFO:   Using real predictions for lipophilicity
+[2026-02-20 15:02:39,903] INFO:   Results: 0 CERTIFY, 2295 ABSTAIN, 0 NO-GUARANTEE (total: 2295)
+[2026-02-20 15:02:39,904] INFO: Evaluating kliep on sider...
+[2026-02-20 15:02:39,992] INFO:   Using real predictions for sider
+[2026-02-20 15:02:40,000] INFO:   Results: 0 CERTIFY, 675 ABSTAIN, 0 NO-GUARANTEE (total: 675)
+[2026-02-20 15:02:40,001] INFO: Evaluating kliep on tox21...
+[2026-02-20 15:02:40,024] INFO:   tox21: dropped 566/7831 NaN labels
+[2026-02-20 15:02:40,165] WARNING:   Prediction length mismatch for tox21: 1567 vs 1469, falling back to oracle
+[2026-02-20 15:02:40,165] INFO:   Using oracle predictions for tox21
+[2026-02-20 15:02:40,171] INFO:   Results: 1 CERTIFY, 264 ABSTAIN, 0 NO-GUARANTEE (total: 265)
+[2026-02-20 15:02:40,173] INFO: Evaluating kliep on toxcast...
+[2026-02-20 15:02:40,195] INFO:   toxcast: dropped 6845/8576 NaN labels
+[2026-02-20 15:02:40,261] WARNING:   Prediction length mismatch for toxcast: 1715 vs 396, falling back to oracle
+[2026-02-20 15:02:40,262] INFO:   Using oracle predictions for toxcast
+[2026-02-20 15:02:40,264] INFO:   Results: 4 CERTIFY, 101 ABSTAIN, 0 NO-GUARANTEE (total: 105)
+[2026-02-20 15:02:40,265] INFO: Evaluating kliep on molhiv...
+[2026-02-20 15:02:40,690] INFO:   Using real predictions for molhiv
+[2026-02-20 15:02:41,608] INFO:   Results: 0 CERTIFY, 11615 ABSTAIN, 0 NO-GUARANTEE (total: 11615)
+[2026-02-20 15:02:41,616] INFO: Evaluating kliep on muv...
+[2026-02-20 15:02:41,794] INFO:   muv: dropped 78246/93087 NaN labels
+[2026-02-20 15:02:42,034] WARNING:   Prediction length mismatch for muv: 18617 vs 2794, falling back to oracle
+[2026-02-20 15:02:42,034] INFO:   Using oracle predictions for muv
+[2026-02-20 15:02:42,318] INFO:   Results: 0 CERTIFY, 8440 ABSTAIN, 0 NO-GUARANTEE (total: 8440)
+[2026-02-20 15:02:42,321] INFO: Evaluating kliep on hiv...
+[2026-02-20 15:02:42,820] INFO:   Using real predictions for hiv
+[2026-02-20 15:02:42,870] INFO:   Results: 0 CERTIFY, 100 ABSTAIN, 0 NO-GUARANTEE (total: 100)
+[2026-02-20 15:02:42,876] INFO: Evaluating kliep on qm7...
+[2026-02-20 15:02:43,082] INFO:   Using real predictions for qm7
+[2026-02-20 15:02:43,089] INFO:   Results: 9 CERTIFY, 91 ABSTAIN, 0 NO-GUARANTEE (total: 100)
+[2026-02-20 15:02:43,090] INFO: Evaluating kliep on delaney...
+[2026-02-20 15:02:43,173] INFO:   Using real predictions for delaney
+[2026-02-20 15:02:43,177] INFO:   Results: 4 CERTIFY, 96 ABSTAIN, 0 NO-GUARANTEE (total: 100)
+[2026-02-20 15:02:43,177] INFO: Evaluating kliep on sampl...
+[2026-02-20 15:02:43,273] INFO:   Using real predictions for sampl
+[2026-02-20 15:02:43,276] INFO:   Results: 3 CERTIFY, 97 ABSTAIN, 0 NO-GUARANTEE (total: 100)
+[2026-02-20 15:02:43,277] INFO: Evaluating kliep on adult...
+[2026-02-20 15:02:43,747] INFO:   Using real predictions for adult
+[2026-02-20 15:02:43,784] INFO:   Results: 7 CERTIFY, 238 ABSTAIN, 0 NO-GUARANTEE (total: 245)
+[2026-02-20 15:02:43,788] INFO: Evaluating kliep on compas...
+[2026-02-20 15:03:08,497] INFO:   Using real predictions for compas
+[2026-02-20 15:03:08,509] INFO:   Results: 16 CERTIFY, 174 ABSTAIN, 0 NO-GUARANTEE (total: 190)
+[2026-02-20 15:03:08,734] INFO: Evaluating kliep on bank...
+[2026-02-20 15:03:09,075] INFO:   Using real predictions for bank
+[2026-02-20 15:03:09,093] INFO:   Results: 0 CERTIFY, 50 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:03:09,097] INFO: Evaluating kliep on german_credit...
+[2026-02-20 15:03:09,201] INFO:   Using real predictions for german_credit
+[2026-02-20 15:03:09,204] INFO:   Results: 0 CERTIFY, 70 ABSTAIN, 0 NO-GUARANTEE (total: 70)
+[2026-02-20 15:03:09,205] INFO: Evaluating kliep on heart_disease...
+[2026-02-20 15:03:09,231] INFO:   Using real predictions for heart_disease
+[2026-02-20 15:03:09,234] INFO:   Results: 0 CERTIFY, 40 ABSTAIN, 0 NO-GUARANTEE (total: 40)
+[2026-02-20 15:03:09,235] INFO: Evaluating kliep on diabetes...
+[2026-02-20 15:03:09,341] INFO:   Using real predictions for diabetes
+[2026-02-20 15:03:09,343] INFO:   Results: 0 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 15:03:09,344] INFO: Evaluating kliep on student_performance...
+[2026-02-20 15:03:09,444] INFO:   Using real predictions for student_performance
+[2026-02-20 15:03:09,450] INFO:   Results: 10 CERTIFY, 45 ABSTAIN, 0 NO-GUARANTEE (total: 55)
+[2026-02-20 15:03:09,450] INFO: Evaluating kliep on wine_quality...
+[2026-02-20 15:03:09,583] INFO:   Using real predictions for wine_quality
+[2026-02-20 15:03:09,586] INFO:   Results: 11 CERTIFY, 19 ABSTAIN, 0 NO-GUARANTEE (total: 30)
+[2026-02-20 15:03:09,587] INFO: Evaluating kliep on online_shoppers...
+[2026-02-20 15:03:09,761] INFO:   Using real predictions for online_shoppers
+[2026-02-20 15:03:09,767] INFO:   Results: 2 CERTIFY, 48 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:03:09,768] INFO: Evaluating kliep on communities_crime...
+[2026-02-20 15:03:09,887] INFO:   Using real predictions for communities_crime
+[2026-02-20 15:03:09,890] INFO:   Results: 3 CERTIFY, 42 ABSTAIN, 0 NO-GUARANTEE (total: 45)
+[2026-02-20 15:03:09,890] INFO: Evaluating kliep on mushroom...
+[2026-02-20 15:03:10,004] INFO:   Using real predictions for mushroom
+[2026-02-20 15:03:10,008] INFO:   Results: 14 CERTIFY, 16 ABSTAIN, 0 NO-GUARANTEE (total: 30)
+[2026-02-20 15:03:10,009] INFO: Evaluating kliep on imdb...
+[2026-02-20 15:03:16,366] INFO:   Using real predictions for imdb
+[2026-02-20 15:03:16,377] INFO:   Results: 30 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:03:16,502] INFO: Evaluating kliep on yelp...
+[2026-02-20 15:03:24,485] INFO:   Using real predictions for yelp
+[2026-02-20 15:03:24,507] INFO:   Results: 31 CERTIFY, 19 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:03:24,699] INFO: Evaluating kliep on amazon...
+[2026-02-20 15:03:24,779] INFO:   Using real predictions for amazon
+[2026-02-20 15:03:24,784] INFO:   Results: 0 CERTIFY, 15 ABSTAIN, 0 NO-GUARANTEE (total: 15)
+[2026-02-20 15:03:24,786] INFO: Evaluating kliep on civil_comments...
+[2026-02-20 15:03:24,858] INFO:   Using real predictions for civil_comments
+[2026-02-20 15:03:24,866] INFO:   Results: 0 CERTIFY, 25 ABSTAIN, 0 NO-GUARANTEE (total: 25)
+[2026-02-20 15:03:24,868] INFO: Evaluating kliep on twitter...
+[2026-02-20 15:03:24,950] INFO:   Using real predictions for twitter
+[2026-02-20 15:03:24,957] INFO:   Results: 0 CERTIFY, 50 ABSTAIN, 0 NO-GUARANTEE (total: 50)
+[2026-02-20 15:03:24,959] INFO: Evaluating kliep on ag_news...
+[2026-02-20 15:03:37,802] INFO:   Using real predictions for ag_news
+[2026-02-20 15:03:37,823] INFO:   Results: 5 CERTIFY, 15 ABSTAIN, 0 NO-GUARANTEE (total: 20)
+[2026-02-20 15:03:38,010] INFO: Evaluating kliep on dbpedia...
+[2026-02-20 15:03:43,103] INFO:   Using real predictions for dbpedia
+[2026-02-20 15:03:43,119] INFO:   Results: 20 CERTIFY, 50 ABSTAIN, 0 NO-GUARANTEE (total: 70)
+[2026-02-20 15:03:43,164] INFO: Evaluating kliep on imdb_genre...
+[2026-02-20 15:03:46,781] INFO:   Using real predictions for imdb_genre
+[2026-02-20 15:03:46,792] INFO:   Results: 26 CERTIFY, 14 ABSTAIN, 0 NO-GUARANTEE (total: 40)
+[2026-02-20 15:03:46,817] INFO: Evaluating kliep on sst2...
+[2026-02-20 15:03:51,615] INFO:   Using real predictions for sst2
+[2026-02-20 15:03:51,649] INFO:   Results: 20 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 40)
+[2026-02-20 15:03:51,695] INFO: Evaluating kmm on bace...
+[2026-02-20 15:03:53,169] INFO:   Using real predictions for bace
+[2026-02-20 15:03:53,183] INFO:   Results: 1 CERTIFY, 634 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 15:03:53,184] INFO: Evaluating kmm on bbbp...
+[2026-02-20 15:03:56,253] INFO:   Using real predictions for bbbp
+[2026-02-20 15:03:56,269] INFO:   Results: 0 CERTIFY, 635 ABSTAIN, 0 NO-GUARANTEE (total: 635)
+[2026-02-20 15:03:56,271] INFO: Evaluating kmm on clintox...
+[2026-02-20 15:03:57,753] INFO:   Using real predictions for clintox
+[2026-02-20 15:03:57,764] INFO:   Results: 3 CERTIFY, 547 ABSTAIN, 0 NO-GUARANTEE (total: 550)
+[2026-02-20 15:03:57,766] INFO: Evaluating kmm on esol...
+[2026-02-20 15:03:57,780] INFO:   esol: binarized via median-split (threshold=-2.680, pos_rate=0.466)
+[2026-02-20 15:03:58,997] INFO:   Using real predictions for esol
+[2026-02-20 15:03:59,002] INFO:   Results: 0 CERTIFY, 30 ABSTAIN, 0 NO-GUARANTEE (total: 30)
+[2026-02-20 15:03:59,004] INFO: Evaluating kmm on freesolv...
+[2026-02-20 15:03:59,017] INFO:   freesolv: binarized via median-split (threshold=-2.920, pos_rate=0.427)
+[2026-02-20 15:03:59,407] INFO:   Using real predictions for freesolv
+[2026-02-20 15:03:59,410] INFO:   Results: 0 CERTIFY, 15 ABSTAIN, 0 NO-GUARANTEE (total: 15)
+[2026-02-20 15:03:59,411] INFO: Evaluating kmm on lipophilicity...
+[2026-02-20 15:03:59,435] INFO:   lipophilicity: binarized via median-split (threshold=2.430, pos_rate=0.472)
+[2026-02-20 15:04:21,798] INFO:   Using real predictions for lipophilicity
+[2026-02-20 15:04:21,838] INFO:   Results: 0 CERTIFY, 2295 ABSTAIN, 0 NO-GUARANTEE (total: 2295)
+[2026-02-20 15:04:21,839] INFO: Evaluating kmm on sider...
+[2026-02-20 15:04:23,136] INFO:   Using real predictions for sider
+[2026-02-20 15:04:23,148] INFO:   Results: 0 CERTIFY, 675 ABSTAIN, 0 NO-GUARANTEE (total: 675)
+[2026-02-20 15:04:23,150] INFO: Evaluating kmm on tox21...
+[2026-02-20 15:04:23,176] INFO:   tox21: dropped 566/7831 NaN labels
+[2026-02-20 15:07:58,707] WARNING:   Prediction length mismatch for tox21: 1567 vs 1469, falling back to oracle
+[2026-02-20 15:07:58,708] INFO:   Using oracle predictions for tox21
+[2026-02-20 15:07:58,718] INFO:   Results: 0 CERTIFY, 265 ABSTAIN, 0 NO-GUARANTEE (total: 265)
+[2026-02-20 15:07:58,720] INFO: Evaluating kmm on toxcast...
+[2026-02-20 15:07:58,748] INFO:   toxcast: dropped 6845/8576 NaN labels
+[2026-02-20 15:08:02,715] WARNING:   Prediction length mismatch for toxcast: 1715 vs 396, falling back to oracle
+[2026-02-20 15:08:02,715] INFO:   Using oracle predictions for toxcast
+[2026-02-20 15:08:02,722] INFO:   Results: 0 CERTIFY, 105 ABSTAIN, 0 NO-GUARANTEE (total: 105)
+[2026-02-20 15:08:02,723] INFO: Evaluating kmm on molhiv...

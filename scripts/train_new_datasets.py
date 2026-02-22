@@ -54,6 +54,23 @@ NEW_DATASETS = {
     "twitter":          {"domain": "text",      "model": "lr", "binarize": None},
     # --- vision (LR, 512-dim CNN embeddings, already have full predictions) ---
     # camelyon17, waterbirds: just need mapping update, skip training
+
+    # ---- NEW batch (Session 9): 12 more datasets ----
+    # molecular
+    "hiv":              {"domain": "molecular", "model": "rf", "binarize": None},
+    "qm7":              {"domain": "molecular", "model": "rf", "binarize": None},
+    "delaney":          {"domain": "molecular", "model": "rf", "binarize": None},
+    "sampl":            {"domain": "molecular", "model": "rf", "binarize": None},
+    # tabular
+    "wine_quality":     {"domain": "tabular",   "model": "lr", "binarize": None},
+    "online_shoppers":  {"domain": "tabular",   "model": "lr", "binarize": None},
+    "communities_crime":{"domain": "tabular",   "model": "lr", "binarize": None},
+    "mushroom":         {"domain": "tabular",   "model": "lr", "binarize": None},
+    # text (pre-vectorized TF-IDF in features.npy)
+    "ag_news":          {"domain": "text",      "model": "lr", "binarize": None},
+    "dbpedia":          {"domain": "text",      "model": "lr", "binarize": None},
+    "imdb_genre":       {"domain": "text",      "model": "lr", "binarize": None},
+    "sst2":             {"domain": "text",      "model": "lr", "binarize": None},
 }
 
 # Datasets that already have full predictions — just add to mapping

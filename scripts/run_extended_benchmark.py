@@ -1,9 +1,14 @@
 """
-Extended cross-domain benchmark: all registered methods on all 23 datasets.
+Extended cross-domain benchmark: all registered methods on all 35+ datasets.
 
-Extends run_cross_domain_benchmark.py with muv, molhiv, student_performance
-and all 10 baselines (ulsif, kliep, kmm, rulsif, weighted_conformal,
+Extends run_cross_domain_benchmark.py with all processed datasets and
+all 10 baselines (ulsif, kliep, kmm, rulsif, weighted_conformal,
 split_conformal, cvplus, group_dro, bbse, ravel).
+
+Session 9 adds 12 new datasets:
+  text:     ag_news, dbpedia, imdb_genre, sst2
+  tabular:  wine_quality, online_shoppers, communities_crime, mushroom
+  molecular: hiv, qm7, delaney, sampl
 
 Usage:
     python scripts/run_extended_benchmark.py
@@ -21,17 +26,26 @@ sys.path.insert(0, str(shift_bench / "scripts"))
 
 import run_cross_domain_benchmark as rb
 
-# Extend DOMAIN_DATASETS with all known datasets
+# All known datasets (35 total, excluding test_dataset/camelyon17/waterbirds)
 rb.DOMAIN_DATASETS["molecular"] = [
+    # Original
     "bace", "bbbp", "clintox", "esol", "freesolv", "lipophilicity",
     "sider", "tox21", "toxcast", "molhiv", "muv",
+    # New (Session 9)
+    "hiv", "qm7", "delaney", "sampl",
 ]
 rb.DOMAIN_DATASETS["tabular"] = [
+    # Original
     "adult", "compas", "bank", "german_credit",
     "heart_disease", "diabetes", "student_performance",
+    # New (Session 9)
+    "wine_quality", "online_shoppers", "communities_crime", "mushroom",
 ]
 rb.DOMAIN_DATASETS["text"] = [
+    # Original
     "imdb", "yelp", "amazon", "civil_comments", "twitter",
+    # New (Session 9)
+    "ag_news", "dbpedia", "imdb_genre", "sst2",
 ]
 rb.NAN_LABEL_DATASETS = {"tox21", "toxcast", "muv"}
 

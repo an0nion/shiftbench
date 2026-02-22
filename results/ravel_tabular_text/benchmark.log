@@ -1,0 +1,90 @@
+[2026-02-23 10:22:38,363] INFO: ================================================================================
+[2026-02-23 10:22:38,364] INFO: Cross-Domain Benchmark Configuration
+[2026-02-23 10:22:38,365] INFO: ================================================================================
+[2026-02-23 10:22:38,365] INFO: Methods: ['ravel']
+[2026-02-23 10:22:38,365] INFO: Domains: ['tabular', 'text']
+[2026-02-23 10:22:38,365] INFO: Datasets: 20 (adult, compas, bank, german_credit, heart_disease, diabetes, student_performance, wine_quality, online_shoppers, communities_crime, mushroom, imdb, yelp, amazon, civil_comments, twitter, ag_news, dbpedia, imdb_genre, sst2)
+[2026-02-23 10:22:38,367] INFO: Tau grid: [0.5, 0.6, 0.7, 0.8, 0.85, 0.9]
+[2026-02-23 10:22:38,367] INFO: Alpha: 0.05
+[2026-02-23 10:22:38,367] INFO: Output directory: results\ravel_tabular_text
+[2026-02-23 10:22:38,367] INFO: ================================================================================
+[2026-02-23 10:22:38,372] INFO: Evaluating ravel on adult...
+[2026-02-23 10:22:41,418] INFO:   Using real predictions for adult
+[2026-02-23 10:22:41,532] INFO:   Results: 5 CERTIFY, 289 ABSTAIN, 0 NO-GUARANTEE (total: 294)
+[2026-02-23 10:22:41,541] INFO: Evaluating ravel on compas...
+[2026-02-23 10:25:09,888] INFO:   Using real predictions for compas
+[2026-02-23 10:25:09,940] INFO:   Results: 9 CERTIFY, 219 ABSTAIN, 0 NO-GUARANTEE (total: 228)
+[2026-02-23 10:25:10,223] INFO: Evaluating ravel on bank...
+[2026-02-23 10:25:13,087] INFO:   Using real predictions for bank
+[2026-02-23 10:25:13,132] INFO:   Results: 0 CERTIFY, 60 ABSTAIN, 0 NO-GUARANTEE (total: 60)
+[2026-02-23 10:25:13,137] INFO: Evaluating ravel on german_credit...
+[2026-02-23 10:25:13,364] INFO:   Using real predictions for german_credit
+[2026-02-23 10:25:13,372] INFO:   Results: 0 CERTIFY, 84 ABSTAIN, 0 NO-GUARANTEE (total: 84)
+[2026-02-23 10:25:13,373] INFO: Evaluating ravel on heart_disease...
+[2026-02-23 10:25:13,686] INFO:   Using real predictions for heart_disease
+[2026-02-23 10:25:13,703] INFO:   Results: 0 CERTIFY, 48 ABSTAIN, 0 NO-GUARANTEE (total: 48)
+[2026-02-23 10:25:13,704] INFO: Evaluating ravel on diabetes...
+[2026-02-23 10:25:13,921] INFO:   Using real predictions for diabetes
+[2026-02-23 10:25:13,930] INFO:   Results: 0 CERTIFY, 24 ABSTAIN, 0 NO-GUARANTEE (total: 24)
+[2026-02-23 10:25:13,931] INFO: Evaluating ravel on student_performance...
+[2026-02-23 10:25:14,111] INFO:   Using real predictions for student_performance
+[2026-02-23 10:25:14,122] INFO:   Results: 4 CERTIFY, 62 ABSTAIN, 0 NO-GUARANTEE (total: 66)
+[2026-02-23 10:25:14,123] INFO: Evaluating ravel on wine_quality...
+[2026-02-23 10:25:14,445] INFO:   Using real predictions for wine_quality
+[2026-02-23 10:25:14,465] INFO:   Results: 12 CERTIFY, 24 ABSTAIN, 0 NO-GUARANTEE (total: 36)
+[2026-02-23 10:25:14,467] INFO: Evaluating ravel on online_shoppers...
+[2026-02-23 10:25:14,948] INFO:   Using real predictions for online_shoppers
+[2026-02-23 10:25:14,974] INFO:   Results: 0 CERTIFY, 60 ABSTAIN, 0 NO-GUARANTEE (total: 60)
+[2026-02-23 10:25:14,977] INFO: Evaluating ravel on communities_crime...
+[2026-02-23 10:25:15,296] INFO:   Using real predictions for communities_crime
+[2026-02-23 10:25:15,311] INFO:   Results: 3 CERTIFY, 51 ABSTAIN, 0 NO-GUARANTEE (total: 54)
+[2026-02-23 10:25:15,312] INFO: Evaluating ravel on mushroom...
+[2026-02-23 10:25:15,631] INFO:   Using real predictions for mushroom
+[2026-02-23 10:25:15,649] INFO:   Results: 16 CERTIFY, 20 ABSTAIN, 0 NO-GUARANTEE (total: 36)
+[2026-02-23 10:25:15,652] INFO: Evaluating ravel on imdb...
+[2026-02-23 10:26:13,040] INFO:   Using real predictions for imdb
+[2026-02-23 10:26:13,079] INFO:   Results: 36 CERTIFY, 24 ABSTAIN, 0 NO-GUARANTEE (total: 60)
+[2026-02-23 10:26:13,220] INFO: Evaluating ravel on yelp...
+[2026-02-23 10:27:06,196] INFO:   Using real predictions for yelp
+[2026-02-23 10:27:06,261] INFO:   Results: 30 CERTIFY, 30 ABSTAIN, 0 NO-GUARANTEE (total: 60)
+[2026-02-23 10:27:06,488] INFO: Evaluating ravel on amazon...
+[2026-02-23 10:27:35,941] INFO:   Using real predictions for amazon
+[2026-02-23 10:27:35,961] INFO:   Results: 13 CERTIFY, 5 ABSTAIN, 0 NO-GUARANTEE (total: 18)
+[2026-02-23 10:27:36,033] INFO: Evaluating ravel on civil_comments...
+[2026-02-23 10:28:07,590] INFO:   Using real predictions for civil_comments
+[2026-02-23 10:28:07,607] INFO:   Results: 1 CERTIFY, 11 ABSTAIN, 0 NO-GUARANTEE (total: 12)
+[2026-02-23 10:28:07,681] INFO: Evaluating ravel on twitter...
+[2026-02-23 10:28:40,184] INFO:   Using real predictions for twitter
+[2026-02-23 10:28:40,218] INFO:   Results: 11 CERTIFY, 49 ABSTAIN, 0 NO-GUARANTEE (total: 60)
+[2026-02-23 10:28:40,310] INFO: Evaluating ravel on ag_news...
+[2026-02-23 10:31:11,706] INFO:   Using real predictions for ag_news
+[2026-02-23 10:31:12,129] INFO:   Results: 6 CERTIFY, 18 ABSTAIN, 0 NO-GUARANTEE (total: 24)
+[2026-02-23 10:31:13,028] INFO: Evaluating ravel on dbpedia...
+[2026-02-23 10:32:22,275] INFO:   Using real predictions for dbpedia
+[2026-02-23 10:32:22,342] INFO:   Results: 24 CERTIFY, 60 ABSTAIN, 0 NO-GUARANTEE (total: 84)
+[2026-02-23 10:32:22,419] INFO: Evaluating ravel on imdb_genre...
+[2026-02-23 10:32:54,345] INFO:   Using real predictions for imdb_genre
+[2026-02-23 10:32:54,391] INFO:   Results: 24 CERTIFY, 24 ABSTAIN, 0 NO-GUARANTEE (total: 48)
+[2026-02-23 10:32:54,430] INFO: Evaluating ravel on sst2...
+[2026-02-23 10:33:42,501] INFO:   Using real predictions for sst2
+[2026-02-23 10:33:42,641] INFO:   Results: 24 CERTIFY, 24 ABSTAIN, 0 NO-GUARANTEE (total: 48)
+[2026-02-23 10:33:42,861] INFO: Saved raw results to results\ravel_tabular_text\cross_domain_raw_results.csv
+[2026-02-23 10:33:42,862] INFO: Generating summary tables...
+[2026-02-23 10:33:42,951] INFO:   Saved domain summary to results\ravel_tabular_text\cross_domain_summary.csv
+[2026-02-23 10:33:42,989] INFO:   Saved dataset breakdown to results\ravel_tabular_text\cross_domain_by_dataset.csv
+[2026-02-23 10:33:43,005] INFO:   Saved method breakdown to results\ravel_tabular_text\cross_domain_by_method.csv
+[2026-02-23 10:33:43,130] INFO:   Saved decision distribution to results\ravel_tabular_text\cross_domain_decision_distribution.csv
+[2026-02-23 10:33:43,131] INFO: Running statistical analysis...
+[2026-02-23 10:33:43,135] INFO:   Testing: Do certification rates differ by domain?
+[2026-02-23 10:33:43,148] INFO:   Testing: Does method ranking change by domain?
+[2026-02-23 10:33:43,164] INFO:   Computing: Domain difficulty ranking
+[2026-02-23 10:33:43,168] INFO:   Computing: Effective sample size by domain
+[2026-02-23 10:33:43,172] INFO:   Computing: Runtime by domain
+[2026-02-23 10:33:43,189] INFO:   Saved statistical analysis to results\ravel_tabular_text\cross_domain_statistical_analysis.csv
+[2026-02-23 10:33:43,193] INFO:   Saved domain difficulty to results\ravel_tabular_text\cross_domain_difficulty.csv
+[2026-02-23 10:33:43,197] INFO:   Saved ESS summary to results\ravel_tabular_text\cross_domain_ess_summary.csv
+[2026-02-23 10:33:43,230] INFO:   Saved runtime summary to results\ravel_tabular_text\cross_domain_runtime.csv
+[2026-02-23 10:33:43,230] INFO: ================================================================================
+[2026-02-23 10:33:43,230] INFO: Cross-Domain Benchmark Complete!
+[2026-02-23 10:33:43,230] INFO: Results saved to: results\ravel_tabular_text
+[2026-02-23 10:33:43,231] INFO: ================================================================================

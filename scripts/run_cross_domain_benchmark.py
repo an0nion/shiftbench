@@ -130,11 +130,17 @@ def load_dataset_safe(dataset_name: str):
         from shiftbench.data import load_dataset
         X, y, cohorts, splits = load_dataset(dataset_name)
 
-        # Handle NaN labels (tox21, toxcast)
+        # Handle NaN labels (tox21, toxcast, muv): replace NaN with 0,
+        # matching train_new_datasets.py which uses nan_to_num(nan=0).
+        # Dropping NaN causes a sample-count mismatch with saved predictions.
         if dataset_name in NAN_LABEL_DATASETS:
-            X, y, cohorts, splits = drop_nan_labels(
-                X, y, cohorts, splits, dataset_name
-            )
+            nan_count = int(np.isnan(y).sum())
+            if nan_count > 0:
+                logging.info(
+                    f"  {dataset_name}: replacing {nan_count} NaN labels with 0 "
+                    f"(nan_frac={nan_count/len(y):.3f})"
+                )
+            y = np.nan_to_num(y, nan=0.0).astype(int)
 
         # Handle regression datasets (median-split binarization)
         if dataset_name in REGRESSION_DATASETS:
