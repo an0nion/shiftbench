@@ -1,0 +1,7 @@
+model,r2,coefficients,n_features,n_obs
+cert_rate ~ log(n_eff),0.6446192807172032,"log_neff=0.0844, intercept=-0.1178",1,27
+cert_rate ~ shift,0.10499471458204579,"shift_magnitude=-0.2449, intercept=0.2402",1,27
+cert_rate ~ log(n_eff) + shift,0.6703827880765113,"log_neff=0.0960, shift_magnitude=0.1474, intercept=-0.1940",2,27
+cert_rate ~ domain,0.5042408206934473,"is_text=0.3527, is_tabular=0.0364, intercept=0.0500",2,27
+cert_rate ~ domain + log(n_eff),0.705556041473943,"is_text=-0.0441, is_tabular=-0.1308, log_neff=0.0873, intercept=-0.0601",3,27
+cert_rate ~ log(n_eff) + shift + domain,0.7059700583415687,"log_neff=0.0884, shift_magnitude=-0.0396, is_text=-0.0741, is_tabular=-0.1562, intercept=-0.0343",4,27

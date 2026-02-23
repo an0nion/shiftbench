@@ -2,6 +2,89 @@
 
 ---
 
+## Session 10 -- 2026-02-23
+
+### Work Completed This Session
+
+**H3 Regression Expanded (27 datasets -- MAJOR REVISION):**
+Script: scripts/analysis_h3_regression_40.py. Results: results/h3_regression_40/.
+
+Combined RAVEL tabular/text (20 datasets, Session 9) + uLSIF molecular
+(7 real-pred datasets from cross_domain_extended). Computed shift metrics
+for 12 new datasets via two-sample AUC classifier.
+
+KEY FINDING REVISION: n_eff (R2=0.645) now outperforms domain alone (R2=0.504)
+as a cross-domain predictor. Partial R2(n_eff | domain) = 0.406 (was 0.002 in
+6-dataset analysis). The old "domain R2=0.994" was an overfitting artifact of
+6 maximally-separated data points.
+
+New claim: "n_eff is the primary mechanistic driver; domain partially mediates
+n_eff (scaffold shift -> low n_eff; text overlap -> high n_eff) but does not
+subsume it."
+
+Within-domain n_eff coefficients all positive:
+- Molecular: R2(neff)=0.525, neff_coef=+0.058
+- Tabular:   R2(neff)=0.386, neff_coef=+0.087
+- Text:      R2(neff)=0.438, neff_coef=+0.108
+
+**H2 Wilson CI finding documented in SECTION_5_REAL_DATA.md (Section 5.4.4):**
+neff_ess_gated FWER=5.24%, CI=[0.048, 0.057] -- criterion met.
+naive_* variants FWER~6.5%, CI_upper~0.070 -- NOT MET (anti-conservative ~1.3pp).
+Conclusion: n_eff correction necessary for calibration at boundary null.
+
+**SECTION_5_REAL_DATA.md updated:**
+- Section 5.1: experimental setup expanded to 27 datasets
+- Section 5.2: Finding 1 revised (n_eff > domain as predictor)
+- Section 5.4.4: added H2 Wilson CI calibration finding (new section)
+- Section 5.5.1: H3 regression table updated with 27-dataset results
+- Section 5.6: RAVEL behavior expanded with tabular/text per-dataset tables
+
+**PI Issues Audit -- Updated:**
+
+| # | Priority | Status (Session 10) |
+|---|----------|--------------------|
+| 1 | WCP validation on all datasets | DONE (Session 7) |
+| 2 | Full method matrix (6 methods x 40 datasets) | PARTIAL -- uLSIF/KLIEP/WCP on 6; RAVEL on 20 tabular/text |
+| 3 | Add 27 more datasets (target 40) | DONE (Session 9) -- 40 in prediction_mapping |
+| 4 | H3 regression (cert_rate ~ domain + n_eff + shift) | DONE -- revised with 27 datasets |
+| 5 | 8-page paper draft | PARTIAL -- Sections 4+5 complete; Intro/Method/Related Work/Conclusion missing |
+
+---
+
+## Session 9 -- 2026-02-23
+
+### Work Completed This Session
+
+**Dataset expansion to 40 (Priority 3 -- COMPLETE):**
+Added 15 new datasets (credit_default, hate_speech, rotten_tomatoes + others).
+prediction_mapping.json expanded from 25 to 40 datasets.
+
+Bug fixes applied before running new datasets:
+1. tox21/toxcast/muv: NaN mismatch fixed (nan_to_num instead of drop_nan_labels)
+2. amazon/civil_comments/twitter: replaced sparse TF-IDF (15-21 features,
+   AUC ~0.5) with real HuggingFace TF-IDF. New AUC: 0.83-0.96.
+
+**RAVEL on tabular (11 datasets, Priority 2 -- DONE for tabular):**
+Script: scripts/run_cross_domain_benchmark.py with method=ravel.
+Results: results/ravel_tabular_text/
+Domain summary: cert_rate=4.95%, mean n_eff=37 (11 datasets)
+
+**RAVEL on text (9 datasets, Priority 2 -- DONE for text):**
+Results: results/ravel_tabular_text/
+Domain summary: cert_rate=40.82%, mean n_eff=485 (9 datasets)
+
+**H4 per-tau null test (extended):**
+0 false certifications across 6000 trials (200 x 6 datasets x 5 taus). PASS.
+
+**H2 Wilson CI 10k:**
+neff_ess_gated: FWER=5.24%, CI=[0.048, 0.057]. Criterion (CI_upper < 0.06) MET.
+naive_* variants: FWER~6.5%, CI_upper~0.070. NOT MET.
+Results: results/h2_wilson_10k/h2_wilson_10k_proper.csv
+
+**Committed and pushed to an0nion/shiftbench** (2 commits: Session 9 + Wilson CI).
+
+---
+
 ## Session 8 — 2026-02-20
 
 ### Work Completed This Session
