@@ -38,14 +38,18 @@ rb.DOMAIN_DATASETS["tabular"] = [
     # Original
     "adult", "compas", "bank", "german_credit",
     "heart_disease", "diabetes", "student_performance",
-    # New (Session 9)
+    # Session 9
     "wine_quality", "online_shoppers", "communities_crime", "mushroom",
+    # Session 10
+    "credit_default",
 ]
 rb.DOMAIN_DATASETS["text"] = [
     # Original
     "imdb", "yelp", "amazon", "civil_comments", "twitter",
-    # New (Session 9)
+    # Session 9
     "ag_news", "dbpedia", "imdb_genre", "sst2",
+    # Session 10
+    "hate_speech", "rotten_tomatoes",
 ]
 rb.NAN_LABEL_DATASETS = {"tox21", "toxcast", "muv"}
 
@@ -57,9 +61,9 @@ else:
     # Default: run all 10 methods
     sys.argv = [
         "run_extended_benchmark.py",
-        "--methods", "ulsif,kliep,kmm,rulsif,weighted_conformal,split_conformal,cvplus,group_dro,bbse",
+        "--methods", "ulsif,kliep,kmm,rulsif,weighted_conformal,split_conformal,cvplus,group_dro,bbse,ravel",
         "--domains", "molecular,tabular,text",
-        "--output", "results/cross_domain_extended",
+        "--output", "results/full_method_matrix",
         "--tau", "0.5,0.6,0.7,0.8,0.9",
         "--alpha", "0.05",
     ]

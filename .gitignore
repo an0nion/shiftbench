@@ -29,6 +29,10 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+*.code-workspace
+
+# Claude Code internal
+.claude/
 
 # Misc
 nul
