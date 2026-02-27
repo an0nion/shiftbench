@@ -11,6 +11,7 @@ Usage:
 """
 
 import argparse
+import concurrent.futures
 import sys
 import time
 from pathlib import Path
@@ -97,6 +98,12 @@ def get_available_methods() -> Dict[str, callable]:
 REGRESSION_DATASETS = {"esol", "freesolv", "lipophilicity"}
 NAN_LABEL_DATASETS = {"tox21", "toxcast", "muv"}
 
+# Runtime control: KMM's QP solver is O(n²) — prohibitively slow for large n_cal.
+# Cap n_cal at 1000 for KMM; any dataset exceeding this is marked NOT_RUN.
+KMM_CAP_N_CAL = 1000
+# Wall-clock budget per (method, dataset) evaluation.  Exceeded → TIMEOUT row.
+METHOD_TIMEOUT_SECONDS = 600
+
 
 def binarize_regression_labels(y, splits, dataset_name):
     """Median-split binarization using training set median only.
@@ -180,6 +187,30 @@ def _load_predictions_for_dataset(dataset_name: str, y_cal: np.ndarray) -> np.nd
     return (y_cal > 0.5).astype(int)
 
 
+def _make_status_row(
+    dataset_name: str,
+    method_name: str,
+    status: str,
+    elapsed_sec: float = 0.0,
+    n_cal: int = 0,
+) -> pd.DataFrame:
+    """Return a single-row sentinel DataFrame for NOT_RUN or TIMEOUT evaluations."""
+    return pd.DataFrame([{
+        "dataset": dataset_name,
+        "method": method_name,
+        "cohort_id": "__status__",
+        "tau": float("nan"),
+        "decision": "NOT_RUN",
+        "mu_hat": float("nan"),
+        "lower_bound": float("nan"),
+        "p_value": float("nan"),
+        "n_eff": float("nan"),
+        "elapsed_sec": elapsed_sec,
+        "diagnostics": f"status={status} n_cal={n_cal}",
+        "status": status,
+    }])
+
+
 def evaluate_method_on_dataset(
     method_name: str,
     method_creator: callable,
@@ -192,7 +223,12 @@ def evaluate_method_on_dataset(
 
     Returns DataFrame with columns:
         dataset, method, cohort_id, tau, decision, mu_hat, lower_bound,
-        p_value, n_eff, elapsed_sec, diagnostics
+        p_value, n_eff, elapsed_sec, diagnostics, status
+
+    status values:
+        "OK"       — normal evaluation
+        "NOT_RUN"  — skipped (e.g. KMM n_cal > KMM_CAP_N_CAL)
+        "TIMEOUT"  — exceeded METHOD_TIMEOUT_SECONDS wall-clock budget
     """
     logging.info(f"Evaluating {method_name} on {dataset_name}...")
 
@@ -210,8 +246,16 @@ def evaluate_method_on_dataset(
     X_cal = X[cal_mask]
     y_cal = y[cal_mask]
     cohorts_cal = cohorts[cal_mask]
-
     X_test = X[test_mask]
+    n_cal = int(X_cal.shape[0])
+
+    # KMM cap: QP solver is O(n²); skip large calibration sets
+    if method_name == "kmm" and n_cal > KMM_CAP_N_CAL:
+        logging.warning(
+            f"  KMM skipped: n_cal={n_cal} > KMM_CAP_N_CAL={KMM_CAP_N_CAL}. "
+            f"Marking as NOT_RUN."
+        )
+        return _make_status_row(dataset_name, method_name, "NOT_RUN", 0.0, n_cal)
 
     # Create method instance
     try:
@@ -220,28 +264,37 @@ def evaluate_method_on_dataset(
         logging.error(f"Failed to create method {method_name}: {e}")
         return None
 
-    # Estimate weights
-    t_start = time.time()
-    try:
-        weights = method.estimate_weights(X_cal, X_test)
-        t_weights = time.time() - t_start
-    except Exception as e:
-        logging.error(f"Weight estimation failed for {method_name} on {dataset_name}: {e}")
-        return None
-
     # Load real model predictions if available, fall back to oracle
     predictions_cal = _load_predictions_for_dataset(dataset_name, y_cal)
 
-    # Estimate bounds
-    t_start = time.time()
-    try:
+    # Core evaluation (weight estimation + bounds) with wall-clock timeout
+    def _run_core():
+        t0 = time.time()
+        weights = method.estimate_weights(X_cal, X_test)
+        t_weights = time.time() - t0
+
+        t0 = time.time()
         decisions = method.estimate_bounds(
             y_cal, predictions_cal, cohorts_cal, weights, tau_grid, alpha
         )
-        t_bounds = time.time() - t_start
-    except Exception as e:
-        logging.error(f"Bound estimation failed for {method_name} on {dataset_name}: {e}")
-        return None
+        t_bounds = time.time() - t0
+        return decisions, t_weights + t_bounds
+
+    t_wall_start = time.time()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(_run_core)
+        try:
+            decisions, elapsed_sec = future.result(timeout=METHOD_TIMEOUT_SECONDS)
+        except concurrent.futures.TimeoutError:
+            elapsed_wall = time.time() - t_wall_start
+            logging.warning(
+                f"  TIMEOUT: {method_name} on {dataset_name} exceeded "
+                f"{METHOD_TIMEOUT_SECONDS}s (elapsed={elapsed_wall:.1f}s)"
+            )
+            return _make_status_row(dataset_name, method_name, "TIMEOUT", elapsed_wall, n_cal)
+        except Exception as e:
+            logging.error(f"Evaluation failed for {method_name} on {dataset_name}: {e}")
+            return None
 
     # Convert decisions to DataFrame
     records = []
@@ -256,8 +309,9 @@ def evaluate_method_on_dataset(
             "lower_bound": d.lower_bound,
             "p_value": d.p_value,
             "n_eff": d.n_eff,
-            "elapsed_sec": t_weights + t_bounds,
-            "diagnostics": str(d.diagnostics) if d.diagnostics else ""
+            "elapsed_sec": elapsed_sec,
+            "diagnostics": str(d.diagnostics) if d.diagnostics else "",
+            "status": "OK",
         })
 
     df = pd.DataFrame(records)
@@ -267,8 +321,10 @@ def evaluate_method_on_dataset(
     n_abstain = (df["decision"] == "ABSTAIN").sum()
     n_no_guarantee = (df["decision"] == "NO-GUARANTEE").sum()
 
-    logging.info(f"  Results: {n_certify} CERTIFY, {n_abstain} ABSTAIN, "
-                f"{n_no_guarantee} NO-GUARANTEE (total: {len(df)})")
+    logging.info(
+        f"  Results: {n_certify} CERTIFY, {n_abstain} ABSTAIN, "
+        f"{n_no_guarantee} NO-GUARANTEE (total: {len(df)}, elapsed={elapsed_sec:.1f}s)"
+    )
 
     return df
 
@@ -388,8 +444,16 @@ def generate_summary_tables(df: pd.DataFrame, output_dir: Path):
     """Generate summary CSV files."""
     logging.info("Generating summary tables...")
 
-    # 1. Cross-domain summary: Aggregated by domain
-    summary_by_domain = df.groupby(["domain", "method"]).agg({
+    # Separate OK rows (real decisions) from sentinel rows (NOT_RUN / TIMEOUT)
+    if "status" in df.columns:
+        df_ok = df[df["status"] == "OK"].copy()
+        df_sentinel = df[df["status"] != "OK"].copy()
+    else:
+        df_ok = df.copy()
+        df_sentinel = pd.DataFrame()
+
+    # 1. Cross-domain summary: Aggregated by domain (OK rows only)
+    summary_by_domain = df_ok.groupby(["domain", "method"]).agg({
         "decision": lambda x: (x == "CERTIFY").sum() / len(x) * 100,  # cert rate %
         "mu_hat": "mean",
         "lower_bound": "mean",
@@ -408,27 +472,27 @@ def generate_summary_tables(df: pd.DataFrame, output_dir: Path):
     summary_by_domain.to_csv(summary_file)
     logging.info(f"  Saved domain summary to {summary_file}")
 
-    # 2. Per-dataset breakdown
-    summary_by_dataset = df.groupby(["dataset", "domain", "method"]).agg({
+    # 2. Per-dataset breakdown (OK rows only)
+    summary_by_dataset = df_ok.groupby(["dataset", "domain", "method"]).agg({
         "decision": lambda x: (x == "CERTIFY").sum() / len(x) * 100,
         "mu_hat": "mean",
         "lower_bound": "mean",
         "n_eff": "mean",
-        "elapsed_sec": "sum",
+        "elapsed_sec": "first",  # same value repeated across cohort/tau rows
         "cohort_id": "nunique"
     }).round(2)
 
     summary_by_dataset.columns = [
         "cert_rate_%", "mean_mu_hat", "mean_lower_bound",
-        "mean_n_eff", "total_runtime_sec", "n_cohorts"
+        "mean_n_eff", "runtime_sec", "n_cohorts"
     ]
 
     dataset_file = output_dir / "cross_domain_by_dataset.csv"
     summary_by_dataset.to_csv(dataset_file)
     logging.info(f"  Saved dataset breakdown to {dataset_file}")
 
-    # 3. Per-method breakdown
-    summary_by_method = df.groupby(["method", "domain"]).agg({
+    # 3. Per-method breakdown (OK rows only)
+    summary_by_method = df_ok.groupby(["method", "domain"]).agg({
         "decision": lambda x: (x == "CERTIFY").sum() / len(x) * 100,
         "mu_hat": "mean",
         "lower_bound": "mean",
@@ -446,16 +510,60 @@ def generate_summary_tables(df: pd.DataFrame, output_dir: Path):
     summary_by_method.to_csv(method_file)
     logging.info(f"  Saved method breakdown to {method_file}")
 
-    # 4. Decision distribution table
+    # 4. Decision distribution table (OK rows only)
     decision_dist = pd.crosstab(
-        [df["domain"], df["method"]],
-        df["decision"],
+        [df_ok["domain"], df_ok["method"]],
+        df_ok["decision"],
         margins=True
     )
 
     decision_file = output_dir / "cross_domain_decision_distribution.csv"
     decision_dist.to_csv(decision_file)
     logging.info(f"  Saved decision distribution to {decision_file}")
+
+    # 5. Runtime table — all (method, dataset) combinations including NOT_RUN / TIMEOUT
+    runtime_rows = []
+    # OK evaluations: one row per (dataset, method), runtime = first elapsed_sec value
+    if not df_ok.empty:
+        for (dataset, method), grp in df_ok.groupby(["dataset", "method"]):
+            domain = grp["domain"].iloc[0] if "domain" in grp.columns else ""
+            runtime_rows.append({
+                "dataset": dataset,
+                "domain": domain,
+                "method": method,
+                "status": "OK",
+                "runtime_sec": round(grp["elapsed_sec"].iloc[0], 2),
+                "n_cohort_tau_pairs": len(grp),
+            })
+    # Sentinel evaluations (NOT_RUN, TIMEOUT)
+    if not df_sentinel.empty:
+        for _, row in df_sentinel.iterrows():
+            runtime_rows.append({
+                "dataset": row["dataset"],
+                "domain": row.get("domain", ""),
+                "method": row["method"],
+                "status": row["status"],
+                "runtime_sec": round(row["elapsed_sec"], 2),
+                "n_cohort_tau_pairs": 0,
+            })
+
+    if runtime_rows:
+        runtime_table = (
+            pd.DataFrame(runtime_rows)
+            .sort_values(["method", "domain", "dataset"])
+            .reset_index(drop=True)
+        )
+        runtime_file = output_dir / "runtime_table.csv"
+        runtime_table.to_csv(runtime_file, index=False)
+        logging.info(f"  Saved runtime table to {runtime_file}")
+
+        # Log a compact summary of NOT_RUN / TIMEOUT entries
+        skipped = runtime_table[runtime_table["status"] != "OK"]
+        if not skipped.empty:
+            logging.info(
+                f"  Skipped evaluations: {len(skipped)} "
+                f"({skipped['status'].value_counts().to_dict()})"
+            )
 
 
 def run_statistical_analysis(df: pd.DataFrame, output_dir: Path):
@@ -467,6 +575,14 @@ def run_statistical_analysis(df: pd.DataFrame, output_dir: Path):
         from scipy.stats import f_oneway, kruskal
     except ImportError:
         logging.warning("scipy not available - skipping statistical tests")
+        return
+
+    # Use only completed evaluations for statistical analysis
+    if "status" in df.columns:
+        df = df[df["status"] == "OK"].copy()
+
+    if df.empty:
+        logging.warning("No completed evaluations for statistical analysis.")
         return
 
     # Prepare binary outcome (1 = CERTIFY, 0 = otherwise)

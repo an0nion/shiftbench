@@ -1,0 +1,3 @@
+method,domain,cert_rate_%,mean_mu_hat,mean_lower_bound,mean_n_eff,mean_runtime_sec,n_datasets
+ulsif,tabular,7.39,0.8,0.27,29.2,9.28,11
+ulsif,text,46.38,0.67,0.61,470.03,6.88,9

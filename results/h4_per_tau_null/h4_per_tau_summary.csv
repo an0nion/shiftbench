@@ -1,0 +1,6 @@
+tau,n_datasets,n_false_total,n_trials_total,fwer_pooled,ci_lower,ci_upper,ci_upper_lt_alpha,all_pass
+0.5,6,0,1200,0.0,0.0,0.003191,True,True
+0.6,6,0,1200,0.0,0.0,0.003191,True,True
+0.7,6,0,1200,0.0,0.0,0.003191,True,True
+0.8,6,0,1200,0.0,0.0,0.003191,True,True
+0.9,6,0,1200,0.0,0.0,0.003191,True,True

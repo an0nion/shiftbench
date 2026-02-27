@@ -1,0 +1,3 @@
+test,statistic,p_value,significant,interpretation
+Certification rate by domain (Kruskal-Wallis),241.08863437302134,2.2768626518039347e-54,True,Certification rates differ significantly across domains
+Domain difficulty (by certification rate),,,,Hardest domain: tabular (cert rate: 7.39%)
