@@ -293,7 +293,7 @@ Note: tabular/text figures are from RAVEL; molecular from uLSIF. RAVEL's additio
 
 A subsampling intervention confirms causality: subsampling IMDB text cohorts from 2288 to 3 samples reduces n_eff from 2287.8 to 2.3 and certification rate from 40% to 0%, matching molecular performance at equivalent n_eff. PCA intervention on BACE molecular features (reducing 217 dimensions to 5 at 57% explained variance) has zero effect on n_eff or certification rate, confirming molecular difficulty is irreducibly structural.
 
-**WCP vs. EB comparison.** Weighted Conformal Prediction provides higher lower bounds than EB in 60-100% of valid (cohort, tau) pairs per dataset, with 2-7x more certifications at n_eff < 300. The advantage converges at very high n_eff (text IMDB: 1:1 ratio). WCP's quantile-based approach avoids the sub-Gaussian variance penalty paid by EB via the n_eff term, making it particularly advantageous for sparse-cohort settings.
+**WCP vs. EB comparison (exploratory; moved to Appendix).** WCP and EB provide fundamentally different guarantees (marginal coverage vs. concentration bound), and this comparison was run without Holm correction applied to WCP while the primary EB protocol uses Holm — so the two pipelines are not protocol-matched. As an exploratory observation only: WCP certifies more pairs than EB at n_eff < 300 (mechanism: WCP uses weighted quantiles, avoiding the sub-Gaussian variance penalty EB pays via n_eff). Full protocol-matched comparison — applying Holm over the same hypothesis family for both methods — is deferred to future work. The per-dataset table appears in Appendix A.
 
 ### 6.5 Full Benchmark Summary
 
@@ -307,7 +307,7 @@ A subsampling intervention confirms causality: subsampling IMDB text cohorts fro
 
 Per-dataset highlights---Text: Amazon 72.2%, IMDB 60.0%, Yelp 50.0%, SST-2 50.0%, DBpedia 28.6%, Civil Comments 8.3%. Tabular: Mushroom 44.4%, Wine Quality 33.3%, COMPAS 4.0%, Adult 1.7%. RAVEL abstains completely on all molecular scaffold datasets (k-hat gate fires due to extreme weight concentration from scaffold-based covariate shift; this is the intended certify-or-abstain behaviour).
 
-**WCP vs. EB comparison across all domains** (6 Tier-A datasets, real model predictions, alpha = 0.05, no Holm correction):
+**Appendix A: WCP vs. EB comparison** (6 Tier-A datasets, real model predictions, alpha = 0.05; WCP run without Holm correction — not protocol-matched to EB pipeline; exploratory only):
 
 | Dataset | Domain | WCP cert% | EB cert% | Ratio | n_eff |
 |---------|--------|-----------|---------|-------|-------|
@@ -318,7 +318,7 @@ Per-dataset highlights---Text: Amazon 72.2%, IMDB 60.0%, Yelp 50.0%, SST-2 50.0%
 | IMDB | text | 40.0% | 40.0% | 1.0x | 39996.5 |
 | Yelp | text | 0.0% | 0.0% | --- | 47989.8 |
 
-WCP provides higher lower bounds than EB in 60--100% of valid (cohort, tau) pairs per dataset. The advantage is largest at n_eff < 300 (2--7x more certifications) and converges to 1:1 at very high n_eff (IMDB: 39,996). The mechanism: WCP uses weighted quantiles (no sub-Gaussian variance penalty); EB pays a variance penalty scaled by 1/n_eff. Stratified by n_eff bin: at n_eff 100--300, WCP certifies 20.0% vs EB 12.9%; at n_eff < 10, WCP certifies 3.3% vs EB 0.0%. Note that WCP (marginal coverage) and EB (concentration bound) provide different guarantees; the comparison is practically informative but not a direct theoretical equivalence.
+Under this non-protocol-matched comparison, WCP certifies more pairs than EB at n_eff < 300, with advantage converging to 1:1 at very high n_eff (IMDB: 39,996). **Caution:** WCP (marginal coverage) and EB (concentration bound on PPV) provide different guarantees, and Holm correction was not applied to WCP. The observed advantage partly reflects method-level differences in error budgeting, not purely improved certification power. Protocol-matched comparison (Holm applied uniformly) is future work.
 
 **Full 9-method x 35-dataset results** (KMM, RULSIF, Split Conformal, CV+, Group DRO, BBSE across all domains) are being computed in `results/full_benchmark/` and will be appended below as the run completes. Preliminary observations are consistent with the domain-level patterns above: domain and n_eff remain the dominant predictors of certification rate regardless of method.
 

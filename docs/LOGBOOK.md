@@ -2,6 +2,121 @@
 
 ---
 
+## Session 11 — 2026-02-27
+
+### Work Completed This Session
+
+**Harness fix — KMM cap + timeout (Priority 2, unblocking full benchmark):**
+Script: `scripts/run_cross_domain_benchmark.py` — added:
+- `KMM_CAP_N_CAL = 1000`: skip KMM if n_cal > 1000, write NOT_RUN sentinel row.
+  Root cause: KMM uses a QP solver O(n²); lipophilicity (n_cal≈950) took ~9 min, tox21 (n_cal=1567) would take >72 min. Cap fires for tox21, molhiv, adult, compas, bank, imdb, and all large datasets.
+- `METHOD_TIMEOUT_SECONDS = 600`: ThreadPoolExecutor with 10-min wall-clock budget per (method, dataset). TIMEOUT sentinel row on breach.
+- `generate_summary_tables()` now filters `status=="OK"` for cert-rate tables and emits `runtime_table.csv` (dataset × method × status × runtime_sec).
+- `run_statistical_analysis()` filters `status=="OK"`.
+
+Full 9-method × 35-dataset benchmark started: background job → `results/full_benchmark/`.
+KMM cap confirmed working: 12+ large datasets skipped instantly. uLSIF/KLIEP complete all 35 datasets in ~2 min total.
+
+**Paper updates (6 edits to docs/PAPER_DRAFT.md):**
+- Abstract + Intro + §7 Conclusion: replaced "300-fold" with 27-dataset domain means (Text 40.3%, Tab 8.6%, Mol 5.0%)
+- §6.3: added Wilson CI calibration paragraph (neff_ess_gated FWER=5.24% MET; naive ~6.5% NOT MET)
+- §6.4: replaced 6-dataset table with 27-dataset table + revised n_eff > domain mechanism
+- §6.5: filled [TBD] with RAVEL per-domain table + WCP vs EB table (flagged as non-protocol-matched)
+- §6.5 WCP section: demoted "2-7x" claim; added explicit protocol mismatch caveat (WCP not Holm-corrected)
+
+**H3 deconfound — uLSIF on tabular+text:**
+Script: run_extended_benchmark.py --methods ulsif --domains tabular,text → `results/h3_deconfound_ulsif/`
+Runtime: 2 min 7 sec. 20 datasets × 1 method.
+
+KEY FINDING — Domain gap is STRUCTURAL, not a method artifact:
+Under uLSIF (same method for all domains), the tabular-text cert rate gap persists:
+- Tabular (11 datasets): cert_rate = 7.4%, mean_n_eff = 29.2
+- Text (9 datasets):    cert_rate = 46.4%, mean_n_eff = 470.0
+Gap: 6.3x in cert rate, 16x in n_eff. Matches RAVEL direction (RAVEL: tab=4.95%, text=40.82%).
+RAVEL is slightly more conservative (k-hat gate): tab 4.95% vs uLSIF 7.39%; text 40.82% vs 46.38%.
+Conclusion: domain mediates n_eff structurally; method stringency is a secondary factor.
+
+Per-dataset uLSIF highlights (tabular): mushroom 46.7%, wine_quality 36.7%, student_performance 18.2%, compas 8.4%, adult 2.5%. Text: amazon 80.0%, imdb 60.0%, yelp 62.0%, sst2 50.0%, civil_comments 10.0%.
+
+**H4 per-tau null — Wilson CIs added:**
+Script: `scripts/analysis_h4_per_tau_ci.py` → `results/h4_per_tau_null/h4_per_tau_null_with_ci.csv`
+Reads existing h4_per_tau_null.csv (200 trials per dataset × 6 datasets = 1200 trials per tau).
+
+| tau | n_trials | n_false | FWER% | CI_lo% | CI_hi% | pass |
+|-----|----------|---------|-------|--------|--------|------|
+| 0.5 | 1200     | 0       | 0.00% | 0.00%  | 0.32%  | PASS |
+| 0.6 | 1200     | 0       | 0.00% | 0.00%  | 0.32%  | PASS |
+| 0.7 | 1200     | 0       | 0.00% | 0.00%  | 0.32%  | PASS |
+| 0.8 | 1200     | 0       | 0.00% | 0.00%  | 0.32%  | PASS |
+| 0.9 | 1200     | 0       | 0.00% | 0.00%  | 0.32%  | PASS |
+
+ALL PASS. Wilson CI_upper = 0.32% << alpha=5%. FWER is controlled independently at each tau.
+(With 0 events in 1200 trials, this is substantially more conservative than required.)
+
+**H1 boundary analysis — Where do disagreements live?**
+Script: `scripts/analysis_h1_boundary.py` → `results/h1_boundary/`
+Data: 4350 rows from experiment_c_raw.csv (6 datasets × 30 trials).
+
+All 32 KLIEP-uLSIF disagreements come from BBBP only. All other datasets: 0 disagreements.
+- Adult, BACE, COMPAS, IMDB, Yelp: agree on every active pair.
+- BBBP: 276 active pairs, 32 disagreements (11.6%).
+
+KEY FINDING — Disagreements concentrate entirely near the certification boundary:
+- LB - tau in [0, 0.05]: 3/8 pairs disagree (37.5%)
+- LB - tau in [0.05, 0.10]: 29/107 pairs disagree (27.1%) [BBBP-specific]
+- LB - tau > 0.10: 0/161 pairs disagree (0%) ← ZERO disagreements when margin > 0.1
+
+BBBP disagree cases: mean boundary_dist = 0.064 (just above threshold), mean neff_ratio = 1.009.
+neff_ratio ≈ 1.01 for both agree and disagree cases — weight estimates are nearly identical.
+Conclusion: disagreements are irreducible boundary noise, not systematic method differences.
+KLIEP-uLSIF are exchangeable for all well-separated certifications (LB - tau > 0.1).
+
+**WCP paper fix:**
+- Demoted "WCP vs EB comparison" from main result to "Appendix A"
+- Removed headline "2-7x more certifications" claim from abstract-level
+- Added explicit protocol mismatch caveat: WCP not Holm-corrected; different guarantees
+- Table caption updated to note exploratory status
+
+### PI Issues Audit — Updated
+
+| # | Priority | Status (Session 11) |
+|---|----------|--------------------|
+| 1 | WCP validation on all datasets | DONE (Session 7) |
+| 2 | Full method matrix (9 methods × 35 datasets) | IN PROGRESS — job bt1nwy6vu running, KMM cap+timeout fixed |
+| 3 | 35+ datasets | DONE — 35 in full_benchmark |
+| 4 | H3 regression + deconfound | DONE — 27 datasets; deconfound confirms structural gap |
+| 5 | Paper draft | SUBSTANTIALLY COMPLETE — 6.5 still needs full method table |
+
+### PI Experiment Order — Status
+
+| Order | Experiment | Status |
+|-------|-----------|--------|
+| 1 | Kill job + KMM_CAP + timeout | DONE |
+| 2 | uLSIF on tabular+text (H3 deconfound) | DONE — domain gap confirmed structural |
+| 3 | H4 per-tau null with Wilson CI | DONE — FWER=0%, CI_hi=0.32% at all taus |
+| 4 | Protocol-match WCP or demote | DONE — demoted to Appendix A |
+| 5 | H1 boundary analysis (BBBP) | DONE — all disagrees at LB-tau < 0.1 |
+
+### Results Files Added This Session
+
+- `results/full_benchmark/` — 9-method × 35-dataset run (in progress)
+- `results/h3_deconfound_ulsif/` — uLSIF on tabular+text (deconfound)
+- `results/h4_per_tau_null/h4_per_tau_null_with_ci.csv` — Wilson CIs per tau
+- `results/h4_per_tau_null/h4_per_tau_summary.csv` — pooled per-tau summary
+- `results/h1_boundary/h1_boundary_by_dataset.csv`
+- `results/h1_boundary/h1_boundary_by_dist.csv` — disagree_rate vs |LB-tau| bins
+- `results/h1_boundary/h1_boundary_by_neff.csv`
+- `results/h1_boundary/h1_bbbp_boundary.csv` — BBBP-specific
+- `results/h1_boundary/h1_bbbp_by_neff.csv`
+- `results/h1_boundary/h1_boundary_full.csv`
+
+### Scripts Added This Session
+
+- `scripts/analysis_h4_per_tau_ci.py` — Wilson CI on existing null data
+- `scripts/analysis_h1_boundary.py` — |LB-tau| boundary analysis for disagreements
+
+---
+
 ## Session 10 -- 2026-02-23
 
 ### Work Completed This Session
