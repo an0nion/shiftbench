@@ -374,7 +374,7 @@ def create_cohorts(
         else:
             # Parse dates
             dates = pd.to_datetime(df[cohort_col])
-            cohorts = pd.qcut(dates.astype(int), q=n_cohorts, labels=False, duplicates="drop")
+            cohorts = pd.qcut(dates.astype("int64"), q=n_cohorts, labels=False, duplicates="drop")
         cohorts = cohorts.astype(str)
 
     elif cohort_type in ["geographic", "category", "demographic"]:

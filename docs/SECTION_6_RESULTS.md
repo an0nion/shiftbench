@@ -100,23 +100,72 @@ Cross-domain certification rates (RAVEL, 27 datasets):
 Molecular difficulty is irreducibly structural: PCA dimensionality reduction from
 217 to 5 features has zero effect on n_eff (remains ≈1.0 for BACE).
 
-## 6.6 Finding 5: Method Rankings Shift by Domain (Preliminary)
+## 6.6 Finding 5: Method Rankings Shift by Domain
 
-Based on results available at the time of writing (uLSIF/KLIEP/WCP on 6 Tier-A
-datasets; RAVEL on 20 tabular/text datasets):
+Full results from the 10-method × 38-dataset benchmark (see §6.7 for tables):
 
-- **Molecular:** All IW methods certify 0–2% of cohorts; RAVEL fully abstains
-  due to k-hat gate. WCP certifies at higher rates (2–8%) by bypassing the n_eff
-  penalty.
-- **Tabular:** uLSIF certifies 1–8%; RAVEL certifies 0–44% (mushroom: 44.4% due
-  to clean demographic shift, low n_eff suffices). WCP outperforms EB (4–7×).
-- **Text:** RAVEL certifies 8–72% (9 datasets). At high n_eff (IMDB: 538, Amazon:
-  1017), method choice is less critical; WCP and EB converge.
+- **Molecular (15 datasets, cert rates 0–0.6%):** All methods struggle due to
+  scaffold shift (mean n_eff ≈ 0.15). WCP certifies most (0.39%) by bypassing
+  the sub-Gaussian variance penalty. IW methods (uLSIF, KLIEP, rULSIF, BBSE)
+  all achieve identical 0.06% — weight estimates are near-exchangeable. RAVEL
+  certifies 0.04% (k-hat gate abstains on extreme scaffold shifts). KMM capped
+  on large datasets (NOT_RUN for n_cal > 1000).
+- **Tabular (12 datasets, cert rates 2–42%):** WCP dominates at 41.66%,
+  split_conformal 2nd at 25.3%. IW methods cluster at 12–12.5%. KMM lags (2.2%,
+  only 5 datasets eligible). Group DRO is competitive at 10.6% (9 datasets,
+  capped on large ones).
+- **Text (11 datasets, cert rates 35–49%):** WCP leads at 49.02%, group_dro 2nd
+  at 47.78% (only 3 datasets — capped on large text corpora). split_conformal
+  3rd at 40.73%. IW methods cluster at 36–37%. RAVEL comparable at 35.4%.
 
-Full cross-domain method matrix (all 10 methods × 40 datasets) is reported in
-`results/full_method_matrix/` (see Section 6.7).
+**Runtime:** split_conformal and bbse are fastest (<1s/dataset); WCP, RAVEL,
+cvplus require 7–31s/dataset due to permutation/optimization overhead.
 
 ## 6.7 Full Method Matrix Results
 
-[Results from `results/full_method_matrix/` to be inserted here after benchmark
-completion. Script: `scripts/run_extended_benchmark.py` with all 10 methods.]
+10 methods × 38 datasets, 5 τ values (0.5–0.9), α=0.05. Methods capped:
+KMM (n_cal > 1000 → NOT_RUN), group_dro (n_cal > 5000 → NOT_RUN).
+
+### Certification Rate (%) by Domain and Method
+
+| Method             | Molecular (15) | Tabular (12) | Text (11) |
+|--------------------|---------------|--------------|-----------|
+| weighted_conformal | 0.39          | **41.66**    | **49.02** |
+| split_conformal    | 0.19          | 25.30        | 40.73     |
+| group_dro†         | 0.58          | 10.57        | 47.78‡    |
+| kliep              | 0.06          | 12.49        | 36.34     |
+| ulsif              | 0.06          | 12.15        | 36.34     |
+| rulsif             | 0.06          | 12.15        | 36.34     |
+| bbse               | 0.06          | 12.82        | 36.10     |
+| ravel              | 0.04          | 10.06        | 35.37     |
+| cvplus             | 0.00          | 10.94        | 35.61     |
+| kmm‡               | 0.18          | 2.17         | —         |
+
+† group_dro capped: molecular 12/15 datasets, tabular 9/12, text 3/11.
+‡ kmm capped: molecular 9/15 datasets, tabular 5/12 datasets.
+
+### Mean n_eff by Domain
+
+| Domain   | Mean n_eff | Range          |
+|----------|-----------|----------------|
+| Text     | 438       | 3–11,560       |
+| Tabular  | 33–42     | 0–200          |
+| Molecular| 0.1–3.5   | 0–50           |
+
+### Key Findings
+
+1. **WCP dominates tabular and text** at 42% and 49% cert rate. The n_eff
+   advantage at moderate sample sizes (+1.3 pp over split_conformal on text,
+   +16 pp on tabular) is consistent with the WCP-vs-EB analysis (§6.4).
+2. **IW methods are interchangeable** on molecular and text (all within 0.2 pp).
+   On tabular, bbse is marginally highest (12.82%) followed closely by
+   kliep (12.49%) and ulsif/rulsif/cvplus (10–12%).
+3. **RAVEL is competitive but not superior.** On tabular (10.06%) and text
+   (35.37%), RAVEL underperforms WCP by 31 and 14 pp respectively. RAVEL's
+   k-hat gate abstains aggressively on molecular scaffold shifts (0.04%).
+4. **Domain gap persists across all methods.** Molecular cert rates are 40–100×
+   lower than text regardless of method, confirming the structural n_eff gap
+   (H3 deconfound, §6.5).
+
+Source: `results/full_method_matrix/cross_domain_summary.csv`
+Run: `scripts/run_extended_benchmark.py`, 2026-02-28.

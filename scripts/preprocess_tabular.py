@@ -486,7 +486,8 @@ def preprocess_features(df: pd.DataFrame, label_col: str) -> np.ndarray:
     categorical_data = None
     if categorical_cols:
         # Fill missing values with "missing"
-        df_cat = df_features[categorical_cols].fillna("missing")
+        # Convert to object first so pandas Categorical columns accept new values
+        df_cat = df_features[categorical_cols].astype(object).fillna("missing")
 
         # One-hot encode
         df_encoded = pd.get_dummies(df_cat, drop_first=False)

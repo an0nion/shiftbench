@@ -1,0 +1,4 @@
+test,statistic,p_value,significant,interpretation
+Certification rate by domain (Kruskal-Wallis),103951.05567559587,0.0,True,Certification rates differ significantly across domains
+Method-domain interaction (Chi-square),,,False,Method performance is consistent across domains
+Domain difficulty (by certification rate),,,,Hardest domain: molecular (cert rate: 0.12%)
