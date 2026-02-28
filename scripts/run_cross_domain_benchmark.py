@@ -101,6 +101,9 @@ NAN_LABEL_DATASETS = {"tox21", "toxcast", "muv"}
 # Runtime control: KMM's QP solver is O(n²) — prohibitively slow for large n_cal.
 # Cap n_cal at 1000 for KMM; any dataset exceeding this is marked NOT_RUN.
 KMM_CAP_N_CAL = 1000
+# Group DRO is O(n_iter × n_cohorts × n_cal) — skip large calibration sets.
+# molhiv (~11k pairs) took 109s; muv (78k samples) would exceed 10 min.
+GROUP_DRO_CAP_N_CAL = 5000
 # Wall-clock budget per (method, dataset) evaluation.  Exceeded → TIMEOUT row.
 METHOD_TIMEOUT_SECONDS = 600
 
@@ -257,6 +260,14 @@ def evaluate_method_on_dataset(
         )
         return _make_status_row(dataset_name, method_name, "NOT_RUN", 0.0, n_cal)
 
+    # Group DRO cap: O(n_iter × n_cohorts × n_cal) — prohibitively slow for large datasets
+    if method_name == "group_dro" and n_cal > GROUP_DRO_CAP_N_CAL:
+        logging.warning(
+            f"  group_dro skipped: n_cal={n_cal} > GROUP_DRO_CAP_N_CAL={GROUP_DRO_CAP_N_CAL}. "
+            f"Marking as NOT_RUN."
+        )
+        return _make_status_row(dataset_name, method_name, "NOT_RUN", 0.0, n_cal)
+
     # Create method instance
     try:
         method = method_creator()
@@ -267,7 +278,12 @@ def evaluate_method_on_dataset(
     # Load real model predictions if available, fall back to oracle
     predictions_cal = _load_predictions_for_dataset(dataset_name, y_cal)
 
-    # Core evaluation (weight estimation + bounds) with wall-clock timeout
+    # Core evaluation (weight estimation + bounds) with wall-clock timeout.
+    # NOTE: do NOT use 'with ThreadPoolExecutor(...) as executor:' here — the
+    # context manager calls shutdown(wait=True) on __exit__, which blocks until
+    # the submitted future completes even after a TimeoutError is caught.  This
+    # caused the process to deadlock on large datasets (e.g. muv).  Instead we
+    # create the executor manually and always call shutdown(wait=False).
     def _run_core():
         t0 = time.time()
         weights = method.estimate_weights(X_cal, X_test)
@@ -281,7 +297,8 @@ def evaluate_method_on_dataset(
         return decisions, t_weights + t_bounds
 
     t_wall_start = time.time()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    try:
         future = executor.submit(_run_core)
         try:
             decisions, elapsed_sec = future.result(timeout=METHOD_TIMEOUT_SECONDS)
@@ -295,6 +312,9 @@ def evaluate_method_on_dataset(
         except Exception as e:
             logging.error(f"Evaluation failed for {method_name} on {dataset_name}: {e}")
             return None
+    finally:
+        # shutdown(wait=False): release the executor without blocking on stuck threads.
+        executor.shutdown(wait=False)
 
     # Convert decisions to DataFrame
     records = []
